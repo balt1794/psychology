@@ -1,5 +1,5 @@
 // Import necessary dependencies
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextRequest, NextResponse } from 'next/server';
 import { Stripe } from 'stripe';
 
 // Create a new instance of the Stripe client
@@ -8,15 +8,10 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? "", {
 });
 
 // Define your API route handler using the POST function
-export async function POST(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method !== 'POST') {
-    res.setHeader('Allow', ['POST']);
-    res.status(405).end(`Method ${req.method} Not Allowed`);
-    return;
-  }
-
+export async function POST(req: NextRequest, res: NextResponse<string>) {
+ 
   try {
-    const { userId, email, purchaseType } = req.body;
+    const { userId, email, purchaseType } = await req.json();
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
@@ -32,20 +27,13 @@ export async function POST(req: NextApiRequest, res: NextApiResponse) {
         purchaseType: purchaseType,
       },
       mode: 'payment',
-      success_url: `${process.env.NEXT_PUBLIC_APP_URL}/`,
-      cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/`,
+      success_url: `${req.headers.get('origin')}/`,
+      cancel_url: `${req.headers.get('origin')}/`,
       client_reference_id: userId,
     });
 
-    res.status(200).json({ sessionId: session.id });
+
   } catch (err) {
-    console.error(err);
-    if (err instanceof Error) {
-      res.status(500).json({ statusCode: 500, message: err.message });
-    } else {
-      res.status(500).json({ statusCode: 500, message: 'Unknown error occurred.' });
-    }
+ 
   }
 }
-
-
