@@ -1,6 +1,7 @@
 // Import necessary dependencies
 import { NextRequest, NextResponse } from 'next/server';
 import { Stripe } from 'stripe';
+import {headers} from "next/headers";
 
 // Create a new instance of the Stripe client
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? "", {
@@ -9,7 +10,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? "", {
 
 // Define your API route handler using the POST function
 export async function POST(req: NextRequest, res: NextResponse<string>) {
- 
+  const headersList = headers();
   try {
     const { userId, email, purchaseType } = await req.json();
 
@@ -27,8 +28,8 @@ export async function POST(req: NextRequest, res: NextResponse<string>) {
         purchaseType: purchaseType,
       },
       mode: 'payment',
-      success_url: `${req.headers.get('origin')}/`,
-      cancel_url: `${req.headers.get('origin')}/`,
+      success_url: `${headersList.get("origin")}/thank-you`,
+      cancel_url: `${headersList.get("origin")}/`,
       client_reference_id: userId,
     });
 
