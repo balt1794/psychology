@@ -8,6 +8,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? "", {
   apiVersion: '2023-10-16',
 });
 
+
 // Define your API route handler using the POST function
 export async function POST(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
@@ -33,7 +34,7 @@ export async function POST(req: NextApiRequest, res: NextApiResponse) {
         purchaseType: purchaseType
       },
       mode: 'payment',
-      success_url: `${process.env.NEXT_PUBLIC_APP_URL}/`,
+      success_url: `${process.env.NEXT_PUBLIC_APP_URL}/thank-you`,
       cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/`,
       client_reference_id: userId,
     });
@@ -49,10 +50,5 @@ export async function POST(req: NextApiRequest, res: NextApiResponse) {
   }
 }
 
-// Create a Cors middleware
-const corsMiddleware = Cors({
-  allowMethods: ['POST', 'HEAD'],
-});
-
-// Export the Cors-wrapped handler
-export default corsMiddleware(POST as any);
+// Export the handler
+export default POST;
