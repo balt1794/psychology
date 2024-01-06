@@ -197,7 +197,6 @@ export default function Home() {
             //userId : auth.user.uid
             userId: auth.user.uid,
           email: auth.user.email,
-          purchaseType: 'onetime',
           })
         
       });

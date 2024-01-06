@@ -12,7 +12,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? "", {
 export async function POST(req: NextRequest, res: NextResponse<string>) {
   const headersList = headers();
   try {
-    const { userId, email, purchaseType } = await req.json();
+    const { userId, email } = await req.json();
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
@@ -25,7 +25,6 @@ export async function POST(req: NextRequest, res: NextResponse<string>) {
       customer_email: email,
       metadata: {
         userId: userId,
-        purchaseType: purchaseType,
       },
       mode: 'payment',
       success_url: `${headersList.get("origin")}/thank-you`,
