@@ -8,11 +8,6 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? "", {
   apiVersion: '2023-10-16',
 });
 
-// Create a Cors middleware
-const cors = Cors({
-  allowMethods: ['POST', 'HEAD'],
-});
-
 // Define your API route handler using the POST function
 export async function POST(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
@@ -54,5 +49,10 @@ export async function POST(req: NextApiRequest, res: NextApiResponse) {
   }
 }
 
+// Create a Cors middleware
+const corsMiddleware = Cors({
+  allowMethods: ['POST', 'HEAD'],
+});
+
 // Export the Cors-wrapped handler
-export default cors(POST as any);
+export default corsMiddleware(POST as any);
