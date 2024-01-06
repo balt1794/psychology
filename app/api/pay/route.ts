@@ -1,53 +1,34 @@
-//import { IncomingMessage, ServerResponse } from 'http';
-import type { NextApiRequest, NextApiResponse } from 'next';
-//import { doc, getDoc, updateDoc } from 'firebase/firestore';
-
+// Import necessary dependencies
+import { NextApiRequest, NextApiResponse } from 'next';
 import Cors from 'micro-cors';
 import { Stripe } from 'stripe';
-//import { buffer } from 'micro';
-//import { db } from "../../config/firebase"
-import http from 'http';
 
-
-
+// Create a new instance of the Stripe client
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? "", {
   apiVersion: '2023-10-16',
 });
 
-
-
+// Create a Cors middleware
 const cors = Cors({
   allowMethods: ['POST', 'HEAD'],
 });
 
-const handler = async (req: NextApiRequest, res: NextApiResponse)   => {
-  //console.log('Request received');
-  const { method } = req;
-  const { userId, email, purchaseType } = JSON.parse(req.body);
-
-  //console.log('Headers:', headers)
-  //console.log('Authorization header:', headers.authorization);
-
-  if (method !== 'POST') {
+// Define your API route handler using the POST function
+export async function POST(req: NextApiRequest, res: NextApiResponse) {
+  if (req.method !== 'POST') {
     res.setHeader('Allow', ['POST']);
-    res.status(405).end(`Method ${method} Not Allowed`);
+    res.status(405).end(`Method ${req.method} Not Allowed`);
+    return;
   }
 
-  //const sig = headers['stripe-signature'];
-
   try {
-    // Retrieve the authenticated user's ID from the request headers
-    //const userId = headers.authorization?.replace('Bearer ', '');
-   // console.log('userId', userId, email);
-    // Create a new Stripe checkout session
-    //return;
+    const { userId, email, purchaseType } = JSON.parse(req.body);
+
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items: [
         {
-          //price: 'price_1LQLYKLxbwyf0mciMbNjfLyD',
-          price: 'price_1OVcBaLxbwyf0mciZyDDfkgD',
-           // replace with the actual price ID
+          price: 'price_1OVcBaLxbwyf0mciZyDDfkgD', // replace with the actual price ID
           quantity: 1,
         },
       ],
@@ -60,9 +41,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse)   => {
       success_url: `${process.env.NEXT_PUBLIC_APP_URL}/`,
       cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/`,
       client_reference_id: userId,
-    
     });
-    // Send the session ID back to the client
+
     res.status(200).json({ sessionId: session.id });
   } catch (err) {
     console.error(err);
@@ -72,21 +52,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse)   => {
       res.status(500).json({ statusCode: 500, message: 'Unknown error occurred.' });
     }
   }
-};
+}
 
-
-
-
-  
-
-
-  // export const config = {
-  //   api: {
-  //     bodyParser: false,
-  //   },
-  // };
-
-  export default cors((req: NextApiRequest | http.IncomingMessage, res: NextApiResponse | http.ServerResponse) => {
-  
-    return handler(req as NextApiRequest, res as NextApiResponse);
-  });
+// Export the Cors-wrapped handler
+export default cors(POST as any);
