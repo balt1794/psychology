@@ -46,7 +46,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse)   => {
       line_items: [
         {
           //price: 'price_1LQLYKLxbwyf0mciMbNjfLyD',
-          price: 'price_1O71iVLxbwyf0mcij0tR1R5n',
+          price: 'price_1OVcBaLxbwyf0mciZyDDfkgD',
            // replace with the actual price ID
           quantity: 1,
         },
