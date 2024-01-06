@@ -1,13 +1,11 @@
 // Import necessary dependencies
 import { NextApiRequest, NextApiResponse } from 'next';
-import Cors from 'micro-cors';
 import { Stripe } from 'stripe';
 
 // Create a new instance of the Stripe client
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? "", {
   apiVersion: '2023-10-16',
 });
-
 
 // Define your API route handler using the POST function
 export async function POST(req: NextApiRequest, res: NextApiResponse) {
@@ -18,7 +16,7 @@ export async function POST(req: NextApiRequest, res: NextApiResponse) {
   }
 
   try {
-    const { userId, email, purchaseType } = JSON.parse(req.body);
+    const { userId, email, purchaseType } = req.body;
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
@@ -31,10 +29,10 @@ export async function POST(req: NextApiRequest, res: NextApiResponse) {
       customer_email: email,
       metadata: {
         userId: userId,
-        purchaseType: purchaseType
+        purchaseType: purchaseType,
       },
       mode: 'payment',
-      success_url: `${process.env.NEXT_PUBLIC_APP_URL}/thank-you`,
+      success_url: `${process.env.NEXT_PUBLIC_APP_URL}/`,
       cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/`,
       client_reference_id: userId,
     });
@@ -50,5 +48,4 @@ export async function POST(req: NextApiRequest, res: NextApiResponse) {
   }
 }
 
-// Export the handler
-export default POST;
+
