@@ -17,7 +17,7 @@ export async function POST(req: NextRequest, res: NextResponse<string>) {
       payment_method_types: ['card'],
       line_items: [
         {
-          price: 'price_1OVcBaLxbwyf0mciZyDDfkgD', // replace with the actual price ID
+          price: 'price_1OVcBaLxbwyf0mciZyDDfkgD', 
           quantity: 1,
         },
       ],
