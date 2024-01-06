@@ -68,7 +68,7 @@ export default function Navbar() {
   <Link className="hover:scale-105" href="/" passHref>
     <img
       className="block h-12 lg:h-12 w-auto lg:hidden"
-      src="/rbai-mobile.png"
+      src="/mobile.png"
       alt="Resume Boost AI Web"
     />
   </Link>
