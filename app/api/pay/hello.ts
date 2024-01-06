@@ -1,17 +1,16 @@
-// app/api/pay.ts
+// pages/api/pay.ts
 
 import { NextApiRequest, NextApiResponse } from 'next';
 import { Stripe } from 'stripe';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? "", {
   apiVersion: '2023-10-16',
 });
 
-export const dynamic = 'force-dynamic'; // defaults to auto
-
-export default async function handler(req: NextApiRequest, res: NextApiResponse): Promise<void> {
+export default async function POST(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
-    res.status(405).end('Method Not Allowed');
+    res.setHeader('Allow', ['POST']);
+    res.status(405).end(`Method ${req.method} Not Allowed`);
     return;
   }
 
@@ -29,7 +28,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       customer_email: email,
       metadata: {
         userId: userId,
-        purchaseType: purchaseType,
+        purchaseType: purchaseType
       },
       mode: 'payment',
       success_url: `${process.env.NEXT_PUBLIC_APP_URL}/`,
