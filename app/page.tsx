@@ -187,7 +187,7 @@ export default function Home() {
 
 
     try {
-      const response = await fetch('/api/pay', {
+      const response = await fetch('/api/hello', {
         method: 'POST',
         //headers: {
         //  'Content-Type': 'application/json'
