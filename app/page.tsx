@@ -18,6 +18,7 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null);
 
   const [loading, setLoading] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   const auth = useAuth();
 
@@ -119,6 +120,7 @@ export default function Home() {
       alert("Upload one or more images.");
       return;
     }
+    setSubmitting(true);
 
     try {
       // Make a POST request to the image analysis API
@@ -171,6 +173,7 @@ export default function Home() {
         alert("An unexpected error occurred. Please try again.");
       }
     }
+    setSubmitting(false);
     await updateFreeRewritesLeft();
   }
 
@@ -307,12 +310,33 @@ export default function Home() {
             freeRewritesLeft && freeRewritesLeft > 0 ? (
               // User has free rewrites left
               <>
-                <button
-                  type="submit"
-                  className="sm:inline-block text-black px-3 text-md font-medium border-solid border-4 border-white-400 rounded-full bg-transparent p-1 text-black hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 overflow-hidden whitespace-nowrap truncate"
-                >
-                 Generate Listing
-                </button>
+               <style jsx>{`
+               .loader {
+                border: 16px solid #f3f3f3; /* Light grey */
+                border-top: 16px solid black; /* Blue */
+                border-radius: 50%;
+                width: 45px;
+                height: 45px;
+                animation: spin 2s linear infinite;
+              }
+              
+              @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+              }
+                 `}</style>
+           
+           {submitting ? (
+        <div className="loader"></div>
+      ) : (
+        <button
+          type="submit"
+          className="sm:inline-block text-black px-3 text-md font-medium border-solid border-4 border-white-400 rounded-full bg-transparent p-1 text-black hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 overflow-hidden whitespace-nowrap truncate"
+          disabled={submitting} // Disable the button when submitting
+        >
+          Generate Listing
+        </button>
+      )}
               </>
             ) : (
               // User doesn't have free rewrites left
@@ -337,10 +361,12 @@ export default function Home() {
           
 
           {/* Right Side: AI Response */}
+          
           {openAIResponse !== "" && (
             <div className="w-full md:w-1/2 border-solid border-t-4 border-r-4 border-b-4 border-white-400 rounded-lg shadow-md p-8 text-black">
               <div className="border-t border-gray-300 pt-4">
                 <h2 className="text-xl font-bold mb-2">AI-Generated Listing:</h2>
+                {submitting ? "Generating..." : "Generate Listing"}
                 <p dangerouslySetInnerHTML={{ __html: openAIResponse.replace(/(?:\r\n|\r|\n)/g, "<br/>") }} />
                 <div className="flex justify-center mt-4">
                   <button
