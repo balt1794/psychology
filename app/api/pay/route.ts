@@ -1,7 +1,6 @@
 // Import necessary dependencies
 import { NextRequest, NextResponse } from 'next/server';
 import { Stripe } from 'stripe';
-import {headers} from "next/headers";
 
 // Create a new instance of the Stripe client
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? "", {
@@ -17,7 +16,7 @@ export async function POST(req: NextRequest, res: NextResponse<string>) {
       payment_method_types: ['card'],
       line_items: [
         {
-          price: 'price_1OVcBaLxbwyf0mciZyDDfkgD', 
+          price: 'price_1OVcBaLxbwyf0mciZyDDfkgD',
           quantity: 1,
         },
       ],
@@ -32,9 +31,10 @@ export async function POST(req: NextRequest, res: NextResponse<string>) {
       client_reference_id: userId,
     });
 
-    return NextResponse.json(session.url)
+    return NextResponse.json({ sessionId: session.id }); // Return sessionId instead of URL
   } catch (err) {
- 
+    console.error(err);
+    // Handle error and return an appropriate response
+    return NextResponse.json({ error: 'Failed to create checkout session' });
   }
-  
 }
