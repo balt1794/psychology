@@ -190,9 +190,9 @@ export default function Home() {
     try {
       const response = await fetch('/api/pay', {
         method: 'POST',
-        //headers: {
-        //  'Content-Type': 'application/json'
-       // },
+        headers: {
+          'Content-Type': 'application/json'
+        },
        body:
           JSON.stringify({
             //userId : auth.user.uid
