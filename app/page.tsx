@@ -232,20 +232,6 @@ export default function Home() {
     } 
   };
 
-  const handleSubscription = async (e: React.MouseEvent) => {
-    e.preventDefault();
-    const { data } = await axios.post('/api/pay',
-    {
-      priceId: 'price_1OVcBaLxbwyf0mciZyDDfkgD'
-    },
-    {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-    );
-    window.location.assign(data)
-  }
 
   return (
     <>
