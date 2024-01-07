@@ -5,7 +5,7 @@ import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import Cors from 'micro-cors';
 import { Stripe } from 'stripe';
 import { buffer } from 'micro';
-import { db } from "../../../config/firebase"
+import { db } from "../../config/firebase"
 import http from 'http';
 
 interface MyCheckoutSession extends Stripe.Checkout.Session {
