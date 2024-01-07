@@ -1,25 +1,24 @@
-//import { IncomingMessage, ServerResponse } from 'http';
+import { IncomingMessage, ServerResponse } from 'http';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 
 import Cors from 'micro-cors';
 import { Stripe } from 'stripe';
-//import { buffer } from 'micro';
-import { db } from "../../config/firebase"
+import { buffer } from 'micro';
+import { db } from "../../../config/firebase"
 import http from 'http';
 
 interface MyCheckoutSession extends Stripe.Checkout.Session {
 customer_email: string;
   metadata: {
     customer_email: string;
-    userId: string;
-    purchaseType: string;
+    userId: string
   }
 }
 
-//const stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? "", {
-  //apiVersion: '2023-10-16',
-//});
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? "", {
+  apiVersion: '2023-10-16',
+});
 
 const cors = Cors({
   allowMethods: ['POST', 'HEAD'],
@@ -55,14 +54,8 @@ const webhookHandler = async (req: NextApiRequest,  res: NextApiResponse) => {
       //const customerEmail = session.customer_email;
       const userId = session.metadata.userId;
       //await updateFreeRewritesLeft(customerEmail);
-      if (session.metadata.purchaseType === 'onetime') {
-        await updateFreeRewritesLeft(userId);
-      } else if (session.metadata.purchaseType === 'monthly') {
-        await updateFreeRewritesLeftMonthly(userId);
-      } else if (session.metadata.purchaseType === 'yearly') {
-        await updateFreeRewritesLeftMonthly(userId);
-      }
-      
+      await updateFreeRewritesLeft(userId);
+      //console.log(`Customer email "${userId}" extracted and passed to updateFreeRewritesLeft function.`);
     }
 
     res.statusCode = 200;
@@ -92,7 +85,7 @@ async function updateFreeRewritesLeft(userId: string){
       if (userDoc.exists()) {
         // Use updateDoc() to update the document with the new value
         await updateDoc(userDocRef, {
-          freeRewritesLeft: 15,
+          freeRewritesLeft: 20,
         });
         //console.log('freeRewritesLeft updated');
       } else {
@@ -102,39 +95,6 @@ async function updateFreeRewritesLeft(userId: string){
       //console.error("Error updating freeRewritesLeft: ", e);
     }
 
-    
-
-  
-}
-
-async function updateFreeRewritesLeftMonthly(userId: string){
-
-  //console.log('updateFreeRewritesLeft called with userid:', userId);
-
-  // Check if the customer email matches the logged in user's email
-  
-    const userDocRef = doc(db, "users", userId);
-  
-    try {
-      // Use getDoc() instead of doc() to check if the document exists
-      const userDoc = await getDoc(userDocRef);
-      //console.log('userDoc.exists():', userDoc.exists());
-  
-      if (userDoc.exists()) {
-        // Use updateDoc() to update the document with the new value
-        await updateDoc(userDocRef, {
-          freeRewritesLeft: 1000,
-          paidUser: true
-        });
-        //console.log('freeRewritesLeft updated');
-      } else {
-        //console.log("userDoc does not exist");
-      }
-    } catch (e) {
-      //console.error("Error updating freeRewritesLeft: ", e);
-    }
-
-    
 
   
 }
