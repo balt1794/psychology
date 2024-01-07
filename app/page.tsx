@@ -253,7 +253,6 @@ export default function Home() {
   <div className="flex flex-col items-center justify-center max-w-4xl gap-8 mx-auto">
     <h1 className="text-4xl font-bold text-center text-black md:text-6xl">
       Fast and Efficient Listings using AI  ⚡
-     
     </h1>
     
     <p className="text-2xl text-center text-black text-muted-foreground">Create stunning property listings in seconds. Say goodbye to the manual time-consuming listings and let AI take care of it 🏠</p>
