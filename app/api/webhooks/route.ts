@@ -60,7 +60,7 @@ async function updateFreeRewritesLeft(userId: string) {
       const currentFreeRewritesLeft = userDoc.data()?.freeRewritesLeft || 0;
 
       await updateDoc(userDocRef, {
-        freeRewritesLeft: currentFreeRewritesLeft + 20,
+        freeRewritesLeft: currentFreeRewritesLeft + 15,
       });
     }
   } catch (e) {
