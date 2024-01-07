@@ -17,8 +17,8 @@ export async function POST(req: NextRequest, res: NextResponse<string>) {
       payment_method_types: ['card'],
       line_items: [
         {
-          price: 'price_1OVcBaLxbwyf0mciZyDDfkgD',
-          //price: 'price_1OSPdmLxbwyf0mciDtKjHAFN',
+          //price: 'price_1OVcBaLxbwyf0mciZyDDfkgD',
+          price: 'price_1OVmXdLxbwyf0mciLw8zY4fv',
           quantity: 1,
         },
       ],
