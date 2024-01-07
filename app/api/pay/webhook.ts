@@ -1,5 +1,5 @@
 import { IncomingMessage, ServerResponse } from 'http';
-import type { NextApiRequest, NextApiResponse } from 'next';
+import { NextRequest, NextResponse } from 'next/server';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 
 import Cors from 'micro-cors';
@@ -9,10 +9,10 @@ import { db } from "../../../config/firebase"
 import http from 'http';
 
 interface MyCheckoutSession extends Stripe.Checkout.Session {
-customer_email: string;
+  customer_email: string;
   metadata: {
     customer_email: string;
-    userId: string
+    userId: string;
   }
 }
 
@@ -24,89 +24,44 @@ const cors = Cors({
   allowMethods: ['POST', 'HEAD'],
 });
 
-const webhookHandler = async (req: NextApiRequest,  res: NextApiResponse) => {
-  //console.log("Webjhook bitsh");
-  const sig = req.headers['stripe-signature'];
-
-  if (!sig) {
-    res.statusCode = 400;
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify({ message: 'Webhook Error: Signature missing.' }));
-    return;
-  }
+export const webhookHandler = async (req: NextRequest, res: NextResponse) => {
+  const sig = req.headers.get('stripe-signature');
 
 
   try {
     const { 
-        type, 
-        data: {
-            object: { 
-                ...webhookData 
-            }
-        } 
-    } = req.body;
-   
+      type, 
+      data: {
+        object: { 
+          ...webhookData 
+        }
+      } 
+    } = await req.json();
+
     if (type === 'checkout.session.completed') {
-    //console.log("Debugger", webhookData)
       const session = webhookData as MyCheckoutSession;
 
-      // Extract customer email from session and pass it to updateFreeRewritesLeft function
-      //const customerEmail = session.customer_email;
       const userId = session.metadata.userId;
-      //await updateFreeRewritesLeft(customerEmail);
       await updateFreeRewritesLeft(userId);
-      //console.log(`Customer email "${userId}" extracted and passed to updateFreeRewritesLeft function.`);
     }
 
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify({ received: true }));
   } catch (err) {
-    console.error(err);
-    res.statusCode = 400;
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify({ message: 'Webhook Error' }));
+
   }
 };
 
-async function updateFreeRewritesLeft(userId: string){
+async function updateFreeRewritesLeft(userId: string) {
+  const userDocRef = doc(db, 'users', userId);
 
-  //console.log('updateFreeRewritesLeft called with userid:', userId);
+  try {
+    const userDoc = await getDoc(userDocRef);
 
-  // Check if the customer email matches the logged in user's email
-  
-    const userDocRef = doc(db, "users", userId);
-  
-    try {
-      // Use getDoc() instead of doc() to check if the document exists
-      const userDoc = await getDoc(userDocRef);
-      //console.log('userDoc.exists():', userDoc.exists());
-  
-      if (userDoc.exists()) {
-        // Use updateDoc() to update the document with the new value
-        await updateDoc(userDocRef, {
-          freeRewritesLeft: 20,
-        });
-        //console.log('freeRewritesLeft updated');
-      } else {
-        //console.log("userDoc does not exist");
-      }
-    } catch (e) {
-      //console.error("Error updating freeRewritesLeft: ", e);
+    if (userDoc.exists()) {
+      await updateDoc(userDocRef, {
+        freeRewritesLeft: 20,
+      });
     }
-
-
-  
+  } catch (e) {
+    console.error('Error updating freeRewritesLeft: ', e);
+  }
 }
-  
-
-
-  // export const config = {
-  //   api: {
-  //     bodyParser: false,
-  //   },
-  // };
-
-  export default cors((req: NextApiRequest | http.IncomingMessage, res: NextApiResponse | http.ServerResponse) => {
-    return webhookHandler(req as NextApiRequest, res as NextApiResponse);
-  });
