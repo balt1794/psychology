@@ -333,7 +333,7 @@ export default function Home() {
               // User doesn't have free rewrites left
               <button
                 type="button"
-                onClick={handleSubscription}
+                onClick={handleCheckout}
                 className="sm:inline-block text-black px-3 text-md font-medium border-solid border-4 border-white-400 rounded-full bg-transparent p-1 text-black hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 overflow-hidden whitespace-nowrap truncate"
               >
                 Buy Credits

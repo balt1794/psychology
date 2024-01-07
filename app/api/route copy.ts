@@ -10,7 +10,6 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? "", {
 
 // Define your API route handler using the POST function
 export async function POST(req: NextRequest, res: NextResponse<string>) {
-  const headersList = headers();
   try {
     const { userId, email, purchaseType } = await req.json();
 
@@ -28,13 +27,14 @@ export async function POST(req: NextRequest, res: NextResponse<string>) {
         purchaseType: purchaseType,
       },
       mode: 'payment',
-      success_url: `${headersList.get("origin")}/thank-you`,
-      cancel_url: `${headersList.get("origin")}/`,
+      success_url: 'http://localhost:3000',
+      cancel_url: 'http://localhost:3000',
       client_reference_id: userId,
     });
 
-
+    return NextResponse.json(session.url)
   } catch (err) {
  
   }
+  
 }
