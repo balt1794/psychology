@@ -32,7 +32,7 @@ role: "user",
 content: [
 {
 type: "text",
-text: "Look at all the images uploaded and give me a title and description of the place, house rules, instructions to check in, standard cancellation, and also give me a good description of the image in a listing form so if there are chairs say 4 chairs, etc: Give it to me with bullet points",
+text: "Look at all the images uploaded and give me a title and description of the place, house rules, instructions to check in, standard cancellation, and also give me a good description of the images in a listing form so if there are chairs say 4 chairs, etc: Give it to me with bullet points. If there are two different images of 2 different houses give me a title and description of the place for each one, house rules, instructions to check in, standard cancellation, and also give me a good description of each image in a listing form. If the images have are related to each other, so if it's a house and the other images are spaces within the house, then give me one listing, but if it's two images with two different house, then give me two listings. Don't ever tell users, you can't give them a response or don't tell them that the uploaded images are two different images, just give me a the listings. You always create listings for multiple images.",
 },
 {
 type: "image_url",
