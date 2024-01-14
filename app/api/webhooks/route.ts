@@ -1,11 +1,22 @@
+import Cors from 'micro-cors';
 import { NextRequest, NextResponse } from 'next/server';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
+import { buffer } from 'micro';
 import { db } from '../../../config/firebase';
+import { Stripe } from 'stripe';
 
-
-
+interface MyCheckoutSession extends Stripe.Checkout.Session {
+  customer_email: string;
+  metadata: {
+    customer_email: string;
+    userId: string;
+  };
+}
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
+const cors = Cors({
+  allowMethods: ['POST', 'HEAD'],
+});
 
 export async function POST(req: NextRequest, res: NextResponse) {
   try {
