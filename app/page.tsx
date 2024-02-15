@@ -1,7 +1,5 @@
 "use client"
 import Navbar from "@/components/Navbar";
-// Import necessary dependencies
-// Import necessary dependencies
 import { ChangeEvent, useState, useEffect, FormEvent } from "react";
 import { Toaster, toast } from "react-hot-toast";
 import { useAuth } from "../context/AuthContext";
@@ -238,34 +236,32 @@ export default function Home() {
 
   return (
     <>
-    <section className="relative  md:mx-20 pt-24 lg:pt-32 rounded-2xl lg:rounded-[3rem] mb-20 lg:mb-36">
-  <div className="flex flex-col items-center justify-center max-w-4xl gap-8 mx-auto">
-    <h1 className="text-4xl font-bold text-center text-black md:text-6xl">
-      Fast and Efficient Listings using AI  ⚡
-    </h1>
-    
-    <p className="text-2xl text-center text-black text-muted-foreground">Create stunning property listings in seconds. Say goodbye to the manual time-consuming listings and let AI take care of it 🏠</p>
-    
+   <section className="relative  pt-24 lg:pt-32  mb-20 lg:mb-36 overflow-hidden">
+  <div className="absolute inset-0 w-full h-full z-0">
+    <img className="absolute inset-0 w-full h-full object-cover" src="hero.png" alt="Background Image" />
+    <div className="absolute inset-0 bg-black opacity-80"></div>
+  </div>
+  <div className="relative z-10 flex flex-col items-center justify-center max-w-4xl gap-8 mx-auto">
+    <h1 className="text-4xl font-bold text-center text-white md:text-6xl">Fast and Efficient Listings using AI ⚡</h1>
+    <p className="text-2xl text-center text-white text-muted-foreground">Create stunning property listings in seconds. Say goodbye to the manual time-consuming listings and let AI take care of it 🏠</p>
     <div className="grid items-center justify-center gap-3 text-center">
-    
-  <button type="button"
-   onClick={() => {
-    const generatorSection = document.getElementById("generator");
-    if (generatorSection) {
-      generatorSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  }}
-   className="w-full sm:inline-block text-black px-3 text-md font-medium border-solid border-4 border-white-400 rounded-full bg-transparent p-1 text-black hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 overflow-hidden whitespace-nowrap truncate">
-
-
-  Create Listings Now!
-</button>
-
-      <span className="text-black">Get 1 free credit upon signup</span>
+      <button
+        type="button"
+        onClick={() => {
+          const generatorSection = document.getElementById("generator");
+          if (generatorSection) {
+            generatorSection.scrollIntoView({ behavior: "smooth" });
+          }
+        }}
+        className="w-full sm:inline-block text-white px-3 text-md font-medium border-solid border-4 border-white-400 rounded-full bg-transparent p-1 text-black hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 overflow-hidden whitespace-nowrap truncate"
+      >
+        Create Listings Now!
+      </button>
+      <span className="text-white mb-4">Get 1 free credit upon signup</span>
     </div>
-  
   </div>
 </section>
+
 
 
       <Toaster />
@@ -365,8 +361,8 @@ export default function Home() {
           {openAIResponse !== "" && (
             <div className="w-full md:w-1/2 border-solid border-t-4 border-r-4 border-b-4 border-white-400 rounded-lg shadow-md p-8 text-black">
               <div className="border-t border-gray-300 pt-4">
-                <h2 className="text-xl font-bold mb-2">AI-Generated Listing:</h2>
-                {submitting ? "Generating..." : "Generate Listing"}
+                <h2 className="text-xl font-bold mb-2">Listing Details:</h2>
+                {submitting ? "Generating..." : ""}
                 <p dangerouslySetInnerHTML={{ __html: openAIResponse.replace(/(?:\r\n|\r|\n)/g, "<br/>") }} />
                 <div className="flex justify-center mt-4">
                   <button
