@@ -8,6 +8,7 @@ import FreeRewritesLeft from "../components/FreeRewritesLeft";
 import { updateDoc, getDoc, doc } from "firebase/firestore"; 
 import { db } from "../config/firebase";
 import axios from "axios"
+import Image from "next/image";
 
 export default function Home() {
   // State to manage the uploaded images and OpenAI API response
@@ -236,9 +237,9 @@ export default function Home() {
 
   return (
     <>
-   <section className="relative  pt-24 lg:pt-32  mb-20 lg:mb-36 overflow-hidden">
+   <section className="relative  pt-24 lg:pt-32  mb-20 lg:mb-16 overflow-hidden">
   <div className="absolute inset-0 w-full h-full z-0">
-    <img className="absolute inset-0 w-full h-full object-cover" src="hero.png" alt="Background Image" />
+    <Image className="absolute inset-0 w-full h-full object-cover" width="1000" height="1000" src="/hero.png" alt="Background Image" loading="lazy" />
     <div className="absolute inset-0 bg-black opacity-80"></div>
   </div>
   <div className="relative z-10 flex flex-col items-center justify-center max-w-4xl gap-8 mx-auto">
@@ -261,6 +262,21 @@ export default function Home() {
     </div>
   </div>
 </section>
+
+<section>
+<div className="relative z-10 flex flex-col items-center justify-center max-w-4xl gap-8 mx-auto">
+<span className="text-xl text-black hidden md:flex mb-2">Create listings instantly with PropertyListingsAI</span>
+  </div>
+<div className="flex items-center justify-center gap-3">
+    <div className="flex items-center space-x-2">
+        <img src="/airbnb.png" width="60" height="30" className="w-10 md:w-12  v-lazy-image v-lazy-image-loaded" ></img>
+        <img src="/booking.svg" width="60" height="30" className="w-10 md:w-12 v-lazy-image v-lazy-image-loaded" ></img>
+        <img src="/Vrbo.svg.png" width="60" height="30" className="w-14 md:w-24  v-lazy-image v-lazy-image-loaded" ></img>
+        <img src="/zillow.png" width="60" height="30" className="w-14 md:w-28  v-lazy-image v-lazy-image-loaded" ></img>
+    </div>
+</div>
+</section>
+
 
 
 
@@ -357,24 +373,45 @@ export default function Home() {
           
 
           {/* Right Side: AI Response */}
-          
           {openAIResponse !== "" && (
-            <div className="w-full md:w-1/2 border-solid border-t-4 border-r-4 border-b-4 border-white-400 rounded-lg shadow-md p-8 text-black">
-              <div className="border-t border-gray-300 pt-4">
-                <h2 className="text-xl font-bold mb-2">Listing Details:</h2>
-                {submitting ? "Generating..." : ""}
-                <p dangerouslySetInnerHTML={{ __html: openAIResponse.replace(/(?:\r\n|\r|\n)/g, "<br/>") }} />
-                <div className="flex justify-center mt-4">
-                  <button
-                                    className="sm:inline-block text-black px-3 text-md font-medium border-solid border-4 border-white-400 rounded-full bg-transparent p-1 text-black hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 overflow-hidden whitespace-nowrap truncate"
-                    onClick={copyAIResponseToClipboard}
-                  >
-                    Copy Listing
-                  </button>
-                </div>
+  <div className="w-full md:w-1/2 border-solid border-t-4 border-r-4 border-b-4 border-white-400 rounded-lg shadow-md p-8 text-black">
+    <div className="border-t border-gray-300 pt-4">
+      <h2 className="text-xl font-bold mb-2">Listing Details:</h2>
+      {submitting ? "Generating..." : ""}
+      <div>
+        {openAIResponse.split('\n').map((line, index) => {
+          if (line.startsWith("###")) {
+            return (
+              <div key={index} className="mb-4">
+                <strong>{line.replace(/#/g, "").trim()}</strong>
               </div>
-            </div>
-          )}
+            );
+          } else if (line.startsWith("**")) {
+            return (
+              <div key={index} className="mb-4">
+                <strong>{line.replace(/\*/g, "").trim()}</strong>
+              </div>
+            );
+          } else {
+            return (
+              <div key={index} className="mb-4">
+                {line}
+              </div>
+            );
+          }
+        })}
+      </div>
+      <div className="flex justify-center mt-4">
+        <button
+          className="sm:inline-block text-black px-3 text-md font-medium border-solid border-4 border-white-400 rounded-full bg-transparent p-1 text-black hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 overflow-hidden whitespace-nowrap truncate"
+          onClick={copyAIResponseToClipboard}
+        >
+          Copy Listing
+        </button>
+      </div>
+    </div>
+  </div>
+)}
         </div>
       </div>
     </>
