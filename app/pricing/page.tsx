@@ -20,7 +20,7 @@ if (!auth.user) {
 }
 
     try {
-      const response = await fetch('/api/hello', {
+      const response = await fetch('/api/pay', {
         method: 'POST',
         //headers: {
         //  'Content-Type': 'application/json'
