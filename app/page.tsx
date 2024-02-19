@@ -9,6 +9,8 @@ import { updateDoc, getDoc, doc } from "firebase/firestore";
 import { db } from "../config/firebase";
 import axios from "axios"
 import Image from "next/image";
+import { Carousel, Typography, Button } from "@material-tailwind/react";
+ 
 
 export default function Home() {
   // State to manage the uploaded images and OpenAI API response
@@ -277,8 +279,171 @@ export default function Home() {
 </div>
 </section>
 
+<div className="w-full lg:w-3/4 mx-auto mt-12 border-4 border-red-400">
+    <Carousel className="">
+    <div className="relative h-full w-full mx-auto ">
+    <img
+        src="/hero3.png"
+        alt="image 3"
+        className="md:hidden h-full w-full object-cover"
+    />
+    {/* Image for web */}
+    <img
+        src="/hero2.png"
+        alt="image 2"
+        className="hidden md:block h-full w-full object-cover"
+    />
+       <div className="absolute inset-0 grid h-full w-full items-center bg-black/75 ">
+  <div className="w-3/4  p-4 md:w-full  ">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
+      <div className=" p-1 lg:p-4">
+        <Typography
+          variant="h1"
+          color="white"
+          className="mb-4 text-xl lg:text-3xl md:text-4xl lg:text-5xl"
+        >
+          Tropical Luxury Villa Oasis
+        </Typography>
+        <Typography
+          variant="lead"
+          color="white"
+          className=" text-md lg:text-2xl mb-1 lg:mb-12 opacity-80"
+        >
+          This exquisite villa captures the essence of tropical luxury living. Located in a serene, palm-fringed setting, the property features a spacious two-story main house and an inviting outdoor pool area, blending modern amenities with natural beauty. Experience tranquility and elegance with ample space for relaxation and entertainment.
+        </Typography>
+        <div className="flex gap-2 ">
+          <Button     onClick={() => {
+          const generatorSection = document.getElementById("generator");
+          if (generatorSection) {
+            generatorSection.scrollIntoView({ behavior: "smooth" });
+          }
+        }} size="lg" color="white"  className="w-full hidden sm:inline-block text-white px-3 text-md font-medium border-solid border-4 border-white-400 rounded-full bg-transparent p-1 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 overflow-hidden whitespace-nowrap truncate">
+            Generate
+          </Button>
+       
+        </div>
+      </div>
+      <div className="bg-white p-4 hidden lg:block ">
+      <img
+          src="/slider1.png"
+          alt="image 2"
+          className="h-full w-full object-cover"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+      </div>
 
 
+
+      <div className="relative h-full w-full mx-auto ">
+      <img
+        src="/hero3.png"
+        alt="image 3"
+        className="md:hidden h-full w-full object-cover"
+    />
+    {/* Image for web */}
+    <img
+        src="/hero2.png"
+        alt="image 2"
+        className="hidden md:block h-full w-full object-cover"
+    />
+       <div className="absolute inset-0 grid h-full w-full items-center bg-black/75 ">
+  <div className="w-3/4  p-4 md:w-full ">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className=" p-4">
+        <Typography
+          variant="h1"
+          color="white"
+          className="mb-4 text-xl lg:text-3xl md:text-4xl lg:text-5xl"
+        >
+          Serene Mountain View Retreat
+        </Typography>
+        <Typography
+          variant="lead"
+          color="white"
+          className="mb-12  text-md lg:text-2xl opacity-80"
+        >
+Nestled in the hills, this modern retreat offers breathtaking views and a peaceful sanctuary for a relaxing getaway. With its contemporary design and expansive outdoor spaces, the home is perfect for those looking to connect with nature.        </Typography>
+        <div className="flex gap-2 ">
+          <Button     onClick={() => {
+          const generatorSection = document.getElementById("generator");
+          if (generatorSection) {
+            generatorSection.scrollIntoView({ behavior: "smooth" });
+          }
+        }} size="lg" color="white"  className="w-full hidden sm:inline-block text-white px-3 text-md font-medium border-solid border-4 border-white-400 rounded-full bg-transparent p-1 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 overflow-hidden whitespace-nowrap truncate">
+            Generate
+          </Button>
+       
+        </div>
+      </div>
+      <div className="bg-white p-4 hidden lg:block  ">
+      <img
+          src="/slider2.png"
+          alt="image 2"
+          className="h-full w-full object-cover "
+        />
+      </div>
+    </div>
+  </div>
+</div>
+      </div>
+
+      <div className="relative h-full w-full mx-auto ">
+      <img
+        src="/hero3.png"
+        alt="image 3"
+        className="md:hidden h-full w-full object-cover"
+    />
+    {/* Image for web */}
+    <img
+        src="/hero2.png"
+        alt="image 2"
+        className="hidden md:block h-full w-full object-cover"
+    />
+       <div className="absolute inset-0 grid h-full w-full items-center bg-black/75 ">
+  <div className="w-3/4  p-4 md:w-full ">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className=" p-4">
+        <Typography
+          variant="h1"
+          color="white"
+          className="mb-4 text-xl lg:text-3xl md:text-4xl lg:text-5xl"
+        >
+          Serene Hilltop Villa with Jungle Scenery
+        </Typography>
+        <Typography
+          variant="lead"
+          color="white"
+          className="mb-12 text-md lg:text-2xl opacity-80"
+        >
+Indulge in a lavish getaway at this exquisite multi-level villa nestled in the heart of a lush tropical landscape with breathtaking views of the ocean. The serene setting and luxurious amenities promise an unforgettable stay filled with relaxation, privacy, and comfort.     </Typography>
+        <div className="flex gap-2 ">
+          <Button     onClick={() => {
+          const generatorSection = document.getElementById("generator");
+          if (generatorSection) {
+            generatorSection.scrollIntoView({ behavior: "smooth" });
+          }
+        }} size="lg" color="white"  className="w-full hidden sm:inline-block text-white px-3 text-md font-medium border-solid border-4 border-white-400 rounded-full bg-transparent p-1 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 overflow-hidden whitespace-nowrap truncate">
+            Generate
+          </Button>
+       
+        </div>
+      </div>
+      <div className="bg-white p-4 hidden lg:block">
+      <img
+          src="/slider3.png"
+          alt="image 2"
+          className="h-full w-full object-cover"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+      </div>
+    </Carousel>
+    </div>
 
       <Toaster />
       <div className="flex items-center justify-center text-md " id="generator">
