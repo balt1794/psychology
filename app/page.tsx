@@ -286,12 +286,16 @@ export default function Home() {
         src="/hero3.png"
         alt="image 3"
         className="md:hidden h-full w-full object-cover"
+        width={500}
+        height={500}
     />
     {/* Image for web */}
     <Image
         src="/hero2.png"
         alt="image 2"
         className="hidden md:block h-full w-full object-cover"
+        width={500}
+        height={500}
     />
        <div className="absolute inset-0 grid h-full w-full items-center bg-black/75 ">
   <div className="w-3/4  p-4 md:w-full  ">
@@ -328,6 +332,8 @@ export default function Home() {
           src="/slider1.png"
           alt="image 2"
           className="h-full w-full object-cover"
+          width={500}
+          height={500}
         />
       </div>
     </div>
@@ -342,12 +348,16 @@ export default function Home() {
         src="/hero3.png"
         alt="image 3"
         className="md:hidden h-full w-full object-cover"
+        width={500}
+        height={500}
     />
     {/* Image for web */}
     <Image
         src="/hero2.png"
         alt="image 2"
         className="hidden md:block h-full w-full object-cover"
+        width={500}
+        height={500}
     />
        <div className="absolute inset-0 grid h-full w-full items-center bg-black/75 ">
   <div className="w-3/4  p-4 md:w-full ">
@@ -383,6 +393,8 @@ Nestled in the hills, this modern retreat offers breathtaking views and a peacef
           src="/slider2.png"
           alt="image 2"
           className="h-full w-full object-cover "
+          width={500}
+          height={500}
         />
       </div>
     </div>
@@ -395,12 +407,16 @@ Nestled in the hills, this modern retreat offers breathtaking views and a peacef
         src="/hero3.png"
         alt="image 3"
         className="md:hidden h-full w-full object-cover"
+        width={500}
+        height={500}
     />
     {/* Image for web */}
     <Image
         src="/hero2.png"
         alt="image 2"
         className="hidden md:block h-full w-full object-cover"
+        width={500}
+        height={500}
     />
        <div className="absolute inset-0 grid h-full w-full items-center bg-black/75 ">
   <div className="w-3/4  p-4 md:w-full ">
@@ -436,6 +452,8 @@ Indulge in a lavish getaway at this exquisite multi-level villa nestled in the h
           src="/slider3.png"
           alt="image 2"
           className="h-full w-full object-cover"
+          width={500}
+          height={500}
         />
       </div>
     </div>
