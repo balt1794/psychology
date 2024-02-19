@@ -280,15 +280,15 @@ export default function Home() {
 </section>
 
 <div className="w-full lg:w-3/4 mx-auto mt-12 border-4 border-red-400">
-    <Carousel className="">
+    <Carousel autoplay={true} className="">
     <div className="relative h-full w-full mx-auto ">
-    <img
+    <Image
         src="/hero3.png"
         alt="image 3"
         className="md:hidden h-full w-full object-cover"
     />
     {/* Image for web */}
-    <img
+    <Image
         src="/hero2.png"
         alt="image 2"
         className="hidden md:block h-full w-full object-cover"
@@ -324,7 +324,7 @@ export default function Home() {
         </div>
       </div>
       <div className="bg-white p-4 hidden lg:block ">
-      <img
+      <Image
           src="/slider1.png"
           alt="image 2"
           className="h-full w-full object-cover"
@@ -338,13 +338,13 @@ export default function Home() {
 
 
       <div className="relative h-full w-full mx-auto ">
-      <img
+      <Image
         src="/hero3.png"
         alt="image 3"
         className="md:hidden h-full w-full object-cover"
     />
     {/* Image for web */}
-    <img
+    <Image
         src="/hero2.png"
         alt="image 2"
         className="hidden md:block h-full w-full object-cover"
@@ -379,7 +379,7 @@ Nestled in the hills, this modern retreat offers breathtaking views and a peacef
         </div>
       </div>
       <div className="bg-white p-4 hidden lg:block  ">
-      <img
+      <Image
           src="/slider2.png"
           alt="image 2"
           className="h-full w-full object-cover "
@@ -391,13 +391,13 @@ Nestled in the hills, this modern retreat offers breathtaking views and a peacef
       </div>
 
       <div className="relative h-full w-full mx-auto ">
-      <img
+      <Image
         src="/hero3.png"
         alt="image 3"
         className="md:hidden h-full w-full object-cover"
     />
     {/* Image for web */}
-    <img
+    <Image
         src="/hero2.png"
         alt="image 2"
         className="hidden md:block h-full w-full object-cover"
@@ -432,7 +432,7 @@ Indulge in a lavish getaway at this exquisite multi-level villa nestled in the h
         </div>
       </div>
       <div className="bg-white p-4 hidden lg:block">
-      <img
+      <Image
           src="/slider3.png"
           alt="image 2"
           className="h-full w-full object-cover"
