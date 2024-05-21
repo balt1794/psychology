@@ -42,6 +42,7 @@ image_url: { url: imageUrl },
 };
 });
 
+
 const response = await openai.createChatCompletion({
 model: "gpt-4-vision-preview",
 stream: true,
