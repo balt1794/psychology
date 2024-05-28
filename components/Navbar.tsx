@@ -47,10 +47,10 @@ export default function Navbar() {
     }
   };
   return (
-    <Disclosure as="nav" className="border border-gray-500">
+    <Disclosure as="nav" className="border border-[#00000078]">
       {({ open }) => (
         <>
-          <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 ">
+          <div className="mx-auto max-w-8xl px-2 sm:px-6 lg:px-8 ">
             <div className="relative flex h-16 items-center justify-between">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
@@ -65,20 +65,24 @@ export default function Navbar() {
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
               <div className="flex flex-shrink-0 items-center">
-  <Link className="hover:scale-105" href="/" passHref>
+  <Link className="" href="/" passHref>
     <img
       className="block h-12 lg:h-12 w-auto lg:hidden"
       src="/mobile.png"
       alt="Resume Boost AI Web"
     />
+
   </Link>
-  <Link className="hover:scale-105" href="/" passHref>
-    <img
-      className="hidden h-12 lg:h-16 w-auto lg:block lg:h-14" 
-      src="/plai.png" 
-      alt="Resume Boost AI - Mobile"
-    />
+  <Link className=" text-black font-bold text-xl" href="/" passHref>
+
+    PropertyListingsAI
+    
   </Link>
+  <Link className=" text-black font-bold text-xl" href="/" passHref>
+  <svg className="ml-1 mb-1" width="30px" height="50px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M14 21.0001V15.0001H10V21.0001M19 9.77818V16.2001C19 17.8802 19 18.7203 18.673 19.362C18.3854 19.9265 17.9265 20.3855 17.362 20.6731C16.7202 21.0001 15.8802 21.0001 14.2 21.0001H9.8C8.11984 21.0001 7.27976 21.0001 6.63803 20.6731C6.07354 20.3855 5.6146 19.9265 5.32698 19.362C5 18.7203 5 17.8802 5 16.2001V9.77753M21 12.0001L15.5668 5.96405C14.3311 4.59129 13.7133 3.9049 12.9856 3.65151C12.3466 3.42894 11.651 3.42899 11.0119 3.65165C10.2843 3.90516 9.66661 4.59163 8.43114 5.96458L3 12.0001" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</Link>
 </div>
 <div className="hidden sm:ml-6 sm:block">
   <div className="flex items-center space-x-4 h-full">
