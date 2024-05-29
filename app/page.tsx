@@ -14,7 +14,8 @@ import { Carousel, Typography, Button } from "@material-tailwind/react";
 
 export default function Home() {
 
-  const [activeGenerator, setActiveGenerator] = useState<"location" | "houseRules" | "textNarrator">("houseRules");
+  //const [activeGenerator, setActiveGenerator] = useState<"location" | "houseRules" | "textNarrator">("houseRules");
+  const [activeGenerator, setActiveGenerator] = useState<string | null>(null); // Added state for active button
 
   const [showGenerator2, setShowGenerator2] = useState(false);
   // State to manage the uploaded images and OpenAI API response
@@ -414,11 +415,11 @@ export default function Home() {
 <div className="relative z-10 max-w-10xl mx-auto flex p-10 lg:p-20">
   <div className="max-w-5xl ">
     <h1 className="text-5xl lg:text-6xl text-black font-bold  mb-6 mt-1 lg:mt-6" >Real State Listings 🏠</h1>
-    <h2 className="text-5xl lg:text-5xl text-black font-bold  mb-6 mt-1 lg:-mt-2" >Fast and Efficient using AI</h2>
+    <h2 className="text-xl lg:text-5xl text-black font-bold  mb-6 mt-1 lg:-mt-2" >Fast and Efficient using AI</h2>
 
-    <div className="text-2xl lg:text-2xl text-gray-500 mb-6 " style={{ color: "#00000078" }}>
+    <div className="text-lg lg:text-2xl text-gray-500 mb-6 " style={{ color: "#00000078" }}>
     List your properties in minutes using AI ⚡</div>
-    <div className="text-2xl lg:text-2xl text-gray-500 mb-6 " style={{ color: "#00000078" }}>Say goodbye to the manual time-consuming listings and automate it with our suite of real state listing tools</div>
+    <div className="text-lg lg:text-2xl text-gray-500 mb-6 " style={{ color: "#00000078" }}>Say goodbye to the manual time-consuming listings and automate it with our suite of real state listing tools</div>
     <button
         type="button"
         onClick={() => {
@@ -427,7 +428,7 @@ export default function Home() {
             generatorSection.scrollIntoView({ behavior: "smooth" });
           }
         }}
-        className="w-1/2 sm:inline-block text-black px-3 text-md font-medium border-solid border-4 border-white-400 rounded-full bg-transparent p-1 text-black hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 overflow-hidden whitespace-nowrap truncate"
+        className="w-full lg:w-1/2 sm:inline-block text-black px-3 text-md font-medium border-solid border-4 border-white-400 rounded-full bg-transparent p-1 text-black hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 overflow-hidden whitespace-nowrap truncate"
       >
         Create Listings Now!
       </button>
@@ -712,22 +713,23 @@ Indulge in a lavish getaway at this exquisite multi-level villa nestled in the h
       <div className="flex justify-center mt-12 space-x-4">
         {/* Button for Location Generator */}
         <button
-          className={`text-black px-3 text-md font-medium border-solid border-4 border-white-400 rounded-full bg-transparent p-1 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 overflow-hidden whitespace-nowrap truncate ${activeGenerator === 'location' ? 'bg-gray-200' : ''}`}
-          onClick={() => setActiveGenerator('location')}
+  className={`text-black px-3 text-md font-medium border-solid border-4 border-white-400 rounded-full  p-1  focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 overflow-hidden whitespace-nowrap truncate ${activeGenerator === 'location' ? 'bg-gray-200 text-black' : ''}`}
+  onClick={() => setActiveGenerator('location')}
         >
           Directions Generator
         </button>
         {/* Button for House Rules Generator */}
         <button
-          className={`text-black px-3 text-md font-medium border-solid border-4 border-white-400 rounded-full bg-transparent p-1 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 overflow-hidden whitespace-nowrap truncate ${activeGenerator === 'houseRules' ? 'bg-gray-200' : ''}`}
-          onClick={() => setActiveGenerator('houseRules')}
+  className={`text-black px-3 text-md font-medium border-solid border-4 border-white-400 rounded-full  p-1 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 overflow-hidden whitespace-nowrap truncate ${activeGenerator === 'houseRules' ? 'bg-gray-200 text-black'  : ''}`}
+  onClick={() => setActiveGenerator('houseRules')}
         >
           House Rules Generator
         </button>
         {/* Button for Text Narrator */}
         <button
-          className={`text-black px-3 text-md font-medium border-solid border-4 border-white-400 rounded-full bg-transparent p-1 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 overflow-hidden whitespace-nowrap truncate ${activeGenerator === 'textNarrator' ? 'bg-gray-200' : ''}`}
-          onClick={() => setActiveGenerator('textNarrator')}
+              className={`text-black px-3 text-md font-medium border-solid border-4 border-white-400 rounded-full  p-1 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 overflow-hidden whitespace-nowrap truncate ${activeGenerator === 'textNarrator' ? 'bg-gray-200 text-black'  : ''}`}
+              onClick={() => setActiveGenerator('textNarrator')}
+          
         >
          Property Description Generator
         </button>
@@ -740,7 +742,7 @@ Indulge in a lavish getaway at this exquisite multi-level villa nestled in the h
 
 
 
-
+<div className="h-screen">
 
 
 
@@ -750,12 +752,12 @@ Indulge in a lavish getaway at this exquisite multi-level villa nestled in the h
         <>
           {/* Content for Location Generator */}
 
-          <div className="flex items-center justify-center text-md" id="generator">
+          <div className="flex items-center justify-center text-md  " id="generator">
   <div className="flex flex-wrap justify-between w-full max-w-8xl p-4 lg:p-10">
     {/* Left Side: Uploaded Images and Form */}
     <div className="w-full md:w-1/2  shadow-lg p-8 text-black mb-8 rounded-lg md:mb-0 border-solid border-4 border-white-400">
       <h2 className="text-xl font-bold mb-4">Enter property address:</h2>
-        <div className="flex flex-col mb-6">
+        <div className="flex flex-col mb-6 ">
         <input
         type="text"
         placeholder="35 Adams St, Newark, NJ"
@@ -877,7 +879,7 @@ Indulge in a lavish getaway at this exquisite multi-level villa nestled in the h
 
       {activeGenerator === 'houseRules' && (
         <>
-          <div className="flex items-center justify-center text-md " id="generator">
+          <div className="flex items-center justify-center text-md  " id="generator">
         
         <div className="flex flex-wrap justify-between w-full max-w-8xl p-4 lg:p-10  ">
           {/* Left Side: Uploaded Images and Form */}
@@ -886,16 +888,17 @@ Indulge in a lavish getaway at this exquisite multi-level villa nestled in the h
           
             <FreeRewritesLeft freeRewritesLeft={freeRewritesLeft} />
             {images.length > 0 ? (
-              <div className="mb-4">
-                {images.map((image, index) => (
-                  <img
-                    key={index}
-                    src={`data:image/jpeg;base64,${image}`}
-                    className="w-full object-contain max-h-36 mb-2"
-                    alt={`Uploaded Image ${index}`}
-                  />
-                ))}
-              </div>
+               <div className="flex flex-wrap mb-4">
+               {images.map((image, index) => (
+                 <div key={index} className="w-1/4 p-2">
+                   <img
+                     src={`data:image/jpeg;base64,${image}`}
+                     className="w-full object-contain max-h-32 mb-2"
+                     alt={`Uploaded Image ${index}`}
+                   />
+                 </div>
+               ))}
+             </div>
             ) : (
               <div className="mb-4 p-8 text-center">
                 <p>Once you upload images, you will see them here.</p>
@@ -1037,17 +1040,19 @@ Indulge in a lavish getaway at this exquisite multi-level villa nestled in the h
             <h2 className="text-xl font-bold mb-4">Upload Images</h2>
           
             <FreeRewritesLeft freeRewritesLeft={freeRewritesLeft} />
+
             {images.length > 0 ? (
-              <div className="mb-4">
-                {images.map((image, index) => (
-                  <img
-                    key={index}
-                    src={`data:image/jpeg;base64,${image}`}
-                    className="w-full object-contain max-h-36 mb-2"
-                    alt={`Uploaded Image ${index}`}
-                  />
-                ))}
-              </div>
+                 <div className="flex flex-wrap mb-4">
+               {images.map((image, index) => (
+                 <div key={index} className="w-1/4 p-2">
+                   <img
+                     src={`data:image/jpeg;base64,${image}`}
+                     className="w-full object-contain max-h-32 mb-2"
+                     alt={`Uploaded Image ${index}`}
+                   />
+                 </div>
+               ))}
+             </div>
             ) : (
               <div className="mb-4 p-8 text-center">
                 <p>Once you upload images, you will see them here.</p>
@@ -1166,7 +1171,7 @@ Indulge in a lavish getaway at this exquisite multi-level villa nestled in the h
         </>
       )}
 
-      {/* Your existing code */}
+      {/* Your existing code */}</div>
     </>
     </>
   );
