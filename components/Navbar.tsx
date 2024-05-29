@@ -36,7 +36,7 @@ export default function Navbar() {
         if (!userDocSnapshot.exists()) {
           await setDoc(userDocRef, {
             email: user.email,
-            freeRewritesLeft: 1,
+            freeRewritesLeft: 0,
             paidUser: false
           });
         }
