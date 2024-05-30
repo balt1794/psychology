@@ -15,7 +15,7 @@ import { Carousel, Typography, Button } from "@material-tailwind/react";
 export default function Home() {
 
   //const [activeGenerator, setActiveGenerator] = useState<"location" | "houseRules" | "textNarrator">("houseRules");
-  const [activeGenerator, setActiveGenerator] = useState<string | null>(null); // Added state for active button
+  const [activeGenerator, setActiveGenerator] = useState<string | null>('location'); // Added state for active button
 
   const [showGenerator2, setShowGenerator2] = useState(false);
   // State to manage the uploaded images and OpenAI API response
