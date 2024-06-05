@@ -782,7 +782,6 @@ Indulge in a lavish getaway at this exquisite multi-level villa nestled in the h
                 height: 45px;
                 animation: spin 2s linear infinite;
               }
-              
               @keyframes spin {
                 0% { transform: rotate(0deg); }
                 100% { transform: rotate(360deg); }
@@ -884,7 +883,7 @@ Indulge in a lavish getaway at this exquisite multi-level villa nestled in the h
         <div className="flex flex-wrap justify-between w-full max-w-8xl p-4 lg:p-10  ">
           {/* Left Side: Uploaded Images and Form */}
           <div className="w-full md:w-1/2  shadow-lg p-8 text-black mb-8 rounded-lg md:mb-0 border-solid border-4 border-white-400 ">
-            <h2 className="text-xl font-bold mb-4">Upload Images</h2>
+            <h2 className="text-xl font-bold mb-4">House Rules - Upload Images</h2>
           
             <FreeRewritesLeft freeRewritesLeft={freeRewritesLeft} />
             {images.length > 0 ? (
@@ -1037,7 +1036,7 @@ Indulge in a lavish getaway at this exquisite multi-level villa nestled in the h
         <div className="flex flex-wrap justify-between w-full max-w-8xl p-4 lg:p-10  ">
           {/* Left Side: Uploaded Images and Form */}
           <div className="w-full md:w-1/2  shadow-lg p-8 text-black mb-8 rounded-lg md:mb-0 border-solid border-4 border-white-400 ">
-            <h2 className="text-xl font-bold mb-4">Upload Images</h2>
+            <h2 className="text-xl font-bold mb-4">Property Descriptions - Upload Images</h2>
           
             <FreeRewritesLeft freeRewritesLeft={freeRewritesLeft} />
 
