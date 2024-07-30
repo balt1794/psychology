@@ -9,10 +9,28 @@ import Script from 'next/script'
 const inter = Inter({ subsets: ['latin'] })
 const nunito = Nunito({ subsets: ['latin'] })
 
+
 export const metadata: Metadata = {
-  title: 'Property Listings AI',
-  description: 'Generated Real State Listings using AI',
-}
+  title: {
+    template: '%s',
+    default: 'PropertyListingsAI - Generated Real State Listings using AI',
+  },
+  description:
+    'Generated Real State Listings using AI',
+  metadataBase: new URL('https://propertylistingsai.com/'), 
+
+    twitter: {
+      card: 'summary_large_image',
+      site: 'PropertyListingsAI.com',
+      creator: '@balt1794',
+      title: 'PropertyListingsAI - Generated Real State Listings using AI',
+      description: 'Generated Real State Listings using AI',
+      images: ['featured.png'],  
+    },
+    openGraph: {
+      images: ['opengraph-image.png'], 
+    },
+};
 
 export default function RootLayout({
   children,
