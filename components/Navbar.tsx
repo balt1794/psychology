@@ -37,7 +37,8 @@ export default function Navbar() {
           await setDoc(userDocRef, {
             email: user.email,
             freeRewritesLeft: 0,
-            paidUser: false
+            paidUser: false,
+            userId: user.uid 
           });
         }
       }
