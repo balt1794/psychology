@@ -13,18 +13,18 @@ const nunito = Nunito({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: {
     template: '%s',
-    default: 'PropertyListingsAI - Generated Real State Listings using AI',
+    default: 'PropertyListingsAI - Generated Real Estate Listings using AI',
   },
   description:
-    'Generated Real State Listings using AI',
+    'Generated Real Estate Listings using AI',
   metadataBase: new URL('https://propertylistingsai.com/'), 
 
     twitter: {
       card: 'summary_large_image',
       site: 'PropertyListingsAI.com',
       creator: '@balt1794',
-      title: 'PropertyListingsAI - Generated Real State Listings using AI',
-      description: 'Generated Real State Listings using AI',
+      title: 'PropertyListingsAI - Generated Real Estate Listings using AI',
+      description: 'Generated Real Estate Listings using AI',
       images: ['featured.png'],  
     },
     openGraph: {

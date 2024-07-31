@@ -10,7 +10,7 @@ import { db } from "../config/firebase";
 import axios from "axios"
 import Image from "next/image";
 import { Carousel, Typography, Button } from "@material-tailwind/react";
- 
+import Link from "next/link";
 
 export default function Home() {
 
@@ -414,12 +414,12 @@ export default function Home() {
   */}
 <div className="relative z-10 max-w-10xl mx-auto flex p-10 lg:p-20">
   <div className="max-w-5xl ">
-    <h1 className="text-5xl lg:text-6xl text-black font-bold  mb-6 mt-1 lg:mt-6" >Real State Listings 🏠</h1>
+    <h1 className="text-5xl lg:text-6xl text-black font-bold  mb-6 mt-1 lg:mt-6" >Real Estate Listings 🏠</h1>
     <h2 className="text-xl lg:text-5xl text-black font-bold  mb-6 mt-1 lg:-mt-2" >Fast and Efficient using AI</h2>
 
     <div className="text-lg lg:text-2xl text-gray-500 mb-6 " style={{ color: "#00000078" }}>
     List your properties in minutes using AI ⚡</div>
-    <div className="text-lg lg:text-2xl text-gray-500 mb-6 " style={{ color: "#00000078" }}>Say goodbye to the manual time-consuming listings and automate it with our suite of real state listing tools</div>
+    <div className="text-lg lg:text-2xl text-gray-500 mb-6 " style={{ color: "#00000078" }}>Say goodbye to the manual time-consuming listings and automate it with our suite of real estate listing tools</div>
     <button
         type="button"
         onClick={() => {
@@ -497,14 +497,14 @@ export default function Home() {
   </div>
 </div>
 
-
 <section>
-<div className="relative z-10 flex flex-col items-center justify-center max-w-4xl gap-8 mx-auto">
-<span className="text-xl text-black hidden md:flex mb-2">Create listings instantly with PropertyListingsAI</span>
+<div className="relative z-10 flex flex-col items-center justify-center max-w-4xl gap-8 mx-auto mt-8">
+<span className="text-lg text-black font-black hidden md:flex mb-2">Trusted by the best in the market</span>
   </div>
 <div className="flex items-center justify-center gap-3">
-    <div className="flex items-center space-x-2">
-        <img src="/airbnb.png" width="60" height="30" className="w-10 md:w-12  v-lazy-image v-lazy-image-loaded" ></img>
+    <div className="flex items-center space-x-6">
+        <img src="/airbnb.png" width="60" height="30" className="w-10 md:w-12   v-lazy-image v-lazy-image-loaded" ></img>
+        <img src="/remax.png" width="60" height="30" className="w-10 md:w-20  v-lazy-image v-lazy-image-loaded" ></img>
         <img src="/booking.svg" width="60" height="30" className="w-10 md:w-12 v-lazy-image v-lazy-image-loaded" ></img>
         <img src="/Vrbo.svg.png" width="60" height="30" className="w-14 md:w-24  v-lazy-image v-lazy-image-loaded" ></img>
         <img src="/zillow.png" width="60" height="30" className="w-14 md:w-28  v-lazy-image v-lazy-image-loaded" ></img>
@@ -512,12 +512,69 @@ export default function Home() {
 </div>
 </section>
 
-
+<section id="features" className="md:pb-20 mt-12  md:pt-10 pb-6 sm:pb-6 sm:pt-6 rounded-xl border-2 border-white-400 mr-12 ml-12" style={{backgroundColor: "#fafafa"}}>
+    <div className="section_wrapper max-w-295.2 pl-4 pr-4 lg:pl-12 lg:pr-12 mx-auto">
+        <div className="text-center ">
+        <h2 className=" text-2xl lg:text-4xl font-bold mb-0 lg:mb-6 text-center text-black p-6 lg:p-0">Features ⚡</h2>
+    <p className=" text-sm lg:text-lg mb-8 text-center text-black">
+    AI-powered features that can help you list your properties in no time. We offer support for all popular platforms such as Airbnb, Zillow, Remax, and more.
+      </p>
+        </div>
+        <div className="module3 grid grid-cols-2 md:grid-cols-3 gap-6">
+      
+            <div className="feature mb-10">
+            <div className="emoji text-4xl">🤖</div>
+                <h3 className="font-bold mb-4 text-sm text-black lg:text-xl">AI Directions Generator</h3>
+                <p className="text-sm lg:text-black">Transform your job experiences into captivating, easy-to-read bullet points that make your CV stand out from the crowd.</p> 
+            </div>
+            <div className="feature mb-10">
+                <div className="emoji text-4xl">🔒</div>
+                <h3 className="font-bold mb-4 text-sm text-black  lg:text-xl ">AI House Rules Generator</h3>
+                <p className="text-sm lg:text-black">Your resume information stays securely within your control. We don't store your data. Everything is saved locally on your browser session</p>
+            </div>
+            <div className="feature mb-10">
+                <div className="emoji text-4xl">📝</div>
+                <h3 className="font-bold mb-4 text-sm text-black  lg:text-xl ">AI Property Descriptions Generator</h3>
+                <p className="text-sm lg:text-black"> Every resume is downloaded in PDF format which is the standard format for job applications; saving you time to convert back and forth between formats.</p>
+            </div>
+            <div className="feature">
+                <div className="emoji text-4xl">💼</div>
+                <h3 className="font-bold mb-4 text-sm text-black  lg:text-xl ">AI Image to Description</h3>
+                <p className="text-sm lg:text-black">Simply upload your existing CV, and watch it being parsed automatically to save you valuable time. Your resume will be revamped and ready for success.</p>
+            </div>
+            <div className="feature">
+                <div className="emoji text-4xl">📠</div>
+                <h3 className="font-bold mb-4 text-sm  text-black lg:text-xl">AI Social Media Real State Posts</h3>
+                <p className="text-sm lg:text-black">Our tool ensures seamless compatibility with ATS (Applicant Tracking Systems), significantly enhancing your chances of capturing employers' attention.</p>
+            </div>
+            <div className="feature">
+                <div className="emoji text-4xl">📄</div>
+                <h3 className="font-bold mb-4 text-sm text-black  lg:text-xl">AI Property Images Descriptions</h3>
+                <p className="text-sm lg:text-black">Our resume maker is designed to be straightforward, fast, and user-friendly, making it ideal for anyone seeking to create a professional CV in minutes.</p>
+            </div>
+           
+        </div>	
+    </div>
+</section>
 
 
  {/*
+<div className="my-6">
+  <div className="flex items-center justify-center gap-3">
+    <div className="flex items-center space-x-2">
+      <span className="text-sm text-gray-600 hidden md:flex">As seen on: </span> 
+      <Link href="/https://hackernoon.com/my-ai-resume-maker-website-passes-$1k-in-mrr">
+      <img src="/hn-logo.png" width="100" height="32" className="w-1/5 md:w-[150px] grayscale v-lazy-image v-lazy-image-loaded">
+      </img>
+      </Link>
+       </div>
+       </div>
+       </div>
 
-<div className="w-full lg:w-3/4 mx-auto mt-12 border-4 border-red-400">
+
+
+
+<div classNameName="w-full lg:w-3/4 mx-auto mt-12 border-4 border-red-400">
     <Carousel autoplay={true} className="">
     <div className="relative h-full w-full mx-auto ">
     <Image
@@ -757,7 +814,8 @@ Indulge in a lavish getaway at this exquisite multi-level villa nestled in the h
     {/* Left Side: Uploaded Images and Form */}
     <div className="w-full md:w-1/2  shadow-lg p-8 text-black mb-8 rounded-lg md:mb-0 border-solid border-4 border-white-400">
       <h2 className="text-xl font-bold mb-4">Enter property address:</h2>
-        <div className="flex flex-col mb-6 ">
+      <FreeRewritesLeft freeRewritesLeft={freeRewritesLeft} />
+        <div className="flex flex-col mb-6 mt-3 ">
         <input
         type="text"
         placeholder="35 Adams St, Newark, NJ"
