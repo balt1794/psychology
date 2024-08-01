@@ -417,9 +417,9 @@ export default function Home() {
     <h1 className="text-5xl lg:text-6xl text-black font-bold  mb-6 mt-1 lg:mt-6" >Real Estate Listings 🏠</h1>
     <h2 className="text-xl lg:text-5xl text-black font-bold  mb-6 mt-1 lg:-mt-2" >Fast and Efficient using AI</h2>
 
-    <div className="text-lg lg:text-2xl text-gray-500 mb-6 " style={{ color: "#00000078" }}>
+    <div className="text-md lg:text-2xl text-gray-500 mb-2 lg:mb-6 " style={{ color: "#00000078" }}>
     List your properties in minutes using AI ⚡</div>
-    <div className="text-lg lg:text-2xl text-gray-500 mb-6 " style={{ color: "#00000078" }}>Say goodbye to the manual time-consuming listings and automate it with our suite of real estate listing tools</div>
+    <div className="text-md lg:text-2xl text-gray-500 mb-6 " style={{ color: "#00000078" }}>Say goodbye to the manual time-consuming listings and automate it with our suite of real estate listing tools</div>
     <button
         type="button"
         onClick={() => {
@@ -428,7 +428,7 @@ export default function Home() {
             generatorSection.scrollIntoView({ behavior: "smooth" });
           }
         }}
-        className="w-full lg:w-1/2 sm:inline-block text-black px-3 text-md font-medium border-solid border-4 border-white-400 rounded-full bg-transparent p-1 text-black hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 overflow-hidden whitespace-nowrap truncate"
+        className="w-full lg:w-1/2 sm:inline-block text-black px-3 text-lg font-medium border-solid border-4 border-white-400 rounded-full bg-transparent p-1 text-black hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 overflow-hidden whitespace-nowrap truncate"
       >
         Create Listings Now!
       </button>
@@ -440,7 +440,7 @@ export default function Home() {
     <div>
       <div className="-rotate-8 ml-12 p-4 mb-4">
       
-        <div className="text-xs  mb-1 ml-4 " style={{ color: "#00000078" }}>Exquisite villa located in a serene, palm-fringed setting, property features a spacious two-story main house and an outdoor pool area... </div>
+        <div className="text-xs mb-1 ml-4 " style={{ color: "#00000078" }}>Exquisite villa located in a serene, palm-fringed setting, property features a spacious two-story main house and an outdoor pool area... </div>
         <div className="flex items-center justify-center mt-4 rounded-md ">
           
           <div className="text-6xl font-semibold border-4 border-white-400 rounded-xl">
@@ -512,7 +512,7 @@ export default function Home() {
 </div>
 </section>
 
-<section id="features" className="md:pb-20 mt-12  md:pt-10 pb-6 sm:pb-6 sm:pt-6 rounded-xl border-2 border-white-400 mr-12 ml-12" style={{backgroundColor: "#fafafa"}}>
+<section id="features" className="md:pb-20 mt-12  md:pt-10 pb-6 sm:pb-6 sm:pt-6 rounded-xl border-2 border-white-400 mr-4 ml-4" style={{backgroundColor: "#fafafa"}}>
     <div className="section_wrapper max-w-295.2 pl-4 pr-4 lg:pl-12 lg:pr-12 mx-auto">
         <div className="text-center ">
         <h2 className=" text-2xl lg:text-4xl font-bold mb-0 lg:mb-6 text-center text-black p-6 lg:p-0">Features ⚡</h2>
@@ -523,34 +523,34 @@ export default function Home() {
         <div className="module3 grid grid-cols-2 md:grid-cols-3 gap-6">
       
             <div className="feature mb-10">
-            <div className="emoji text-4xl">🤖</div>
+            <div className="emoji text-xl lg:text-4xl">🚘</div>
                 <h3 className="font-bold mb-4 text-sm text-black lg:text-xl">AI Directions Generator</h3>
-                <p className="text-sm lg:text-black">Transform your job experiences into captivating, easy-to-read bullet points that make your CV stand out from the crowd.</p> 
+                <p className="text-sm text-black">Enter the address of your property, and our AI will generate clear, step-by-step directions for your potential guests, making it easy for them to find their way.</p> 
             </div>
             <div className="feature mb-10">
-                <div className="emoji text-4xl">🔒</div>
+                <div className="emoji text-xl text-4xl">🏡</div>
                 <h3 className="font-bold mb-4 text-sm text-black  lg:text-xl ">AI House Rules Generator</h3>
-                <p className="text-sm lg:text-black">Your resume information stays securely within your control. We don't store your data. Everything is saved locally on your browser session</p>
+                <p className="text-md text-black">Upload images or provide details about your property, and our AI will automatically generate comprehensive house rules, including check-in/check-out times and other essential guidelines.</p>
             </div>
             <div className="feature mb-10">
-                <div className="emoji text-4xl">📝</div>
+                <div className="emoji text-xl text-4xl">📝</div>
                 <h3 className="font-bold mb-4 text-sm text-black  lg:text-xl ">AI Property Descriptions Generator</h3>
-                <p className="text-sm lg:text-black"> Every resume is downloaded in PDF format which is the standard format for job applications; saving you time to convert back and forth between formats.</p>
+                <p className="text-md text-black">Generate complete, ready-to-post property descriptions for platforms like Airbnb, Booking.com, Zillow, etc. Highlight your property's best features, making it easy to attract potential guests.</p>
             </div>
             <div className="feature">
-                <div className="emoji text-4xl">💼</div>
-                <h3 className="font-bold mb-4 text-sm text-black  lg:text-xl ">AI Image to Description</h3>
-                <p className="text-sm lg:text-black">Simply upload your existing CV, and watch it being parsed automatically to save you valuable time. Your resume will be revamped and ready for success.</p>
+                <div className="emoji text-xl text-4xl">📷</div>
+                <h3 className="font-bold mb-4 text-sm text-black  lg:text-xl">AI Image to Description</h3>
+                <p className="text-md text-black">Using the latest AI vision models, upload your property images and our AI will convert them into detailed, engaging descriptions, making your listings more appealing and informative.</p>
             </div>
             <div className="feature">
-                <div className="emoji text-4xl">📠</div>
+                <div className="emoji text-xl text-4xl">📱</div>
                 <h3 className="font-bold mb-4 text-sm  text-black lg:text-xl">AI Social Media Real State Posts</h3>
-                <p className="text-sm lg:text-black">Our tool ensures seamless compatibility with ATS (Applicant Tracking Systems), significantly enhancing your chances of capturing employers' attention.</p>
+                <p className="text-md text-black">Create optimized social media posts for your property listings with ease. Our AI ensures your posts are on point to boost visibility and engagement.</p>
             </div>
             <div className="feature">
-                <div className="emoji text-4xl">📄</div>
+                <div className="emoji text-xl text-4xl">🖼️</div>
                 <h3 className="font-bold mb-4 text-sm text-black  lg:text-xl">AI Property Images Descriptions</h3>
-                <p className="text-sm lg:text-black">Our resume maker is designed to be straightforward, fast, and user-friendly, making it ideal for anyone seeking to create a professional CV in minutes.</p>
+                <p className="text-md text-black">Create compelling and accurate descriptions for your individual property images, making your listings more attractive to potential buyers.</p>
             </div>
            
         </div>	
