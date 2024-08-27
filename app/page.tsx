@@ -530,27 +530,27 @@ export default function Home() {
             <div className="feature mb-10">
                 <div className="emoji text-xl text-4xl">🏡</div>
                 <h3 className="font-bold mb-4 text-sm text-black  lg:text-xl ">AI House Rules Generator</h3>
-                <p className="text-md text-black">Upload images or provide details about your property, and our AI will automatically generate comprehensive house rules, including check-in/check-out times and other essential guidelines.</p>
+                <p className="text-sm text-black">Upload images or provide details about your property, and our AI will automatically generate comprehensive house rules, including check-in/check-out times and other essential guidelines.</p>
             </div>
             <div className="feature mb-10">
                 <div className="emoji text-xl text-4xl">📝</div>
                 <h3 className="font-bold mb-4 text-sm text-black  lg:text-xl ">AI Property Descriptions Generator</h3>
-                <p className="text-md text-black">Generate complete, ready-to-post property descriptions for platforms like Airbnb, Booking.com, Zillow, etc. Highlight your property's best features, making it easy to attract potential guests.</p>
+                <p className="text-sm text-black">Generate complete, ready-to-post property descriptions for platforms like Airbnb, Booking.com, Zillow, etc. Highlight your property's best features, making it easy to attract potential guests.</p>
             </div>
             <div className="feature">
                 <div className="emoji text-xl text-4xl">📷</div>
                 <h3 className="font-bold mb-4 text-sm text-black  lg:text-xl">AI Image to Description</h3>
-                <p className="text-md text-black">Using the latest AI vision models, upload your property images and our AI will convert them into detailed, engaging descriptions, making your listings more appealing and informative.</p>
+                <p className="text-sm text-black">Using the latest AI vision models, upload your property images and our AI will convert them into detailed, engaging descriptions, making your listings more appealing and informative.</p>
             </div>
             <div className="feature">
                 <div className="emoji text-xl text-4xl">📱</div>
                 <h3 className="font-bold mb-4 text-sm  text-black lg:text-xl">AI Social Media Real State Posts</h3>
-                <p className="text-md text-black">Create optimized social media posts for your property listings with ease. Our AI ensures your posts are on point to boost visibility and engagement.</p>
+                <p className="text-sm text-black">Create optimized social media posts for your property listings with ease. Our AI ensures your posts are on point to boost visibility and engagement.</p>
             </div>
             <div className="feature">
                 <div className="emoji text-xl text-4xl">🖼️</div>
                 <h3 className="font-bold mb-4 text-sm text-black  lg:text-xl">AI Property Images Descriptions</h3>
-                <p className="text-md text-black">Create compelling and accurate descriptions for your individual property images, making your listings more attractive to potential buyers.</p>
+                <p className="text-sm text-black">Create compelling and accurate descriptions for your individual property images, making your listings more attractive to potential buyers.</p>
             </div>
            
         </div>	
