@@ -8,6 +8,7 @@ export const runtime = 'edge';
 const configuration = new Configuration({
 apiKey: process.env.OPENAI_API_KEY || "",
 });
+
 // Create an instance of OpenAIApi
 const openai = new OpenAIApi(configuration);
 
