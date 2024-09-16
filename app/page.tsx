@@ -551,7 +551,8 @@ export default function Home() {
                 <div className="emoji text-xl text-4xl">🖼️</div>
                 <h3 className="font-bold mb-4 text-sm text-black  lg:text-xl">AI Property Images Descriptions</h3>
                 <p className="text-sm text-black">Create compelling and accurate descriptions for your individual property images, making your listings more attractive to potential buyers.</p>
-                <a className="text-black" href="https://alteropen.com/" title="Alternative Open Directory">AlterOpen</a>
+                <a className="text-white" href="https://alteropen.com/" title="Alternative Open Directory">AlterOpen</a>
+                <a className="text-white" href="https://freeaitool.ai/" title="Alternative Open Directory">FreeAITool</a>
             </div>
            
         </div>	
