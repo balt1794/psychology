@@ -11,6 +11,7 @@ import axios from "axios"
 import Image from "next/image";
 import { Carousel, Typography, Button } from "@material-tailwind/react";
 import Link from "next/link";
+import { Footer } from "@/components/Footer";
 
 export default function Home() {
 
@@ -1231,6 +1232,7 @@ Indulge in a lavish getaway at this exquisite multi-level villa nestled in the h
       )}
 
       {/* Your existing code */}</div>
+      <Footer/>
     </>
     </>
   );

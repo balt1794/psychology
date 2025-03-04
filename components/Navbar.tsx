@@ -13,7 +13,7 @@ import { getDoc, setDoc, doc } from "firebase/firestore";
 const navigation = [
  // { name: 'Blog', href: '/blog', current: false },
   { name: 'Pricing', href: '/pricing', current: false },
- // { name: 'FAQ', href: '/faq', current: false },
+ { name: 'Terms of Use', href: '/terms-of-use', current: false },
   //{ name: 'Calendar', href: '#', current: false },
 ]
 
