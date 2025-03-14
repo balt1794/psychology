@@ -1231,8 +1231,8 @@ Indulge in a lavish getaway at this exquisite multi-level villa nestled in the h
         </>
       )}
 
-      {/* Your existing code */}</div>
-      <Footer/>
+      {/* Your existing code <Footer/> */}</div>
+      
     </>
     </>
   );
