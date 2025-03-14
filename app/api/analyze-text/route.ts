@@ -32,7 +32,7 @@ export async function POST(request: NextRequest) {
 
     // Call OpenAI to get a completion
     const response = await openai.createChatCompletion({
-      model: "gpt-3.5-turbo",
+      model: "gpt-4o",
       messages,
       max_tokens: 4096,
     });
