@@ -44,7 +44,7 @@ image_url: { url: imageUrl },
 
 
 const response = await openai.createChatCompletion({
-model: "gpt-4-vision-preview",
+model: "gpt-4o",
 stream: true,
 max_tokens: 4096,
 messages,
