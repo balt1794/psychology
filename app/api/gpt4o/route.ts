@@ -1,0 +1,77 @@
+import { Configuration, OpenAIApi } from "openai-edge";
+import { OpenAIStream, StreamingTextResponse } from "ai";
+
+// Define the runtime
+export const runtime = 'edge';
+
+// Create configuration object with OpenAI API key
+const configuration = new Configuration({
+apiKey: process.env.OPENAI_API_KEY || "",
+});
+
+// Create an instance of OpenAIApi
+const openai = new OpenAIApi(configuration);
+
+// Define route handler for the POST request to /api/gpt4o
+export async function POST(request: Request) {
+try {
+// Extract the image data and place description from the request body
+const { images, placeDescription, numGuests, numBedrooms, numBeds, numBathrooms, contactInfo, optionalAddress } = await request.json();
+
+// Check if the image data is valid
+if (!images || !Array.isArray(images) || images.length < 2) {
+return new Response("Invalid input: At least two images are required for comparison", { status: 400 });
+}
+
+// Make a request to OpenAI API for image analysis
+const messages = images.map((base64Image, index) => {
+// Decode the base64 image string
+const imageUrl = `data:image/jpeg;base64,${base64Image}`;
+return {
+role: "user",
+content: [
+{
+type: "text",
+text: `Analyze the uploaded images and provide an entire Airbnb listing that includes:
+1. Title: A title for the place (maximum 32 characters).
+2. Description: A long description (maximum 500 characters).
+3. Property Description: ${placeDescription}. Talk about the property as much as you can in a general way based on images. Like this property is located in one of the best spots in...etc (500 characters max)
+4. House rules: House rules.
+5. Image descriptions for each uploaded photo.(maximum 250 characters) Describe every single image.
+6. Number of guests: ${numGuests}.
+7. Number of bedrooms: ${numBedrooms}.
+8. Number of beds: ${numBeds}.
+9. Number of bathrooms: ${numBathrooms}.
+10. Contact information: Generate a "Contact Information" section with the following information: ${contactInfo}. It needs to be like if you have any questions or need support, please contact us at this email or phone number or through the Aibnb chat or WhatsApp. We'll be there to assist you.
+11. Generate a "How to Get There" section with 3 different popular starting points based on this address: ${optionalAddress}. Make it have detailed instructions but short and concise.
+12. Sample cancellation policy.
+13. A list of amenities based on the uploaded images. So if you see a Router, say Wifi, if you use Kitchen, then say Kitchen, etc. Some commons ones are Wifi, TV, Kitchen, Pool, Washer, Air conditioning.
+14. Activies Nearby: A list of places and activities (minimum 4) and things to do nearby based on this address:${optionalAddress} with ETA in parentheses no need to say ETA though.
+Please format the response so that each section is clearly labeled and can be copied individually. Avoid saying anything like I'm unable to view or analyze images directly, but I can help you draft a sample Airbnb listing based on your descriptions and requirements or anything at the end just give the response.
+Here are the images:`,
+},
+{
+type: "image_url",
+image_url: { url: imageUrl },
+},
+],
+};
+});
+
+const response = await openai.createChatCompletion({
+model: "gpt-4o",
+stream: true,
+max_tokens: 4096,
+messages,
+} as any); // Use `as any` to handle the type mismatch
+
+// Create a streaming text response
+const stream = OpenAIStream(response);
+
+return new StreamingTextResponse(stream);
+} catch (error) {
+// Handle any unexpected errors
+console.error("Error in API logic:", error);
+return new Response("Internal Server Error", { status: 500 });
+}
+}
