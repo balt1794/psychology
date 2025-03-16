@@ -102,51 +102,57 @@ export default function InstantListing() {
   };
 
     // Compress images before converting to base64
-    const compressImage = async (file: File) => {
+   // Handle changes when files are selected
+async function handleFileChange(event: ChangeEvent<HTMLInputElement>) {
+  if (!event.target.files) {
+    window.alert("No images selected. Choose images.");
+    return;
+  }
+
+  const files = Array.from(event.target.files);
+
+  // Log original file sizes
+  files.forEach((file) => {
+    console.log(`Original file: ${file.name}, Size: ${(file.size / 1024).toFixed(2)} KB`);
+  });
+
+  const compressedFiles = await Promise.all(
+    files.map(async (file) => {
       const options = {
-        maxSizeMB: 1, // Maximum size in MB
-        maxWidthOrHeight: 1024, // Maximum width or height
+        maxSizeMB: 0.5, // Reduce max size to 0.5 MB
+        maxWidthOrHeight: 800, // Reduce max width/height to 800px
         useWebWorker: true, // Use web worker for better performance
       };
-      return await imageCompression(file, options);
-    };
+      const compressedFile = await imageCompression(file, options);
 
-  // Handle changes when files are selected
-  async function handleFileChange(event: ChangeEvent<HTMLInputElement>) {
-    if (!event.target.files) {
-      window.alert("No images selected. Choose images.");
-      return;
-    }
+      // Log compressed file sizes
+      console.log(`Compressed file: ${compressedFile.name}, Size: ${(compressedFile.size / 1024).toFixed(2)} KB`);
 
-    const files = Array.from(event.target.files);
-    const compressedFiles = await Promise.all(
-      files.map(async (file) => {
-        const compressedFile = await compressImage(file);
-        return compressedFile;
-      })
-    );
+      return compressedFile;
+    })
+  );
 
-    const readers = compressedFiles.map((file) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      return new Promise<string>((resolve) => {
-        reader.onload = () => {
-          if (typeof reader.result === "string") {
-            resolve(reader.result.split(',')[1]); // Extract the base64 part
-          }
-        };
-      });
+  const readers = compressedFiles.map((file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    return new Promise<string>((resolve) => {
+      reader.onload = () => {
+        if (typeof reader.result === "string") {
+          resolve(reader.result.split(',')[1]); // Extract the base64 part
+        }
+      };
     });
+  });
 
-    Promise.all(readers)
-      .then((base64Images) => {
-        setImages(base64Images);
-      })
-      .catch((error) => {
-        console.error("Error reading files:", error);
-        setError("Error reading files. Please try again.");
-      });
-  }
+  Promise.all(readers)
+    .then((base64Images) => {
+      setImages(base64Images);
+    })
+    .catch((error) => {
+      console.error("Error reading files:", error);
+      setError("Error reading files. Please try again.");
+    });
+}
 
   // Handle form submission
   async function handleSubmitDescription(event: FormEvent<HTMLFormElement>) {
