@@ -12,6 +12,7 @@ import Image from "next/image";
 import { Carousel, Typography, Button } from "@material-tailwind/react";
 import Link from "next/link";
 import { Footer } from "@/components/Footer";
+import imageCompression from "browser-image-compression"; // Import the compression library
 
 export default function InstantListing() {
 
@@ -100,18 +101,32 @@ export default function InstantListing() {
     }
   };
 
+    // Compress images before converting to base64
+    const compressImage = async (file: File) => {
+      const options = {
+        maxSizeMB: 1, // Maximum size in MB
+        maxWidthOrHeight: 1024, // Maximum width or height
+        useWebWorker: true, // Use web worker for better performance
+      };
+      return await imageCompression(file, options);
+    };
+
   // Handle changes when files are selected
-  function handleFileChange(event: ChangeEvent<HTMLInputElement>) {
+  async function handleFileChange(event: ChangeEvent<HTMLInputElement>) {
     if (!event.target.files) {
       window.alert("No images selected. Choose images.");
       return;
     }
 
-    // Get the selected files
     const files = Array.from(event.target.files);
+    const compressedFiles = await Promise.all(
+      files.map(async (file) => {
+        const compressedFile = await compressImage(file);
+        return compressedFile;
+      })
+    );
 
-    // Convert the files to base64 strings
-    const readers = files.map((file) => {
+    const readers = compressedFiles.map((file) => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
       return new Promise<string>((resolve) => {
@@ -293,7 +308,8 @@ export default function InstantListing() {
           {/* Left Side: Uploaded Images and Form */}
           <div className="w-full md:w-1/2 shadow-lg p-8 text-black mb-8 rounded-lg md:mb-0 border border-gray-300 bg-white">
             <h2 className="text-xl font-bold mb-4">Upload Images</h2>
-          
+            <p className="text-sm text-gray-600 mb-4">Please upload a minimum of 2 images and a maximum of 10 images for better results.</p>
+
             <FreeRewritesLeft freeRewritesLeft={freeRewritesLeft} />
           
             {/* Dropdown for place description */}
@@ -383,7 +399,7 @@ export default function InstantListing() {
                     id="contactInfo"
                     value={contactInfo}
                     onChange={(e) => setContactInfo(e.target.value)}
-                    placeholder="example@gmail.com, 1234567890"
+                    placeholder="example@gmail.com, +1 973-757-4890, WhatsApp, Airbnb chat"
                     className="mt-1 block w-full border p-1 border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-blue-500"
                 />
             </div>
@@ -396,7 +412,7 @@ export default function InstantListing() {
                     id="optionalAddress"
                     value={optionalAddress}
                     onChange={(e) => setOptionalAddress(e.target.value)}
-                    placeholder="Enter your address here"
+                    placeholder="573 Broadway Ave, New York"
                     className="mt-1 block w-full border p-1 border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-blue-500"
                 />
             </div>
