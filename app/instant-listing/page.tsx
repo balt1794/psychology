@@ -119,8 +119,8 @@ async function handleFileChange(event: ChangeEvent<HTMLInputElement>) {
   const compressedFiles = await Promise.all(
     files.map(async (file) => {
       const options = {
-        maxSizeMB: 0.5, // Reduce max size to 0.5 MB
-        maxWidthOrHeight: 800, // Reduce max width/height to 800px
+        maxSizeMB: 0.2, // Reduce max size to 0.2 MB (200 KB)
+        maxWidthOrHeight: 600, // Reduce max width/height to 600px
         useWebWorker: true, // Use web worker for better performance
       };
       const compressedFile = await imageCompression(file, options);
