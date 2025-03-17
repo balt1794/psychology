@@ -13,6 +13,7 @@ import { Carousel, Typography, Button } from "@material-tailwind/react";
 import Link from "next/link";
 import { Footer } from "@/components/Footer";
 import imageCompression from "browser-image-compression"; // Import the compression library
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 export default function InstantListing() {
 
@@ -22,6 +23,8 @@ export default function InstantListing() {
   const [openAIResponse, setOpenAIResponse] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
 
+  // Initialize Firebase Storage
+  const storage = getStorage();
 
   const [submitting, setSubmitting] = useState(false);
 
@@ -103,6 +106,7 @@ export default function InstantListing() {
 
     // Compress images before converting to base64
    // Handle changes when files are selected
+// Handle file changes and upload to Firebase Storage
 async function handleFileChange(event: ChangeEvent<HTMLInputElement>) {
   if (!event.target.files) {
     window.alert("No images selected. Choose images.");
@@ -111,11 +115,7 @@ async function handleFileChange(event: ChangeEvent<HTMLInputElement>) {
 
   const files = Array.from(event.target.files);
 
-  // Log original file sizes
-  files.forEach((file) => {
-    console.log(`Original file: ${file.name}, Size: ${(file.size / 1024).toFixed(2)} KB`);
-  });
-
+  // Compress images before uploading
   const compressedFiles = await Promise.all(
     files.map(async (file) => {
       const options = {
@@ -123,95 +123,82 @@ async function handleFileChange(event: ChangeEvent<HTMLInputElement>) {
         maxWidthOrHeight: 600, // Reduce max width/height to 600px
         useWebWorker: true, // Use web worker for better performance
       };
-      const compressedFile = await imageCompression(file, options);
-
-      // Log compressed file sizes
-      console.log(`Compressed file: ${compressedFile.name}, Size: ${(compressedFile.size / 1024).toFixed(2)} KB`);
-
-      return compressedFile;
+      return await imageCompression(file, options);
     })
   );
 
-  const readers = compressedFiles.map((file) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    return new Promise<string>((resolve) => {
-      reader.onload = () => {
-        if (typeof reader.result === "string") {
-          resolve(reader.result.split(',')[1]); // Extract the base64 part
-        }
-      };
-    });
-  });
-
-  Promise.all(readers)
-    .then((base64Images) => {
-      setImages(base64Images);
+  // Upload compressed images to Firebase Storage and get URLs
+  const imageUrls = await Promise.all(
+    compressedFiles.map(async (file) => {
+      const storageRef = ref(storage, `images/${file.name}`);
+      await uploadBytes(storageRef, file);
+      return await getDownloadURL(storageRef);
     })
-    .catch((error) => {
-      console.error("Error reading files:", error);
-      setError("Error reading files. Please try again.");
-    });
+  );
+
+  setImages(imageUrls); // Store the URLs in state
 }
 
-  // Handle form submission
-  async function handleSubmitDescription(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
 
-    if (images.length === 0) {
-        alert("Upload one or more images.");
-        return;
-    }
-    setSubmitting(true);
-    setLoadingResponse(true); // Start loading
+async function handleSubmitDescription(event: FormEvent<HTMLFormElement>) {
+  event.preventDefault();
 
-    try {
-        const response = await fetch("api/gpt4o", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                images: images,
-                placeDescription: placeDescription,
-                numGuests: numGuests,
-                numBedrooms: numBedrooms,
-                numBeds: numBeds,
-                numBathrooms: numBathrooms,
-                contactInfo: contactInfo,
-                optionalAddress: optionalAddress,
-            }),
-        });
-
-        if (!response.ok) {
-            throw new Error(`API request failed with status: ${response.status}`);
-        }
-
-        const reader = response.body?.getReader();
-        let chunks: string[] = [];
-
-        while (true) {
-            const { done, value } = await reader?.read() || {};
-            if (done) {
-                break;
-            }
-            if (value) {
-                const currentChunk = new TextDecoder().decode(value);
-                chunks.push(currentChunk);
-            }
-        }
-
-        const formattedResponse = chunks.join("").replace(/(?:\r\n|\r|\n)/g, "\n");
-        setOpenAIResponse(formattedResponse);
-    } catch (error) {
-        console.error("Error during API request:", error);
-        alert("An unexpected error occurred. Please try again.");
-    } finally {
-        setSubmitting(false);
-        setLoadingResponse(false); // Stop loading
-        await updateFreeRewritesLeft();
-    }
+  if (images.length === 0) {
+    alert("Upload one or more images.");
+    return;
   }
+
+  setSubmitting(true);
+  setLoadingResponse(true);
+
+  try {
+    const response = await fetch("api/gpt4o", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        images: images, // Pass image URLs to the backend
+        placeDescription: placeDescription,
+        numGuests: numGuests,
+        numBedrooms: numBedrooms,
+        numBeds: numBeds,
+        numBathrooms: numBathrooms,
+        contactInfo: contactInfo,
+        optionalAddress: optionalAddress,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`API request failed with status: ${response.status}`);
+    }
+
+    const reader = response.body?.getReader();
+    let chunks: string[] = [];
+
+    while (true) {
+      const { done, value } = (await reader?.read()) || {};
+      if (done) {
+        break;
+      }
+      if (value) {
+        const currentChunk = new TextDecoder().decode(value);
+        chunks.push(currentChunk);
+      }
+    }
+
+    const formattedResponse = chunks.join("").replace(/(?:\r\n|\r|\n)/g, "\n");
+    setOpenAIResponse(formattedResponse);
+  } catch (error) {
+    console.error("Error during API request:", error);
+    alert("An unexpected error occurred. Please try again.");
+  } finally {
+    setSubmitting(false);
+    setLoadingResponse(false);
+    await updateFreeRewritesLeft();
+  }
+}
+
 
 
 
