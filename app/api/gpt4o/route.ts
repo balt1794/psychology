@@ -60,7 +60,7 @@ image_url: { url: imageUrl },
 const response = await openai.createChatCompletion({
 model: "gpt-4o",
 stream: true,
-max_tokens: 4096,
+max_tokens: 8192,
 messages,
 } as any); // Use `as any` to handle the type mismatch
 
