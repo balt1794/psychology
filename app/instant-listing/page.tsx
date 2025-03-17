@@ -78,6 +78,7 @@ export default function InstantListing() {
   };
 
   // Handle changes when files are selected
+  // Handle changes when files are selected
   async function handleFileChange(event: ChangeEvent<HTMLInputElement>) {
     if (!event.target.files) {
       alert("No images selected. Choose images.");
@@ -90,25 +91,11 @@ export default function InstantListing() {
 
     try {
       for (const file of files) {
-        // Log original file size
-        console.log(`Original file: ${file.name}, Size: ${(file.size / 1024).toFixed(2)} KB`);
-
-        // Compress the image
-        const options = {
-          maxSizeMB: 0.2, // Reduce max size to 0.2 MB (200 KB)
-          maxWidthOrHeight: 600, // Reduce max width/height to 600px
-          useWebWorker: true, // Use web worker for better performance
-        };
-        const compressedFile = await imageCompression(file, options);
-
-        // Log compressed file size
-        console.log(`Compressed file: ${compressedFile.name}, Size: ${(compressedFile.size / 1024).toFixed(2)} KB`);
-
-        const storageRef = ref(storage, `uploads/${Date.now()}-${compressedFile.name}`);
-        const snapshot = await uploadBytes(storageRef, compressedFile);
+        const storageRef = ref(storage, `uploads/${Date.now()}-${file.name}`);
+        const snapshot = await uploadBytes(storageRef, file);
         const downloadURL = await getDownloadURL(snapshot.ref);
         uploadedURLs.push(downloadURL);
-        console.log(`Uploaded ${compressedFile.name}: ${downloadURL}`);
+        console.log(`Uploaded ${file.name}: ${downloadURL}`);
       }
       setImages(uploadedURLs);
       toast.success("Images uploaded successfully!");
