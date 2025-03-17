@@ -17,7 +17,7 @@ export async function POST(request: Request) {
 try {
 // Extract the image data and place description from the request body
 const { images, placeDescription, numGuests, numBedrooms, numBeds, numBathrooms, contactInfo, optionalAddress } = await request.json();
-
+//console.log(images)
 // Check if the image data is valid
 if (!images || !Array.isArray(images) || images.length < 2) {
 return new Response("Invalid input: At least two images are required for comparison", { status: 400 });
@@ -25,7 +25,7 @@ return new Response("Invalid input: At least two images are required for compari
 
 // Make a request to OpenAI API for image analysis
 const messages = images.map((imageUrl, index) => {
-// Decode the base64 image string
+
 return {
 role: "user",
 content: [
@@ -64,9 +64,11 @@ max_tokens: 4096,
 messages,
 } as any); // Use `as any` to handle the type mismatch
 
+// Log the entire response for debugging
+//console.log("OpenAI Response:", response);
 // Create a streaming text response
 const stream = OpenAIStream(response);
-
+//console.log(stream)
 return new StreamingTextResponse(stream);
 } catch (error) {
 // Handle any unexpected errors
