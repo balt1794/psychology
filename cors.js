@@ -35,3 +35,4 @@ async function setCorsConfiguration() {
 
 // Call the function to set CORS configuration
 setCorsConfiguration();
+
