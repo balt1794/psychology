@@ -12,6 +12,7 @@ import Image from "next/image";
 import { Carousel, Typography, Button } from "@material-tailwind/react";
 import Link from "next/link";
 import { Footer } from "@/components/Footer";
+import { Clock, CheckCircle } from "lucide-react"
 
 export default function Home() {
 
@@ -413,14 +414,14 @@ export default function Home() {
 <Image className="absolute inset-0 w-full h-full object-cover" width="500" height="200" src="/hero.png" alt="Background Image" loading="lazy" />
 <div className="absolute inset-0 bg-black opacity-90"></div>
   */}
-<div className="relative z-10 max-w-10xl mx-auto flex p-10 lg:p-20">
+<div className="relative z-10 max-w-10xl mx-auto flex p-10 lg:p-24">
   <div className="max-w-5xl ">
-    <h1 className="text-5xl lg:text-6xl text-black font-bold  mb-6 mt-1 lg:mt-6" >Real Estate Listings 🏠</h1>
-    <h2 className="text-xl lg:text-5xl text-black font-bold  mb-6 mt-1 lg:-mt-2" >Fast and Efficient using AI</h2>
+    <h1 className="text-5xl lg:text-6xl text-black font-bold  mb-6 mt-1 lg:mt-6" >AI Real Estate Listings</h1>
+    <h2 className="text-xl lg:text-4xl text-black font-bold  mb-6 mt-1 lg:-mt-2" >Property Descriptions using AI 🏠</h2>
 
     <div className="text-md lg:text-2xl text-gray-500 mb-2 lg:mb-6 " style={{ color: "#00000078" }}>
-    List your properties in minutes using AI ⚡</div>
-    <div className="text-md lg:text-2xl text-gray-500 mb-6 " style={{ color: "#00000078" }}>Say goodbye to the manual time-consuming listings and automate it with our suite of real estate listing tools</div>
+    List properties on Airbnb, Booking, Vrbo in minutes using AI ⚡</div>
+    <div className="text-md lg:text-2xl text-gray-500 mb-6 " style={{ color: "#00000078" }}>Say goodbye to manual time-consuming listings and automate it with our AI real estate listing generator</div>
     <button
         type="button"
         onClick={() => {
@@ -429,7 +430,7 @@ export default function Home() {
             generatorSection.scrollIntoView({ behavior: "smooth" });
           }
         }}
-        className="w-full lg:w-1/2 sm:inline-block text-black px-3 text-lg font-medium border-solid border-4 border-white-400 rounded-full bg-transparent p-1 text-black hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 overflow-hidden whitespace-nowrap truncate"
+        className="w-full lg:w-1/2 sm:inline-block bg-[#FF385C] text-black border-4 border-white-400 px-3 text-lg font-medium rounded-lg  p-1 text-white hover:bg-[#E04E5A] focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 overflow-hidden whitespace-nowrap truncate"
       >
         Create Listings Now!
       </button>
@@ -441,7 +442,7 @@ export default function Home() {
     <div>
       <div className="-rotate-8 ml-12 p-4 mb-4">
       
-        <div className="text-xs mb-1 ml-4 " style={{ color: "#00000078" }}>Exquisite villa located in a serene, palm-fringed setting, property features a spacious two-story main house and an outdoor pool area... </div>
+        <div className="text-xs mb-1 ml-4 font-medium" style={{ color: "#00000078" }}>Exquisite villa located in a serene, palm-fringed setting, property features a spacious two-story main house and an outdoor pool area...🌴</div>
         <div className="flex items-center justify-center mt-4 rounded-md ">
           
           <div className="text-6xl font-semibold border-4 border-white-400 rounded-xl">
@@ -478,7 +479,7 @@ export default function Home() {
 
     <div>
       <div className="-rotate-8 ">
-        <div className="text-xs mb-4 " style={{ color: "#00000078" }}>Nestled in the hills, this modern retreat offers breathtaking views and a peaceful sanctuary for a relaxing getaway...</div>
+        <div className="text-xs mb-4 font-medium" style={{ color: "#00000078" }}>Nestled in the hills, this modern retreat offers breathtaking views and a peaceful sanctuary for a relaxing getaway...🚪</div>
  
         <div className="flex items-center justify-center w-128 h-128 rounded-md">
           <div className="text-6xl font-semibold border-4 border-white-400 rounded-xl">
@@ -500,7 +501,7 @@ export default function Home() {
 
 <section>
 <div className="relative z-10 flex flex-col items-center justify-center max-w-4xl gap-8 mx-auto mt-8">
-<span className="text-lg text-black font-black hidden md:flex mb-2">Trusted by the best in the market</span>
+<span className="text-xl text-black font-black hidden md:flex mb-2">Trusted by the best in the market</span>
   </div>
 <div className="flex items-center justify-center gap-3">
     <div className="flex items-center space-x-6">
@@ -511,6 +512,60 @@ export default function Home() {
         <img src="/zillow.png" width="60" height="30" className="w-14 md:w-28  v-lazy-image v-lazy-image-loaded" ></img>
     </div>
 </div>
+</section>
+
+{/* New Section for Included Items and Image */}
+{/* New Section for Included Items and Image */}
+<section className="max-w-8xl mx-auto mt-16 mb-16 p-6 lg:p-16">
+  <div className="flex flex-col lg:flex-row justify-center items-center gap-12">
+    {/* Left Side: Card with Time Savings & Included Items */}
+    <div className="w-full lg:w-1/2 flex justify-center">
+      <div className="bg-white rounded-xl shadow-lg p-8 border-l-8 border-white-400 w-full">
+        <h2 className="text-3xl lg:text-4xl text-black font-bold mb-3">
+          Save <span className="text-[#FF385C]">2+ Hours</span> Per Listing
+        </h2>
+
+        <p className="text-lg text-[#00000078] mb-6">
+          Our AI tools automate the most time-consuming parts of creating property listings, giving you back hours of
+          your valuable time for each property.
+        </p>
+
+        <div className="flex items-center mb-5">
+          <Clock className="h-6 w-6 text-[#FF385C] mr-2" />
+          <h3 className="text-xl font-bold text-black">Everything You Need, Automatically Generated</h3>
+        </div>
+
+        <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {[
+            "Compelling Titles",
+            "Detailed Descriptions",
+            "Property Highlights",
+            "Amenities List",
+            "House Rules",
+            "Contact Information",
+            "SEO Optimized Content",
+            "How to Get There",
+          ].map((item, index) => (
+            <li key={index} className="flex items-start">
+              <CheckCircle className="h-5 w-5 text-[#008489] mr-2 flex-shrink-0 mt-0.5" />
+              <span className="text-[#484848]">{item}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-6 p-4 bg-[#F7F7F7] rounded-lg border-2 border-white-400">
+          <p className="text-[#484848] font-medium">
+            <span className="text-[#FF385C] font-bold">Average time saved:</span> 2 hours per property listing
+          </p>
+        </div>
+      </div>
+    </div>
+
+    {/* Right Side: Image with styling */}
+    <div className="w-full lg:w-1/2 flex justify-center ">
+      <img src="/preview-plai.png" alt="Slider Image" className="w-full h-auto rounded-lg border-2 border-white-400" />
+    </div>
+  </div>
 </section>
 
 <section id="features" className="md:pb-20 mt-12  md:pt-10 pb-6 sm:pb-6 sm:pt-6 rounded-xl border-2 border-white-400 mr-4 ml-4" style={{backgroundColor: "#fafafa"}}>
