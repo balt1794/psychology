@@ -11,24 +11,21 @@ const nunito = Nunito({ subsets: ['latin'] })
 
 
 export const metadata: Metadata = {
-  title: {
-    template: '%s',
-    default: 'PropertyListingsAI - Generated Real Estate Listings using AI',
+  alternates: {
+    canonical: './', 
   },
-  description:
-    'Generated Real Estate Listings using AI',
-  metadataBase: new URL('https://propertylistingsai.com/'), 
+  metadataBase: new URL('https://propertylistingsai.com'), 
 
     twitter: {
       card: 'summary_large_image',
       site: 'PropertyListingsAI.com',
       creator: '@balt1794',
-      title: 'PropertyListingsAI - Generated Real Estate Listings using AI',
-      description: 'Generated Real Estate Listings using AI',
-      images: ['featured.png'],  
+      title: 'PropertyListingsAI - AI Real Estate Listing Generator',
+      description: 'Generate perfect, optimized AI real estate listings instantly to boost visibility and bookings.',
+      images: ['https://propertylistingsai.com/featured-new.png'],  
     },
     openGraph: {
-      images: ['opengraph-image.png'], 
+      images: ['https://propertylistingsai.com/opengraph-image-new.png'],  
     },
 };
 
@@ -39,7 +36,14 @@ export default function RootLayout({
 }) {
   return (
     <>
-   <Script strategy="afterInteractive" src="https://www.googletagmanager.com/gtag/js?id=G-FQHMWF7HC9"/>
+    <html lang="en">
+      <body className={inter.className}>
+      <AuthContextProvider>
+        <Navbar/>
+        {children}
+        </AuthContextProvider>
+      </body>
+      <Script strategy="afterInteractive" src="https://www.googletagmanager.com/gtag/js?id=G-FQHMWF7HC9"/>
 <Script
   id='google-analytics'
   strategy="afterInteractive"
@@ -54,20 +58,6 @@ __html: `
 `,
 }}
  />
-
-<Script
-  id="adsbygoogle-init"
-  strategy="afterInteractive"
-  crossOrigin="anonymous"
-  src= "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4734978183379672"
-/>
-    <html lang="en">
-   
-      <body className={inter.className}>
-      <AuthContextProvider>
-        <Navbar/>
-        {children}
-        </AuthContextProvider></body>
       
     </html>
    

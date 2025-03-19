@@ -1,12 +1,13 @@
-"use client"
+
+"use client";
 import Navbar from "@/components/Navbar";
 import { ChangeEvent, useState, useEffect, FormEvent } from "react";
 import { Toaster, toast } from "react-hot-toast";
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 import { loadStripe } from '@stripe/stripe-js';
-import FreeRewritesLeft from "../../components/FreeRewritesLeft";
+import FreeRewritesLeft from "../components/FreeRewritesLeft";
 import { updateDoc, getDoc, doc } from "firebase/firestore"; 
-import { db } from "../../config/firebase";
+import { db } from "../config/firebase";
 import axios from "axios"
 import Image from "next/image";
 import { Carousel, Typography, Button } from "@material-tailwind/react";
@@ -14,7 +15,9 @@ import Link from "next/link";
 import { Footer } from "@/components/Footer";
 import imageCompression from "browser-image-compression"; // Import the compression library
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { storage } from "../../config/firebase"; // assuming you've exported storage in firebase config
+import { storage } from "../config/firebase"; // assuming you've exported storage in firebase config
+import { ArrowRight } from "lucide-react"
+
 
 export default function InstantListing() {
   // State to manage the uploaded images and OpenAI API response
@@ -245,12 +248,103 @@ export default function InstantListing() {
   return (
     <>
       <Toaster />
+      <div className="max-w-4xl mx-auto p-6">
+      <div className="text-center mb-4">
+        <h1 className="text-4xl md:text-6xl font-bold mb-4 mt-4 text-[#FF385C]">Airbnb Listing Generator</h1>
+
+        <p className="text-xl md:text-2xl text-gray-700 mb-8">
+          Create professional, high-converting Airbnb listings in seconds with AI
+        </p>
+
+        <div className="bg-gray-50 border border-gray-200 rounded-lg p-6 text-left">
+          <h2 className="text-2xl font-semibold mb-4 text-gray-800">
+            Transform Your Property Photos Into Perfect Airbnb Listings
+          </h2>
+          <div className="mt-6 space-y-3">
+            <div className="flex items-start">
+              <div className="flex-shrink-0 h-5 w-5 text-[#FF385C]">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                  <path
+                    fillRule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </div>
+              <p className="ml-2 text-gray-700">
+                <strong>SEO-optimized titles</strong> that increase visibility in Airbnb search results
+              </p>
+            </div>
+
+            <div className="flex items-start">
+              <div className="flex-shrink-0 h-5 w-5 text-[#FF385C]">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                  <path
+                    fillRule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </div>
+              <p className="ml-2 text-gray-700">
+                <strong>Compelling property descriptions</strong> that showcase your space's unique features
+              </p>
+            </div>
+
+            <div className="flex items-start">
+              <div className="flex-shrink-0 h-5 w-5 text-[#FF385C]">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                  <path
+                    fillRule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </div>
+              <p className="ml-2 text-gray-700">
+                <strong>Professional house rules</strong> and guest information sections
+              </p>
+            </div>
+
+            <div className="flex items-start">
+              <div className="flex-shrink-0 h-5 w-5 text-[#FF385C]">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                  <path
+                    fillRule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </div>
+              <p className="ml-2 text-gray-700">
+                <strong>Local area highlights</strong> to help guests discover nearby attractions
+              </p>
+            </div>
+
+            <div className="flex items-start">
+              <div className="flex-shrink-0 h-5 w-5 text-[#FF385C]">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                  <path
+                    fillRule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </div>
+              <p className="ml-2 text-gray-700">
+              <strong>Room-by-room descriptions</strong> with accurate details from your photos
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
       <div className="h-screen">
         <div className="flex items-center justify-center text-md" id="generator">
           <div className="flex flex-wrap justify-between w-full max-w-8xl p-4 lg:p-10">
             {/* Left Side: Uploaded Images and Form */}
             <div className="w-full md:w-1/2 shadow-lg p-8 text-black mb-8 rounded-lg md:mb-0 border border-gray-300 bg-white">
-              <h2 className="text-xl font-bold mb-4">Upload Images</h2>
+              <h2 className="text-xl text-[#FF385C] font-bold mb-4">Upload Images</h2>
               <p className="text-sm text-gray-600 mb-4">Please upload a minimum of 2 images and a maximum of 10 images for better results.</p>
 
               <FreeRewritesLeft freeRewritesLeft={freeRewritesLeft} />
@@ -437,7 +531,7 @@ export default function InstantListing() {
                         ) : (
                           <button
                             type="submit"
-                            className="sm:inline-block text-black px-3 text-md font-medium border-solid border-4 border-white-400 rounded-full bg-transparent p-1 text-black hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 overflow-hidden whitespace-nowrap truncate"
+                            className="sm:inline-block text-white px-3 text-md font-medium border-solid border-4 border-white-400 rounded-lg bg-[#FF385C] p-1 text-white hover:hover:bg-[#E04E5A] focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 overflow-hidden whitespace-nowrap truncate"
                             disabled={submitting || loadingImages || images.length === 0} // Disable if submitting or loading images
                           >
                             Generate Listing
@@ -448,13 +542,13 @@ export default function InstantListing() {
                       <button
                         type="button"
                         onClick={handleCheckout}
-                        className="sm:inline-block text-black px-3 text-md font-medium border-solid border-4 border-white-400 rounded-full bg-transparent p-1 text-black hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 overflow-hidden whitespace-nowrap truncate"
+                        className="sm:inline-block text-white px-3 text-md font-medium border-solid border-4 border-white-400 rounded-lg bg-[#FF385C] p-1 text-white hover:hover:bg-[#E04E5A] focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 overflow-hidden whitespace-nowrap truncate"
                       >
                         Buy Credits
                       </button>
                     )
                   ) : (
-                    <button type="button" onClick={handleGenerateListingClick} className="sm:inline-block text-black px-3 text-md font-medium border-solid border-4 border-white-400 rounded-full bg-transparent p-1 text-black hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 overflow-hidden whitespace-nowrap truncate">
+                    <button type="button" onClick={handleGenerateListingClick} className="sm:inline-block text-white px-3 text-md font-medium border-solid border-4 border-white-400 rounded-lg bg-[#FF385C] p-1 text-white hover:hover:bg-[#E04E5A] focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 overflow-hidden whitespace-nowrap truncate">
                       Generate Listing
                     </button>
                   )}
