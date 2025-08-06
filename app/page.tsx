@@ -14,7 +14,6 @@ export const metadata: Metadata = {
 
 export default function Home() {
 
-
   return (
     <>
 <div className="relative z-10 max-w-10xl mx-auto flex p-10 lg:p-24">
