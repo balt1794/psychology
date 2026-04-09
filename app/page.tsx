@@ -4,11 +4,11 @@ import Link from "next/link";
 import { Footer } from "@/components/Footer";
 import { Clock, CheckCircle } from "lucide-react"
 import { Metadata } from "next";
-import { ArrowRight, Camera } from "lucide-react"
+import { ArrowRight, Camera, Sparkles } from "lucide-react"
 
 export const metadata: Metadata = {
-  title: 'PropertyListingsAI - AI Real Estate Listing Generator',
-  description:'Generate perfect, optimized AI real estate listings instantly to boost visibility and bookings.'
+  title: 'PropertyListingsAI - Real Estate Listing Description Generator',
+  description:'Generate captivating real estate descriptions for your property listings instantly with AI to boost visibility, bookings and sales.'
 };
 
 
@@ -16,86 +16,106 @@ export default function Home() {
 
   return (
     <>
-<div className="relative z-10 max-w-10xl mx-auto flex p-10 lg:p-24">
-  <div className="max-w-5xl ">
-    <h1 className="text-5xl lg:text-6xl text-black font-bold  mb-6 mt-1 lg:mt-6" >AI Real Estate Listings</h1>
-    <h2 className="text-xl lg:text-4xl text-black font-bold  mb-6 mt-1 lg:-mt-2" >Property Descriptions using AI 🏠</h2>
-
-    <div className="text-md lg:text-2xl text-gray-500 mb-2 lg:mb-6 " style={{ color: "#00000078" }}>
-    List properties on Airbnb, Booking, Vrbo in minutes ⚡</div>
-    <div className="text-md lg:text-2xl text-gray-500 mb-6 " style={{ color: "#00000078" }}>Say goodbye to manual time-consuming listings and automate it with our AI real estate listing generator </div>
-  
-      <Link
-                href="/tools"
-                className="inline-flex items-center bg-[#FF385C] hover:bg-[#E31C5F] text-white font-bold py-3 px-6 rounded-lg transition-colors"
-              >
-                Generate Listings Now!
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
-  </div>
-
-  
- 
-  <div className="hidden lg:flex items-center">
+<section className="relative z-10 max-w-9xl mx-auto px-6 py-12 lg:px-16 lg:py-20">
+  <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
     <div>
-      <div className="-rotate-8 ml-12 p-4 mb-4">
+      <h1 className="inline-flex items-center rounded-md bg-[#FF385C] px-4 py-1 text-sm font-semibold text-white mb-6">
+      Real Estate Listing Description Generator
+      <Sparkles className="ml-2 h-4 w-4" />
+      </h1>
+      <h2 className="text-4xl lg:text-6xl text-black font-bold leading-tight mb-4">
+        Better Property Listings 
       
-        <div className="text-xs mb-1 ml-4 font-medium" style={{ color: "#00000078" }}>Exquisite villa located in a serene, palm-fringed setting, property features a spacious two-story main house and an outdoor pool...🌴</div>
-        <div className="flex items-center justify-center mt-4 rounded-md ">
-          
-          <div className="text-6xl font-semibold border-4 border-white-400 rounded-xl">
-            <Image
-              src="/slider1.png"
-              alt="viking in white backgrounsd logo"
-              width={450}
-              height={550}
-              loading="lazy"
-              className="rounded-md"
-            />
-          </div>
-        </div>
-      </div>
-
- {/*
-      <div className="rotate-8 ">
-        <div className="text-xs  mb-3 " style={{ color: "#00000078" }}>Luxury yacht deck setup with a wooden table and chairs featuring a sumptuous cheese platter and a bottle of champagne, against a backdrop of serene sailboats anchored at sea.</div>
         
-        <div className="w-64 h-64 mx-auto rounded-md ">
+      </h2>
+    <h2 className="text-4xl lg:text-6xl text-black font-bold leading-tight mb-4">
+      in Minutes <span className="text-[#FF385C]">with AI</span>
+      <span className="inline-block ml-3  mb-3 text-5xl align-middle">🏠</span>
+      </h2>
+      <p className="text-lg lg:text-2xl text-[#5f5f5f] font-medium mb-6">
+  Powerful real estate tools to manage property listings,
+  <br />
+  create high-converting images and descriptions,
+  <br />
+  and maximize your sales and bookings.
+</p>
+
+      <div className="flex flex-wrap gap-4">
+        <Link
+          href="/tools"
+          className="inline-flex items-center bg-[#FF385C] hover:bg-[#E31C5F] text-white font-bold py-3 px-6 rounded-md transition-colors"
+        >
+          Real Estate Tools
+          <ArrowRight className="ml-2 h-5 w-5" />
+        </Link>
+        <Link
+          href="/airbnb-listing"
+          className="inline-flex items-center border border-[#FF385C] text-[#E31C5F] hover:bg-[#FFECEF] font-bold py-3 px-6 rounded-md transition-colors"
+        >
+          Airbnb Listing Generator
+        </Link>
+      </div>
+    </div>
+
+    <div className="relative">
+      <div className="rounded-[28px] p-0">
+        <div className="relative rounded-xl overflow-hidden border border-[#ececec] bg-white shadow-xl h-[360px] md:h-[560px]">
           <Image
-            src="/hero2.jpg"
-            alt="fox in dark blue logo"
-            width={500}
-            height={500}
-            loading="lazy"
-            className="rounded-md"
+            src="/hero1.jpg"
+            alt="Luxury property exterior"
+            fill
+            priority
+            className="object-cover"
           />
         </div>
       </div>
-      */}
-    </div>
-    
 
-    <div>
-      <div className="-rotate-8 ">
-        <div className="text-xs mb-4 font-medium" style={{ color: "#00000078" }}>Nestled in the hills, this modern retreat offers breathtaking views and a peaceful sanctuary for a relaxing getaway...🚪</div>
- 
-        <div className="flex items-center justify-center w-128 h-128 rounded-md">
-          <div className="text-6xl font-semibold border-4 border-white-400 rounded-xl">
-            <Image
-              src="/slider2.png"
-              alt="dog in gray background logo"
-              width={400}
-              height={300}
-              loading="lazy"
-              className="rounded-md"
-            />
+  <div className="hidden md:block absolute -top-8 right-6 w-72 rounded-2xl bg-white/95 backdrop-blur border border-[#ececec] p-1 shadow-xl">
+       
+        <div className="relative rounded-xl overflow-hidden mb-2 h-36">
+          <Image
+            src="/hero2.jpg"
+            alt="Featured listing preview"
+            fill
+            loading="lazy"
+            className="object-cover"
+          />
+        </div>
+        <div className="mb-2 rounded-lg border border-[#e7e7e7] bg-white">
+          <div className="grid grid-cols-4 divide-x divide-[#e5e5e5]">
+            <div className="px-2 py-2 text-center">
+              <span className="block text-xs font-extrabold text-[#111] leading-none">4</span>
+              <span className="block mt-1 text-[9px] font-medium text-[#666]">Beds</span>
+            </div>
+            <div className="px-2 py-2 text-center">
+              <span className="block text-xs font-extrabold text-[#111] leading-none">4</span>
+              <span className="block mt-1 text-[9px] font-medium text-[#666]">Baths</span>
+            </div>
+            <div className="px-2 py-2 text-center">
+              <span className="block text-xs font-extrabold text-[#111] leading-none">2,284</span>
+              <span className="block mt-1 text-[9px] font-medium text-[#666]">Sq Ft</span>
+            </div>
+            <div className="px-2 py-2 text-center">
+              <span className="block text-xs font-extrabold text-[#111] leading-none">$171</span>
+              <span className="block mt-1 text-[9px] font-medium text-[#666]">/Sq Ft</span>
+            </div>
           </div>
         </div>
+        <div className="rounded-lg border border-[#ececec] bg-[#fafafa] p-2 ">
+          <p className="text-[9px] text-[#444] leading-relaxed font-medium">
+          Just listed in Edwardsville, IL: Beautifully maintained 4-bedroom, 4-bath home in a desirable neighborhood.</p>
+        </div>
+      </div>
+
+      <div className="absolute -bottom-8 left-2 right-2 md:left-0 md:right-12 rounded-xl border border-[#ececec] bg-[#fafafa] px-4 py-2 shadow-lg">
+        <p className="text-xs md:text-sm text-[#2d2d2d] leading-relaxed">
+          A modern, light-filled residence with open living spaces, premium finishes, and strong curb appeal.
+          Perfect as the hero listing preview area for your generated long-form property description.
+        </p>
       </div>
     </div>
-
   </div>
-</div>
+</section>
 
 <section>
 <div className="relative z-10 flex flex-col items-center justify-center max-w-4xl gap-8 mx-auto mt-8">

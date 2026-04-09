@@ -87,7 +87,7 @@ export default function Navbar() {
                 <Menu as="div" className="relative inline-block text-left">
                     <div>
                       <Menu.Button className="inline-flex justify-center w-full rounded-md px-3 py-2 text-base lg:text-lg font-medium text-black hover:underline focus:outline-none">
-                        Tools
+                        Real Estate Tools
                         <ChevronDownIcon className="ml-1 h-7 w-5" aria-hidden="true" />
                       </Menu.Button>
                     </div>
@@ -136,7 +136,7 @@ export default function Navbar() {
                   {user ? (
                     <button
                       type="button"
-                      className="inline-flex items-center bg-[#FF385C] hover:bg-[#E31C5F] text-white font-bold py-2 px-6 rounded-lg transition-colors"
+                      className="inline-flex items-center bg-[#FF385C] hover:bg-[#E31C5F] text-white font-bold py-2 px-6 rounded-md transition-colors"
                       >
                       <Link className=" rounded-md  text-md font-medium" href="/" onClick={() => logout()}>
                         Log Out
@@ -145,7 +145,7 @@ export default function Navbar() {
                   ) : (
                     <button
                       type="button"
-                      className="inline-flex items-center bg-[#FF385C] hover:bg-[#E31C5F] text-white font-bold py-2 px-6 rounded-lg transition-colors"
+                      className="inline-flex items-center bg-[#FF385C] hover:bg-[#E31C5F] text-white font-bold py-2 px-6 rounded-md transition-colors"
                       onClick={loginWithGoogle}
                     >
                       Sign Up
