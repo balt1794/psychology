@@ -117,23 +117,189 @@ export default function Home() {
   </div>
 </section>
 
-<section>
-<div className="relative z-10 flex flex-col items-center justify-center max-w-4xl gap-8 mx-auto mt-8">
-<span className="text-xl text-black font-black hidden md:flex mb-2">Trusted by the best in the market</span>
-  </div>
-<div className="flex items-center justify-center gap-3">
-    <div className="flex items-center space-x-6">
-        <img src="/airbnb.png" width="60" height="30" className="w-10 md:w-12   v-lazy-image v-lazy-image-loaded" ></img>
-        <img src="/remax.png" width="60" height="30" className="w-10 md:w-20  v-lazy-image v-lazy-image-loaded" ></img>
-        <img src="/booking.svg" width="60" height="30" className="w-10 md:w-12 v-lazy-image v-lazy-image-loaded" ></img>
-        <img src="/Vrbo.svg.png" width="60" height="30" className="w-14 md:w-24  v-lazy-image v-lazy-image-loaded" ></img>
-        <img src="/zillow.png" width="60" height="30" className="w-14 md:w-28  v-lazy-image v-lazy-image-loaded" ></img>
+<section className="brand-section">
+  <div className="container mx-auto max-w-5xl px-6 py-10 lg:px-12 lg:py-6">
+    <h2 className="mb-8 text-center text-xl font-bold text-gray-900 md:mb-10 md:text-2xl">
+      Trusted by the best real estate agents and property managers in the market
+    </h2>
+    <div className="brand-logos flex flex-wrap items-center justify-center gap-x-10 gap-y-8 md:gap-x-14">
+      {[
+        { alt: "Airbnb", src: "/airbnb.png", className: "h-8 w-auto max-h-8 md:h-9" },
+        { alt: "RE/MAX", src: "/remax.png", className: "h-7 w-auto max-h-7 md:h-6" },
+        { alt: "Booking.com", src: "/booking.svg", className: "h-8 w-auto max-h-8 md:h-9" },
+        { alt: "Vrbo", src: "/Vrbo.svg.png", className: "h-7 w-auto max-h-[30px] md:h-8 md:max-h-9" },
+        { alt: "Zillow", src: "/zillow.png", className: "h-8 w-auto max-h-7 md:h-10" },
+      ].map((item, i) => (
+        <div key={item.alt} className="brand-logo-item flex shrink-0 items-center justify-center">
+          <img
+            alt={item.alt}
+            width={120}
+            height={40}
+            decoding="async"
+            src={item.src}
+            loading={i < 2 ? "eager" : "lazy"}
+            fetchPriority={i < 2 ? "high" : undefined}
+            className={`object-contain ${item.className}`}
+          />
+        </div>
+      ))}
     </div>
-</div>
+  </div>
 </section>
 
-{/* New Section for Included Items and Image */}
-{/* New Section for Included Items and Image */}
+
+
+{/* 
+<section className="max-w-8xl mx-auto mt-16 mb-16 p-6 lg:p-16">
+      <div className="flex flex-col lg:flex-row justify-between items-start gap-10">
+        <div className="relative w-full lg:w-1/2 rounded-xl overflow-hidden">
+          <img
+            src="/slider3.png"
+            alt="Property Listings AI"
+            className="w-full h-auto rounded-xl"
+          />
+          <div className="absolute inset-0 bg-black bg-opacity-70 rounded-xl flex items-center justify-center">
+            <div className="p-2 text-white max-w-lg">
+              <h2 className="text-3xl font-bold mb-4 text-white">
+                Transform Your <span className="text-[#FF385C]">Airbnb Listing</span>
+              </h2>
+              <p className="mb-6 text-gray-100">
+                Our AI-powered tools analyze your property photos and details to create compelling, SEO-optimized Airbnb
+                listings that attract more guests and increase bookings. Save hours of writing time while creating
+                professional descriptions that highlight your property&apos;s best features.
+              </p>
+              <Link
+                href="/tools"
+                className="inline-flex items-center bg-[#FF385C] hover:bg-[#E31C5F] text-white font-bold py-3 px-6 rounded-lg transition-colors"
+              >
+                Explore Our Tools
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        <div className="w-full lg:w-1/2 bg-white rounded-xl shadow-xl border-r-8 border-gray-200 p-6">
+          <h2 className="text-4xl text-black font-bold mb-6">Real Estate Listing Tools</h2>
+
+          <div className="space-y-2">
+            <div className="p-4 border border-gray-200 rounded-lg hover:border-[#FF385C] transition-colors">
+              <Link href="/airbnb-listing">
+                <h3 className="font-bold text-lg text-[#FF385C] mb-1">Airbnb Listing Generator</h3>
+                <p className="text-gray-700">
+                  Turn your property photos into compelling Airbnb listings that attract more bookings.
+                </p>
+              </Link>
+            </div>
+
+            <div className="p-4 border border-gray-200 rounded-lg hover:border-[#FF385C] transition-colors">
+              <Link href="/property-description-generator">
+                <h3 className="font-bold text-lg text-[#FF385C] mb-1">Property Description Generator</h3>
+                <p className="text-gray-700">
+                  Generate eye-catching descriptions that attract more guests.
+                </p>
+              </Link>
+            </div>
+
+            <div className="p-4 border border-gray-200 rounded-lg hover:border-[#FF385C] transition-colors">
+              <Link href="/airbnb-house-rules-generator">
+                <h3 className="font-bold text-lg text-[#FF385C] mb-1">Airbnb House Rules Generator</h3>
+                <p className="text-gray-700">Create clear, professional house rules based on your property photos.</p>
+              </Link>
+            </div>
+
+            <div className="p-4 border border-gray-200 rounded-lg hover:border-[#FF385C] transition-colors">
+              <Link href="/driving-directions-generator">
+                <h3 className="font-bold text-lg text-[#FF385C] mb-1">Airbnb Driving Directions Generator</h3>
+                <p className="text-gray-700">
+                  Generate detailed driving directions to help guests find your property easily.
+                </p>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+*/}
+
+
+    <section className="w-full max-w-screen-3xl mx-auto px-5 py-10 sm:px-8 md:px-10 lg:px-14 xl:px-20 2xl:px-24 lg:py-14 mt-10 mb-14 lg:mt-12 lg:mb-16">
+      <h2 className="text-center text-3xl font-bold text-gray-900 lg:text-4xl mb-8 lg:mb-10">
+        Explore the Best Real Estate Tools
+      </h2>
+      <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2 sm:gap-x-7 sm:gap-y-8 lg:grid-cols-4 lg:gap-x-7 xl:gap-x-9">
+        {[
+          {
+            emoji: "🏠",
+            imageAlt: "Airbnb listing tool preview",
+            title: "Airbnb Listing Generator",
+            description:
+              "Turn your property photos into compelling Airbnb listings that attract more bookings.",
+            href: "/airbnb-listing",
+            primaryLabel: "Generate listing",
+          },
+          {
+            emoji: "📝",
+            imageAlt: "Property description tool preview",
+            title: "Property Description Generator",
+            description:
+              "Generate eye-catching descriptions that attract more guests and highlight your property's best features.",
+            href: "/property-description-generator",
+            primaryLabel: "Write with AI",
+          },
+          {
+            emoji: "🏡",
+            imageAlt: "House rules tool preview",
+            title: "Airbnb House Rules Generator",
+            description:
+              "Create clear, professional house rules based on your property photos and details.",
+            href: "/airbnb-house-rules-generator",
+            primaryLabel: "Generate rules",
+          },
+          {
+            emoji: "🚘",
+            imageAlt: "Driving directions tool preview",
+            title: "Airbnb Driving Directions Generator",
+            description:
+              "Generate detailed driving directions so guests can find your property easily.",
+            href: "/driving-directions-generator",
+            primaryLabel: "Get directions",
+          },
+        ].map((card) => (
+          <div
+            key={card.title}
+            className="flex flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm"
+          >
+            <div className="relative h-56 w-full shrink-0 bg-gray-100 md:h-60">
+              <Image
+                src="/hero2.jpg"
+                alt={card.imageAlt}
+                fill
+                className="object-cover"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 380px"
+              />
+            </div>
+            <div className="flex flex-col items-center px-6 pb-7 pt-6 text-center">
+              <span className="text-3xl leading-none mb-3" aria-hidden>
+                {card.emoji}
+              </span>
+              <h3 className="text-lg font-bold text-gray-900 lg:text-xl">{card.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-black lg:text-[0.9375rem]">{card.description}</p>
+              <Link
+                href={card.href}
+                className="mt-5 inline-flex w-full max-w-[min(100%,20rem)] items-center justify-center rounded-lg border-2 border-[#FF385C] px-4 py-2.5 text-sm font-semibold text-[#E31C5F] transition-colors hover:bg-[#FFECEF]"
+              >
+                {card.primaryLabel}
+              </Link>
+
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
 <section className="max-w-8xl mx-auto mt-16 mb-16 p-6 lg:p-16">
   <div className="flex flex-col lg:flex-row justify-center items-center gap-10">
     {/* Left Side: Card with Time Savings & Included Items */}
@@ -185,87 +351,6 @@ export default function Home() {
     </div>
   </div>
 </section>
-
-<section className="max-w-8xl mx-auto mt-16 mb-16 p-6 lg:p-16">
-      <div className="flex flex-col lg:flex-row justify-between items-start gap-10">
-        {/* Left Side: Property Image with Description Overlay */}
-        <div className="relative w-full lg:w-1/2 rounded-xl overflow-hidden">
-          <img
-            src="/slider3.png" // Replace with your image URL
-            alt="Property Listings AI"
-            className="w-full h-auto rounded-xl"
-          />
-          <div className="absolute inset-0 bg-black bg-opacity-70 rounded-xl flex items-center justify-center">
-            <div className="p-2 text-white max-w-lg">
-              <h2 className="text-3xl font-bold mb-4 text-white">
-                Transform Your <span className="text-[#FF385C]">Airbnb Listing</span>
-              </h2>
-              <p className="mb-6 text-gray-100">
-                Our AI-powered tools analyze your property photos and details to create compelling, SEO-optimized Airbnb
-                listings that attract more guests and increase bookings. Save hours of writing time while creating
-                professional descriptions that highlight your property's best features.
-              </p>
-              <Link
-                href="/tools"
-                className="inline-flex items-center bg-[#FF385C] hover:bg-[#E31C5F] text-white font-bold py-3 px-6 rounded-lg transition-colors"
-              >
-                Explore Our Tools
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
-            </div>
-          </div>
-        </div>
-
-        {/* Right Side: Tools */}
-        <div className="w-full lg:w-1/2 bg-white rounded-xl shadow-xl border-r-8 border-white-400 p-6">
-          <h2 className="text-4xl text-black font-bold mb-6">Real Estate Listing Tools</h2>
-
-          <div className="space-y-2">
-
-          
-          <div className="p-4 border border-gray-200 rounded-lg hover:border-[#FF385C] transition-colors">
-          <Link href="/airbnb-listing">
-              <h3 className="font-bold text-lg text-[#FF385C] mb-1">Airbnb Listing Generator</h3>
-              <p className="text-gray-700">
-                Turn your property photos into compelling Airbnb listings that attract more bookings.
-              </p>
-              </Link>
-            </div>
-         
-
-          
-            <div className="p-4 border border-gray-200 rounded-lg hover:border-[#FF385C] transition-colors">
-            <Link href="/property-description-generator">
-              <h3 className="font-bold text-lg text-[#FF385C] mb-1">Property Description Generator</h3>
-              <p className="text-gray-700">
-                Generate eye-catching descriptions that attract more guests.
-              </p> </Link>
-            </div>
-         
-
-          
-            <div className="p-4 border border-gray-200 rounded-lg hover:border-[#FF385C] transition-colors">
-            <Link href="/airbnb-house-rules-generator">
-              <h3 className="font-bold text-lg text-[#FF385C] mb-1">Airbnb House Rules Generator</h3>
-              <p className="text-gray-700">Create clear, professional house rules based on your property photos.</p>
-              </Link>
-            </div>
-  
-
-            <div className="p-4 border border-gray-200 rounded-lg hover:border-[#FF385C] transition-colors">
-            <Link href="/driving-directions-generator">
-
-              <h3 className="font-bold text-lg text-[#FF385C] mb-1">Airbnb Driving Directions Generator</h3>
-              <p className="text-gray-700">
-                Generate detailed driving directions to help guests find your property easily.
-              </p>
-              </Link>
-
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
 <section id="features" className="md:pb-20 mt-12  md:pt-10 pb-6 sm:pb-6 sm:pt-6 rounded-xl border-2 border-white-400 mr-4 ml-4 lg:mr-10 lg:ml-10" style={{backgroundColor: "#fafafa"}}>
     <div className="section_wrapper max-w-295.2 pl-4 pr-4 lg:pl-12 lg:pr-12 mx-auto">

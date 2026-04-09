@@ -32,7 +32,7 @@ role: "user",
 content: [
 {
 type: "text",
-text: "Look at all the images uploaded and give me a title and description of the place for sale. E.g. Property with 2 bedrooms, and one bathroom. Tile countertop, etc etc.",
+text: "Look at all the images uploaded and give me a property description of the place as if you were a real estate agent listing the property for sale or just to show it."
 },
 {
 type: "image_url",
