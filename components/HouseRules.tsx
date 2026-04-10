@@ -513,7 +513,7 @@ export default function HouseRules() {
                       disabled={submitting}
                       className="w-full rounded-xl bg-[#FF385C] px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#E31C5F] focus:outline-none focus:ring-2 focus:ring-[#FF385C] focus:ring-offset-2 disabled:opacity-60 sm:w-auto sm:min-w-[220px]"
                     >
-                      Generate Listing
+                      Generate House Rules
                     </button>
                   )
                 ) : (
@@ -531,7 +531,7 @@ export default function HouseRules() {
                   onClick={handleGenerateListingClick}
                   className="w-full rounded-xl bg-[#FF385C] px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#E31C5F] focus:outline-none focus:ring-2 focus:ring-[#FF385C] focus:ring-offset-2 sm:w-auto sm:min-w-[220px]"
                 >
-                  Generate Listing
+                  Generate House Rules
                 </button>
               )}
             </div>
@@ -632,7 +632,7 @@ export default function HouseRules() {
               </>
             ) : (
               <p className="py-14 text-center text-sm leading-relaxed text-gray-500">
-                Upload photos and click <span className="font-medium text-gray-700">Generate Listing</span>—your house
+                Upload photos and click <span className="font-medium text-gray-700">Generate House Rules</span>—your house
                 rules will appear here.
               </p>
             )}

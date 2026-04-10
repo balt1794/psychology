@@ -123,8 +123,8 @@ export default function InstantListing() {
   async function handleSubmitDescription(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    if (images.length === 0) {
-      alert("Upload one or more images.");
+    if (images.length < 2) {
+      alert("Upload at least 2 images to generate a listing.");
       return;
     }
     setSubmitting(true);
@@ -391,16 +391,23 @@ export default function InstantListing() {
           ) : null}
 
           {images.length > 0 ? (
-            <div className="mb-4 grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3">
-              {images.map((image, index) => (
-                <div
-                  key={index}
-                  className="relative aspect-[4/3] overflow-hidden rounded-lg border border-gray-200 bg-gray-100"
-                >
-                  <img src={image} className="h-full w-full object-cover" alt={`Upload ${index + 1}`} />
-                </div>
-              ))}
-            </div>
+            <>
+              <div className="mb-2 grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3">
+                {images.map((image, index) => (
+                  <div
+                    key={index}
+                    className="relative aspect-[4/3] overflow-hidden rounded-lg border border-gray-200 bg-gray-100"
+                  >
+                    <img src={image} className="h-full w-full object-cover" alt={`Upload ${index + 1}`} />
+                  </div>
+                ))}
+              </div>
+              {images.length === 1 ? (
+                <p className="mb-4 text-sm font-medium text-amber-800">
+                  Add one more photo to enable Generate Listing (minimum 2 images).
+                </p>
+              ) : null}
+            </>
           ) : (
             <div className="mb-4 rounded-xl border border-gray-100 bg-white px-4 py-6 text-center text-sm text-gray-500">
               <p>Once you upload images, you will see them here.</p>
@@ -435,8 +442,8 @@ export default function InstantListing() {
                   ) : (
                     <button
                       type="submit"
-                      disabled={submitting || loadingImages || images.length === 0}
-                      className="w-full rounded-xl bg-[#FF385C] px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#E31C5F] focus:outline-none focus:ring-2 focus:ring-[#FF385C] focus:ring-offset-2 disabled:opacity-60 sm:w-auto sm:min-w-[220px]"
+                      disabled={submitting || loadingImages || images.length < 2}
+                      className="w-full rounded-xl bg-[#FF385C] px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#E31C5F] focus:outline-none focus:ring-2 focus:ring-[#FF385C] focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto sm:min-w-[220px]"
                     >
                       Generate Listing
                     </button>
@@ -454,7 +461,8 @@ export default function InstantListing() {
                 <button
                   type="button"
                   onClick={handleGenerateListingClick}
-                  className="w-full rounded-xl bg-[#FF385C] px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#E31C5F] focus:outline-none focus:ring-2 focus:ring-[#FF385C] focus:ring-offset-2 sm:w-auto sm:min-w-[220px]"
+                  disabled={loadingImages || images.length < 2}
+                  className="w-full rounded-xl bg-[#FF385C] px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#E31C5F] focus:outline-none focus:ring-2 focus:ring-[#FF385C] focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto sm:min-w-[220px]"
                 >
                   Generate Listing
                 </button>
@@ -519,7 +527,7 @@ export default function InstantListing() {
                                   className="w-full rounded-xl border border-gray-200 bg-gray-50/80 p-4 text-left text-sm text-gray-700 transition hover:border-[#FF385C]/30 hover:bg-white focus:outline-none focus:ring-2 focus:ring-[#FF385C]/20"
                                   onClick={() => {
                                     navigator.clipboard.writeText(content);
-                                    toast.success(`Copied ${title} (plain text)`, { icon: "✂️" });
+                                    toast.success(`Copied ${title}`, { icon: "✂️" });
                                   }}
                                 >
                                   <pre className="whitespace-pre-wrap font-sans">{content}</pre>
