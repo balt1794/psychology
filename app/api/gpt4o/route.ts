@@ -46,6 +46,7 @@ const instructionText = `Analyze the uploaded images and provide an entire Airbn
 13. A list of amenities based on the uploaded images. So if you see a router, say Wifi, if you see a kitchen, then say Kitchen, etc. Some common ones are Wifi, TV, Kitchen, Pool, Washer, Air conditioning.
 14. Activities Nearby: A list of places and activities (minimum 4) and things to do nearby based on this address/context: ${addressForPrompt} with travel time in parentheses (e.g. "Central Park (15 min)").
 Formatting rules:
+- Plain text only: do NOT use Markdown—no # or ### headings, no **bold**, no bullet asterisks, no backticks.
 - Use clear section headers exactly like: Title:, Description:, How to Get There:, etc. (each header at the start of a block).
 - Put a blank line between each section and its body so sections are easy to parse.
 Please format the response so that each section is clearly labeled and can be copied individually. Avoid saying anything like I'm unable to view or analyze images directly, but I can help you draft a sample Airbnb listing based on your descriptions and requirements or anything at the end just give the response.

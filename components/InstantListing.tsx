@@ -12,6 +12,7 @@ import imageCompression from "browser-image-compression";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "../config/firebase";
 import { Camera } from "lucide-react";
+import { stripMarkdownPlain } from "@/lib/stripMarkdownPlain";
 
 
 export default function InstantListing() {
@@ -189,8 +190,8 @@ export default function InstantListing() {
 
   // Render the component
   function copyAIResponseToClipboard() {
-    navigator.clipboard.writeText(openAIResponse);
-    toast.success("AI response copied to clipboard", {
+    navigator.clipboard.writeText(stripMarkdownPlain(openAIResponse));
+    toast.success("Copied Text", {
       icon: "✂️",
     });
   }
@@ -503,9 +504,11 @@ export default function InstantListing() {
                           const title = titleMatch
                             ? titleMatch[0].replace(/#/g, "").replace(/\*/g, "").replace(/:/g, "").trim()
                             : null;
-                          const content = titleMatch
-                            ? section.replace(titleMatch[0], "").replace(/\*/g, "").trim()
-                            : section.replace(/\*/g, "").trim();
+                          const content = stripMarkdownPlain(
+                            titleMatch
+                              ? section.replace(titleMatch[0], "").trim()
+                              : section.trim()
+                          );
 
                           if (title) {
                             return (
@@ -516,7 +519,7 @@ export default function InstantListing() {
                                   className="w-full rounded-xl border border-gray-200 bg-gray-50/80 p-4 text-left text-sm text-gray-700 transition hover:border-[#FF385C]/30 hover:bg-white focus:outline-none focus:ring-2 focus:ring-[#FF385C]/20"
                                   onClick={() => {
                                     navigator.clipboard.writeText(content);
-                                    toast.success(`Copied ${title} to clipboard!`, { icon: "✂️" });
+                                    toast.success(`Copied ${title} (plain text)`, { icon: "✂️" });
                                   }}
                                 >
                                   <pre className="whitespace-pre-wrap font-sans">{content}</pre>

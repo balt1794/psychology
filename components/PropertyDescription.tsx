@@ -1,6 +1,6 @@
 "use client"
 import Navbar from "@/components/Navbar";
-import { ChangeEvent, useState, useEffect, FormEvent } from "react";
+import { ChangeEvent, useState, useEffect, FormEvent, type ReactNode } from "react";
 import { Toaster, toast } from "react-hot-toast";
 import { useAuth } from "../context/AuthContext";
 import { loadStripe } from '@stripe/stripe-js';
@@ -13,50 +13,52 @@ import { Carousel, Typography, Button } from "@material-tailwind/react";
 import Link from "next/link";
 import { Footer } from "@/components/Footer";
 import { Clock, CheckCircle } from "lucide-react"
-import { ArrowRight, Camera } from "lucide-react"
+import { ArrowRight, Camera } from "lucide-react";
+import { stripMarkdownPlain } from "@/lib/stripMarkdownPlain";
 
 const LISTING_TITLE_MAX_CHARS = 50;
 const LISTING_DESCRIPTION_MAX_CHARS = 500;
 
-/** Truncates title (after ###) and body to fixed limits so output always fits product rules. */
+/** Truncates plain-text title (first line) and body to fixed limits so output always fits product rules. */
 function enforceListingCharacterLimits(raw: string): string {
   const normalized = raw.replace(/\r\n/g, "\n");
   const lines = normalized.split("\n");
-
-  for (let i = 0; i < lines.length; i++) {
-    const line = lines[i];
-    if (line.startsWith("###")) {
-      const titleText = line
-        .replace(/^#+\s*/, "")
-        .trim()
-        .slice(0, LISTING_TITLE_MAX_CHARS);
-      let bodyStart = i + 1;
-      while (bodyStart < lines.length && lines[bodyStart].trim() === "") {
-        bodyStart += 1;
-      }
-      const body = lines
-        .slice(bodyStart)
-        .join("\n")
-        .trim()
-        .slice(0, LISTING_DESCRIPTION_MAX_CHARS);
-      return `### ${titleText}\n\n${body}`;
-    }
+  let i = 0;
+  while (i < lines.length && lines[i].trim() === "") {
+    i += 1;
   }
-
-  let first = 0;
-  while (first < lines.length && lines[first].trim() === "") {
-    first += 1;
-  }
-  if (first >= lines.length) {
+  if (i >= lines.length) {
     return "";
   }
-  const titleText = lines[first].replace(/^#+\s*/, "").trim().slice(0, LISTING_TITLE_MAX_CHARS);
+  const titleText = lines[i].replace(/^#+\s*/, "").trim().slice(0, LISTING_TITLE_MAX_CHARS);
+  i += 1;
+  while (i < lines.length && lines[i].trim() === "") {
+    i += 1;
+  }
   const body = lines
-    .slice(first + 1)
+    .slice(i)
     .join("\n")
     .trim()
     .slice(0, LISTING_DESCRIPTION_MAX_CHARS);
-  return `### ${titleText}\n\n${body}`;
+  return `${titleText}\n\n${body}`;
+}
+
+function parseListingForDisplay(raw: string): { title: string; bodyLines: string[] } {
+  const normalized = raw.replace(/\r\n/g, "\n");
+  const lines = normalized.split("\n");
+  let i = 0;
+  while (i < lines.length && lines[i].trim() === "") {
+    i += 1;
+  }
+  if (i >= lines.length) {
+    return { title: "", bodyLines: [] };
+  }
+  const title = lines[i].replace(/^#+\s*/, "").trim();
+  i += 1;
+  while (i < lines.length && lines[i].trim() === "") {
+    i += 1;
+  }
+  return { title, bodyLines: lines.slice(i) };
 }
 
 export default function PropertyDescription () {
@@ -417,8 +419,8 @@ export default function PropertyDescription () {
 
   // Render the component
   function copyAIResponseToClipboard() {
-    navigator.clipboard.writeText(openAIResponse);
-    toast.success("AI response copied to clipboard", {
+    navigator.clipboard.writeText(stripMarkdownPlain(openAIResponse));
+    toast.success("Copied Text", {
       icon: "✂️",
     });
   }
@@ -795,34 +797,52 @@ Stop struggling with writer's block or generic descriptions. Our tool identifies
               ) : openAIResponse ? (
                 <>
                   <div className="space-y-3">
-                    {openAIResponse.split("\n").map((line, index) => {
-                      const t = line.trimEnd();
-                      if (!t.trim()) {
-                        return <div key={index} className="h-1" />;
-                      }
-                      if (t.startsWith("###")) {
-                        return (
+                    {(() => {
+                      const { title, bodyLines } = parseListingForDisplay(openAIResponse);
+                      const nodes: ReactNode[] = [];
+                      if (title) {
+                        nodes.push(
                           <h3
-                            key={index}
+                            key="title"
                             className="text-xl font-bold leading-snug tracking-tight text-gray-900 sm:text-2xl"
                           >
-                            {t.replace(/^#+\s*/, "").trim()}
+                            {title}
                           </h3>
                         );
                       }
-                      if (t.startsWith("**")) {
-                        return (
-                          <p key={index} className="text-sm font-semibold text-gray-900">
-                            {t.replace(/\*/g, "").trim()}
+                      bodyLines.forEach((line, index) => {
+                        const t = line.trimEnd();
+                        if (!t.trim()) {
+                          nodes.push(<div key={`b-${index}`} className="h-1" />);
+                          return;
+                        }
+                        if (t.startsWith("###")) {
+                          nodes.push(
+                            <h3
+                              key={`h-${index}`}
+                              className="text-lg font-bold leading-snug text-gray-900 sm:text-xl"
+                            >
+                              {t.replace(/^#+\s*/, "").trim()}
+                            </h3>
+                          );
+                          return;
+                        }
+                        if (t.startsWith("**")) {
+                          nodes.push(
+                            <p key={`s-${index}`} className="text-sm font-semibold text-gray-900">
+                              {t.replace(/\*+/g, "").trim()}
+                            </p>
+                          );
+                          return;
+                        }
+                        nodes.push(
+                          <p key={`p-${index}`} className="text-base leading-relaxed text-gray-700">
+                            {t}
                           </p>
                         );
-                      }
-                      return (
-                        <p key={index} className="text-base leading-relaxed text-gray-700">
-                          {t}
-                        </p>
-                      );
-                    })}
+                      });
+                      return nodes;
+                    })()}
                   </div>
                   <button
                     type="button"

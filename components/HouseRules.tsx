@@ -174,6 +174,7 @@ export default function HouseRules() {
         },
         body: JSON.stringify({
           images: images,
+          mode: "house_rules",
         }),
       });
 
@@ -562,26 +563,55 @@ export default function HouseRules() {
               </div>
             ) : openAIResponse ? (
               <>
-                <div className="space-y-3">
+                <div className="space-y-2">
                   {openAIResponse.split("\n").map((line, index) => {
                     const t = line.trimEnd();
-                    if (!t.trim()) {
-                      return <div key={index} className="h-1" />;
+                    const trimmed = t.trim();
+                    if (!trimmed) {
+                      return <div key={index} className="h-2" aria-hidden />;
                     }
-                    if (t.startsWith("###")) {
+                    if (trimmed === "---") {
+                      return <hr key={index} className="my-6 border-gray-200" />;
+                    }
+                    const sectionTitles = [
+                      "House Rules:",
+                      "Instructions to Check In:",
+                      "Standard Cancellation:",
+                    ];
+                    if (sectionTitles.some((title) => trimmed === title || trimmed.startsWith(title))) {
+                      const label = sectionTitles.find((title) => trimmed === title || trimmed.startsWith(title)) ?? trimmed;
+                      const rest = trimmed.slice(label.length).trim();
                       return (
                         <h3
                           key={index}
-                          className="text-xl font-bold leading-snug tracking-tight text-gray-900 sm:text-2xl"
+                          className="mb-2 mt-6 border-b border-gray-100 pb-1 text-base font-bold tracking-tight text-gray-900 first:mt-0 sm:text-lg"
                         >
-                          {t.replace(/^#+\s*/, "").trim()}
+                          {label}
+                          {rest ? ` ${rest}` : ""}
                         </h3>
                       );
                     }
-                    if (t.startsWith("**")) {
+                    if (trimmed.startsWith("###")) {
+                      return (
+                        <h3
+                          key={index}
+                          className="text-base font-bold leading-snug text-gray-900 sm:text-lg"
+                        >
+                          {trimmed.replace(/^#+\s*/, "").replace(/\*+/g, "").trim()}
+                        </h3>
+                      );
+                    }
+                    if (trimmed.startsWith("**")) {
                       return (
                         <p key={index} className="text-sm font-semibold text-gray-900">
-                          {t.replace(/\*/g, "").trim()}
+                          {trimmed.replace(/\*+/g, "").trim()}
+                        </p>
+                      );
+                    }
+                    if (/^-\s+/.test(trimmed)) {
+                      return (
+                        <p key={index} className="border-l-2 border-[#FF385C]/35 pl-3 text-base leading-relaxed text-gray-800">
+                          {trimmed.replace(/^-\s+/, "")}
                         </p>
                       );
                     }

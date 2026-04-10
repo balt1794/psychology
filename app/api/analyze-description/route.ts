@@ -60,23 +60,23 @@ function buildInstructions(
 
   const sharedFormat = `
 OUTPUT FORMAT (strict):
-1) First line: the listing TITLE only, as a markdown H3 (exactly one line starting with "### " then the headline).
+1) First line: the listing TITLE only—plain text, no Markdown, no "#" characters, no **bold**.
 2) One blank line.
-3) DESCRIPTION: flowing paragraphs of prose only (the main body). No other section headings, no bullet lists, no "Key facts" or "Features" blocks, no markdown ## aside from that first title line.
+3) DESCRIPTION: flowing paragraphs of plain prose only (the main body). No other section headings, no bullet lists, no "Key facts" or "Features" blocks, no markdown at all in the body.
 4) Weave any provided facts (beds, baths, sq ft, parking, neighborhood, etc.) into the description paragraphs when given; do not invent conflicting numbers.
 5) No preamble ("Here is your listing") or sign-off.`;
 
   if (airbnbListing) {
     const airbnbLimits = `
 HARD CHARACTER LIMITS (Airbnb-style short fields; count spaces and punctuation):
-- Title text after "### " must be between 0 and ${AIRBNB_TITLE_MAX} characters inclusive. Never exceed ${AIRBNB_TITLE_MAX}.
+- The first line (plain title, no Markdown) must be between 0 and ${AIRBNB_TITLE_MAX} characters inclusive. Never exceed ${AIRBNB_TITLE_MAX}.
 - The entire description body (everything after the blank line under the title) must be between 0 and ${AIRBNB_DESCRIPTION_MAX} characters inclusive. Never exceed ${AIRBNB_DESCRIPTION_MAX}. Stop mid-sentence if needed.`;
 
     if (mode === "simple") {
       return `${base}
 
 MODE: SIMPLE (Airbnb listing limits ON)
-After the ### title line, write a very short marketing description that fits within the ${AIRBNB_DESCRIPTION_MAX}-character body limit.
+After the plain-text title line, write a very short marketing description that fits within the ${AIRBNB_DESCRIPTION_MAX}-character body limit.
 ${sharedFormat}
 ${airbnbLimits}`;
     }
@@ -84,7 +84,7 @@ ${airbnbLimits}`;
     return `${base}
 
 MODE: DETAILED (Airbnb listing limits ON)
-After the ### title line, write the best possible narrative within the ${AIRBNB_DESCRIPTION_MAX}-character body limit—dense, specific prose. No lists or extra headers.
+After the plain-text title line, write the best possible narrative within the ${AIRBNB_DESCRIPTION_MAX}-character body limit—dense, specific prose. No lists or extra headers.
 ${factsBlock ? `FACTS TO WEAVE INTO PROSE:\n${factsBlock}\n` : "No structured facts were provided; describe carefully from images and avoid inventing precise counts.\n"}
 ${sharedFormat}
 ${airbnbLimits}`;
@@ -94,14 +94,14 @@ ${airbnbLimits}`;
     return `${base}
 
 MODE: SIMPLE
-After the ### title line, write 2–3 short paragraphs of marketing description (warm, scannable). Keep it concise but do not worry about a specific character cap.
+After the plain-text title line, write 2–3 short paragraphs of marketing description (warm, scannable). Keep it concise but do not worry about a specific character cap.
 ${sharedFormat}`;
   }
 
   return `${base}
 
 MODE: DETAILED
-After the ### title line, write a rich, professional narrative: several paragraphs covering layout, finishes, natural light, outdoor space, lifestyle, and notable details visible in the photos. No lists or extra headers—only title + body.
+After the plain-text title line, write a rich, professional narrative: several paragraphs covering layout, finishes, natural light, outdoor space, lifestyle, and notable details visible in the photos. No lists or extra headers—only title + body.
 
 ${factsBlock ? `FACTS TO WEAVE INTO PROSE:\n${factsBlock}\n` : "No structured facts were provided; describe carefully from images and avoid inventing precise counts.\n"}
 ${sharedFormat}`;
@@ -111,9 +111,9 @@ function buildSystemMessage(airbnbListing: boolean): string {
   const base =
     "You write accurate, compliant real estate marketing copy. Never include discriminatory language. If a fact is missing, do not invent it.";
   if (airbnbListing) {
-    return `${base} Output must be exactly: one ### title line (title text max ${AIRBNB_TITLE_MAX} chars), blank line, then body only (max ${AIRBNB_DESCRIPTION_MAX} chars total)—no bullet lists or extra sections.`;
+    return `${base} Output must be exactly: one plain-text title line (title max ${AIRBNB_TITLE_MAX} chars, no Markdown), blank line, then body only (max ${AIRBNB_DESCRIPTION_MAX} chars total)—no bullet lists or extra sections.`;
   }
-  return `${base} Output must be: one ### title line, blank line, then paragraph body only—no bullet lists or extra sections. There is no character limit unless the user asks for brevity in the prose itself.`;
+  return `${base} Output must be: one plain-text title line (no Markdown), blank line, then paragraph body only—no bullet lists or extra sections. There is no character limit unless the user asks for brevity in the prose itself.`;
 }
 
 export async function POST(request: Request) {

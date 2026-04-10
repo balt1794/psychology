@@ -38,24 +38,30 @@ export default function DrivingDirections() {
   const [factType, setFactType] = useState("");
 
   const fetchRandomFact = async () => {
+    if (!factType.trim()) {
+      toast.error("Enter a property address.");
+      return;
+    }
     setLoading(true);
     setFact(null);
     try {
-      const response = await fetch('/api/analyze-text', {
-        method: 'POST',
+      const response = await fetch("/api/analyze-text", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ factType })
+        body: JSON.stringify({ factType: factType.trim() }),
       });
       const data = await response.json();
       if (response.ok) {
-        setFact(data.fact);
+        setFact(typeof data.fact === "string" ? data.fact : "");
       } else {
-        console.error("Error fetching random fact:", data.error);
+        const msg = typeof data.error === "string" ? data.error : "Could not generate directions.";
+        toast.error(msg);
       }
     } catch (error) {
       console.error("Error during fetch:", error);
+      toast.error("Something went wrong. Try again.");
     }
     setLoading(false);
   };
@@ -541,12 +547,40 @@ export default function DrivingDirections() {
               </div>
             ) : fact ? (
               <>
-                <div className="space-y-4">
-                  {fact.split("\n").map((instruction, index) => (
-                    <p key={index} className="text-base leading-relaxed text-gray-700">
-                      {instruction}
-                    </p>
-                  ))}
+                <div className="space-y-1">
+                  {fact.split("\n").map((line, index) => {
+                    const t = line.trimEnd();
+                    const trimmed = t.trim();
+                    if (!trimmed) {
+                      return <div key={index} className="h-2" aria-hidden />;
+                    }
+                    if (/^From\s+/i.test(trimmed)) {
+                      return (
+                        <p
+                          key={index}
+                          className="mb-2 mt-5 border-b border-gray-100 pb-1 text-sm font-bold uppercase tracking-wide text-gray-900 first:mt-0"
+                        >
+                          {trimmed}
+                        </p>
+                      );
+                    }
+                    if (/^\d+[\.)]\s/.test(trimmed)) {
+                      const m = trimmed.match(/^(\d+[\.)]\s*)(.*)$/);
+                      const prefix = m?.[1] ?? "";
+                      const rest = m?.[2] ?? trimmed;
+                      return (
+                        <p key={index} className="flex gap-2 pl-1 text-base leading-relaxed text-gray-800">
+                          <span className="w-7 shrink-0 font-semibold text-gray-900">{prefix.trim()}</span>
+                          <span>{rest}</span>
+                        </p>
+                      );
+                    }
+                    return (
+                      <p key={index} className="text-base leading-relaxed text-gray-800">
+                        {t}
+                      </p>
+                    );
+                  })}
                 </div>
                 <button
                   type="button"
