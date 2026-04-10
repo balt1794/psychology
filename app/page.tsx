@@ -2,7 +2,6 @@ import { Toaster, toast } from "react-hot-toast";
 import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
-import { Footer } from "@/components/Footer";
 import { Clock, CheckCircle } from "lucide-react"
 import { Metadata } from "next";
 import { ArrowRight, Camera, Sparkles } from "lucide-react"
@@ -31,23 +30,63 @@ export default function Home() {
         name: "What is included in the $9.99 plan?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "The starter plan includes 15 credits for $9.99, ideal for creating and testing listings across major real estate and vacation rental platforms.",
+          text: "The plan includes 15 credits for $9.99, ideal for creating listings across major real estate platforms.",
         },
       },
       {
         "@type": "Question",
-        name: "Can I use generated content on Airbnb, Zillow, and Booking.com?",
+        name: "What are Airbnb title and description limits?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Yes. The generated copy is designed to be adapted for platforms like Airbnb, Zillow, RE/MAX, Booking.com, and Vrbo.",
+          text: "For Airbnb-friendly copy in PropertyListingsAI, use up to 50 characters for the title and up to 500 characters for the description.",
         },
       },
       {
         "@type": "Question",
-        name: "Who is this tool best for?",
+        name: "Can I generate property listing descriptions for Airbnb, Zillow, and Booking.com?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes. The generated descriptions are designed to be adapted for platforms like Airbnb, Zillow, RE/MAX, Booking.com, and Vrbo.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Who is PropertyListingsAI best for?",
         acceptedAnswer: {
           "@type": "Answer",
           text: "Property managers, real estate agents, Airbnb hosts, and short-term rental operators who want faster listing creation and better marketing copy.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "What is a real estate listing?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "A real estate listing is a description of a property for sale or rent. It includes details such as the location, size, number of bedrooms and bathrooms, and features of the property. PropertyListingsAI helps you turn those facts into polished titles, descriptions, and supporting copy for your marketing.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "How does PropertyListingsAI create listing content?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "PropertyListingsAI uses AI to help you build compelling real estate and short-term rental listings. You enter property details such as type, location, size, and features—or upload photos—and our generators produce tailored copy for Airbnb-style listings, long-form property descriptions, house rules, and driving directions. The same workflow applies across all PropertyListingsAI tools so you can publish faster.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "How long should a real estate listing be?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "The ideal length for a real estate listing can vary depending on the platform and target audience, but generally it should be concise yet informative. A good rule of thumb is to aim for 150-200 words for the main description so you can highlight key features without overwhelming buyers or renters. For online listings, use separate fields for square footage, bedrooms, and similar details where available. PropertyListingsAI is designed to help you stay clear and engaging while you adapt length to each site’s limits.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "What websites can I use PropertyListingsAI for?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "You can adapt PropertyListingsAI output for major real estate portals such as Zillow, Trulia, PropertyGuru, 99.co, and Realtor.com; Multiple Listing Service (MLS) listings; agency and agent websites; social media and classified sites; and short-term rental platforms like Airbnb and Vrbo.",
         },
       },
     ],
@@ -55,41 +94,54 @@ export default function Home() {
 
   return (
     <>
-<section className="relative z-10 max-w-9xl mx-auto px-6 py-12 lg:px-16 lg:py-20">
-  <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+<section className="relative z-10 mx-auto max-w-9xl px-4 py-10 sm:px-6 sm:py-12 lg:px-16 lg:py-20">
+  <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-14">
     <div>
-      <h1 className="inline-flex items-center rounded-md bg-[#FF385C] px-4 py-1 text-sm font-semibold text-white mb-6">
-      Real Estate Listing Description Generator
-      <Sparkles className="ml-2 h-4 w-4" />
+      <h1 className="mb-5 inline-flex max-w-full flex-wrap items-center gap-2 rounded-md bg-[#FF385C] px-3 py-1.5 text-xs font-semibold text-white sm:mb-6 sm:px-4 sm:py-1.5 sm:text-sm">
+        <span className="leading-snug">Real Estate Listing Description Generator</span>
+        <Sparkles className="h-4 w-4 shrink-0" />
       </h1>
-      <h2 className="text-4xl lg:text-6xl text-black font-bold leading-tight mb-4">
-        Better Property Listings 
-      
-        
+      <h2 className="mb-4 text-3xl font-bold leading-[1.12] tracking-tight text-black sm:text-4xl sm:leading-[1.15] lg:mb-6 lg:text-6xl lg:leading-tight">
+        <span className="sm:hidden">
+          <span className="block">Better Property Listings</span>
+          <span className="mt-1 block">
+            in Minutes <span className="text-[#FF385C]">with AI</span>
+          </span>
+        </span>
+        <span className="hidden sm:block">
+          <span className="inline">Better Property</span> <span className="inline">Listings</span>
+          <span className="mt-2 block sm:mt-3">
+            <span className="inline-flex flex-wrap items-center gap-x-2 gap-y-1">
+              <span className="whitespace-nowrap">in Minutes</span>
+              <span className="inline-flex items-center gap-1.5 whitespace-nowrap sm:gap-2">
+                <span className="text-[#FF385C]">with AI</span>
+                <span
+                  className="text-[1.85rem] leading-none sm:text-5xl lg:text-6xl"
+                  aria-hidden="true"
+                >
+                  🏠
+                </span>
+              </span>
+            </span>
+          </span>
+        </span>
       </h2>
-    <h2 className="text-4xl lg:text-6xl text-black font-bold leading-tight mb-4">
-      in Minutes <span className="text-[#FF385C]">with AI</span>
-      <span className="inline-block ml-3  mb-3 text-5xl align-middle">🏠</span>
-      </h2>
-      <p className="text-lg lg:text-2xl text-[#5f5f5f] font-medium mb-6">
-  Powerful real estate tools to manage property listings,
-  <br />
-  create high-converting images and descriptions,
-  <br />
-  and maximize your sales and bookings.
-</p>
+      <p className="mb-6 max-w-xl text-base font-medium leading-relaxed text-[#5f5f5f] sm:text-lg lg:text-2xl">
+        Powerful real estate tools to manage property listings, create high-converting images and descriptions, and
+        maximize your sales and bookings.
+      </p>
 
-      <div className="flex flex-wrap gap-4">
+      <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
         <Link
           href="/tools"
-          className="inline-flex items-center bg-[#FF385C] hover:bg-[#E31C5F] text-white font-bold py-3 px-6 rounded-md transition-colors"
+          className="inline-flex w-full items-center justify-center rounded-md bg-[#FF385C] px-6 py-3 font-bold text-white transition-colors hover:bg-[#E31C5F] sm:w-auto"
         >
           Real Estate Tools
           <ArrowRight className="ml-2 h-5 w-5" />
         </Link>
         <Link
           href="/airbnb-listing"
-          className="inline-flex items-center border border-[#FF385C] text-[#E31C5F] hover:bg-[#FFECEF] font-bold py-3 px-6 rounded-md transition-colors"
+          className="inline-flex w-full items-center justify-center rounded-md border border-[#FF385C] px-6 py-3 font-bold text-[#E31C5F] transition-colors hover:bg-[#FFECEF] sm:w-auto"
         >
           Airbnb Listing Generator
         </Link>
@@ -559,33 +611,78 @@ export default function Home() {
 </section>
 
 <section className="mx-4 mt-10 mb-8 lg:mx-10">
-  <div className="w-full rounded-2xl bg-white p-6 shadow-sm lg:p-8">
+  <div className="w-full rounded-2xl bg-white p-6 lg:p-8">
     <h2 className="text-center text-2xl font-bold text-gray-900 lg:text-4xl">Frequently Asked Questions (FAQ)</h2>
-    <div className="mx-auto mt-5 max-w-4xl space-y-4">
+
+    <div className="mx-auto mt-8 max-w-4xl space-y-4">
       <div className="rounded-md border border-gray-200 bg-[#fafafa] p-4">
         <h3 className="text-center font-semibold text-gray-900 text-lg">How does PropertyListingsAI work?</h3>
         <p className="mt-2 text-md leading-relaxed text-gray-600">
-          Upload property photos and details, and our AI generates listing titles, descriptions, highlights, rules,
-          and directions in seconds.
+          Upload your property photos and details, then PropertyListingsAI generates listing titles, descriptions,
+          highlights, rules, and directions in seconds.
         </p>
       </div>
       <div className="rounded-md border border-gray-200 bg-[#fafafa] p-4">
         <h3 className="text-center font-semibold text-gray-900 text-lg">What is included in the $9.99 plan?</h3>
         <p className="mt-2 text-md leading-relaxed text-gray-600">
-          The starter plan includes 15 credits for $9.99, perfect for creating and testing multiple listing assets.
+          The plan includes 15 credits for $9.99, ideal for creating listings across major real
+          estate and vacation rental platforms.
         </p>
       </div>
       <div className="rounded-md border border-gray-200 bg-[#fafafa] p-4">
-        <h3 className="text-center font-semibold text-gray-900 text-lg">Can I use the content on Airbnb, Zillow, and Booking.com?</h3>
+        <h3 className="text-center font-semibold text-gray-900 text-lg">What are Airbnb title and description limits?</h3>
         <p className="mt-2 text-md leading-relaxed text-gray-600">
-          Yes. Content is built so you can adapt it across Airbnb, Zillow, RE/MAX, Booking.com, Vrbo, and more.
+          For Airbnb-friendly copy in PropertyListingsAI, use up to 50 characters for the title and up to
+          500 characters for the description.
         </p>
       </div>
       <div className="rounded-md border border-gray-200 bg-[#fafafa] p-4">
-        <h3 className="text-center font-semibold text-gray-900 text-lg">Who should use this tool?</h3>
+        <h3 className="text-center font-semibold text-gray-900 text-lg">Can I generate property listing descriptions for Airbnb, Zillow, and Booking.com?</h3>
         <p className="mt-2 text-md leading-relaxed text-gray-600">
-          It is ideal for real estate agents, property managers, Airbnb hosts, and short-term rental teams that want
-          to publish better listings faster.
+        Yes. The generated descriptions are designed to be adapted for platforms like Airbnb, Zillow, RE/MAX, Booking.com,
+          and Vrbo.
+        </p>
+      </div>
+      <div className="rounded-md border border-gray-200 bg-[#fafafa] p-4">
+        <h3 className="text-center font-semibold text-gray-900 text-lg">Who is this tool best for?</h3>
+        <p className="mt-2 text-md leading-relaxed text-gray-600">
+          Property managers, real estate agents, Airbnb hosts, and short-term rental operators who want faster
+          listing creation and better marketing copy.
+        </p>
+      </div>
+      <div className="rounded-md border border-gray-200 bg-[#fafafa] p-4">
+        <h3 className="text-center font-semibold text-gray-900 text-lg">What is a real estate listing?</h3>
+        <p className="mt-2 text-md leading-relaxed text-gray-600">
+          A real estate listing is a description of a property for sale or rent. It includes details such as the
+          location, size, number of bedrooms and bathrooms, and features of the property. PropertyListingsAI helps you turn those facts into polished titles, descriptions, and supporting copy
+          for your marketing.
+        </p>
+      </div>
+      <div className="rounded-md border border-gray-200 bg-[#fafafa] p-4">
+        <h3 className="text-center font-semibold text-gray-900 text-lg">How does PropertyListingsAI create listing content?</h3>
+        <p className="mt-2 text-md leading-relaxed text-gray-600">
+          PropertyListingsAI uses AI to help you build compelling real estate and short-term rental listings. You
+          enter property details such as type, location, size, and features—or upload photos—and our generators
+          produce tailored copy for Airbnb-style listings, long-form property descriptions, house rules, and driving
+          directions. The same workflow applies across all PropertyListingsAI tools so you can publish faster.
+        </p>
+      </div>
+      <div className="rounded-md border border-gray-200 bg-[#fafafa] p-4">
+        <h3 className="text-center font-semibold text-gray-900 text-lg">How long should a real estate listing be?</h3>
+        <p className="mt-2 text-md leading-relaxed text-gray-600">
+          The ideal length for a real estate listing can vary depending on the platform and target audience, but
+          generally it should be concise yet informative. A good rule of thumb is to aim for 150-200 words for the main
+          description so you can highlight key features without overwhelming buyers or renters. For online listings,
+          use separate fields for square footage, bedrooms, and similar details where available. PropertyListingsAI is
+          designed to help you stay clear and engaging while you adapt length to each site&apos;s limits.
+        </p>
+      </div>
+      <div className="rounded-md border border-gray-200 bg-[#fafafa] p-4">
+        <h3 className="text-center font-semibold text-gray-900 text-lg">What websites can I use PropertyListingsAI for?</h3>
+        <p className="mt-2 text-md leading-relaxed text-gray-600">
+          You can adapt PropertyListingsAI output for major real estate portals such as Zillow, Trulia, PropertyGuru,
+          99.co, and Realtor.com; Multiple Listing Service (MLS) listings; agency and agent websites; social media and
+          classified sites; and short-term rental platforms like Airbnb and Vrbo.
         </p>
       </div>
     </div>
@@ -600,7 +697,6 @@ export default function Home() {
 
 
       <Toaster />
-<Footer/>
 
     </>
   );
