@@ -232,8 +232,8 @@ export default function Home() {
       <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2 sm:gap-x-7 sm:gap-y-8 lg:grid-cols-4 lg:gap-x-7 xl:gap-x-9">
         {[
           {
-            emoji: "🏠",
             imageAlt: "Airbnb listing tool preview",
+            imageSrc: "/tool1.png",
             title: "Airbnb Listing Generator",
             description:
               "Turn your property photos into compelling Airbnb listings that attract more bookings.",
@@ -241,8 +241,8 @@ export default function Home() {
             primaryLabel: "Generate listing",
           },
           {
-            emoji: "📝",
             imageAlt: "Property description tool preview",
+            imageSrc: "/tool2.png",
             title: "Property Description Generator",
             description:
               "Generate eye-catching descriptions that attract more guests and highlight your property's best features.",
@@ -250,8 +250,8 @@ export default function Home() {
             primaryLabel: "Write with AI",
           },
           {
-            emoji: "🏡",
             imageAlt: "House rules tool preview",
+            imageSrc: "/tool3.png",
             title: "Airbnb House Rules Generator",
             description:
               "Create clear, professional house rules based on your property photos and details.",
@@ -259,8 +259,8 @@ export default function Home() {
             primaryLabel: "Generate rules",
           },
           {
-            emoji: "🚘",
             imageAlt: "Driving directions tool preview",
+            imageSrc: "/tool4.webp",
             title: "Airbnb Driving Directions Generator",
             description:
               "Generate detailed driving directions so guests can find your property easily.",
@@ -274,17 +274,33 @@ export default function Home() {
           >
             <div className="relative h-56 w-full shrink-0 bg-gray-100 md:h-60">
               <Image
-                src="/hero2.jpg"
+                src={card.imageSrc}
                 alt={card.imageAlt}
                 fill
-                className="object-cover"
+                className={
+                  card.imageSrc === "/tool2.png"
+                    ? "object-cover blur-xs scale-105 brightness-[0.92]"
+                    : "object-cover"
+                }
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 380px"
               />
+              {card.imageSrc === "/tool2.png" ? (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-full bg-black/35 px-4 py-6">
+                  <p className="mx-auto mt-2 max-w-[92%] text-left line-clamp-5 text-[11px] leading-relaxed text-white/90 sm:text-sm font-black">
+                  Modern Hillside Retreat with Scenic Views
+                    </p>
+                    <p className="mx-auto mt-2 max-w-[92%] text-left line-clamp-5 text-[11px] leading-relaxed text-white/90 sm:text-xs">
+                      Nestled amidst a lush, tranquil landscape, this contemporary home offers stunning views of the
+                      surrounding hills and sunsets over the horizon. Its sleek, black exterior is tastefully offset by
+                      warm, glowing lights that enhance its inviting charm. Inside, large windows draw in ample natural
+                      light, creating a bright and airy atmosphere perfect for relaxation or entertaining.
+                    </p>
+                  </div>
+                </div>
+              ) : null}
             </div>
             <div className="flex flex-col items-center px-6 pb-7 pt-6 text-center">
-              <span className="text-3xl leading-none mb-3" aria-hidden>
-                {card.emoji}
-              </span>
               <h3 className="text-lg font-bold text-gray-900 lg:text-xl">{card.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-black lg:text-[0.9375rem]">{card.description}</p>
               <Link

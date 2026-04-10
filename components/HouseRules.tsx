@@ -12,7 +12,8 @@ import Image from "next/image";
 import { Carousel, Typography, Button } from "@material-tailwind/react";
 import Link from "next/link";
 import { Footer } from "@/components/Footer";
-import { Clock, CheckCircle, ClipboardCheck, ArrowRight } from "lucide-react"
+import { Clock, CheckCircle, ClipboardCheck, ArrowRight, Camera } from "lucide-react";
+import { ToolPageShell } from "@/components/ToolPageShell";
 
 export default function HouseRules() {
 
@@ -166,7 +167,7 @@ export default function HouseRules() {
 
     try {
       // Make a POST request to the image analysis API
-      const response = await fetch("api/analyze-image", {
+      const response = await fetch("/api/analyze-image", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -234,7 +235,7 @@ export default function HouseRules() {
 
     try {
       // Make a POST request to the image analysis API
-      const response = await fetch("api/analyze-description", {
+      const response = await fetch("/api/analyze-description", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -408,228 +409,206 @@ export default function HouseRules() {
 
   return (
     <>
-    
-
-   
-        <>
-        <div className="max-w-4xl mx-auto p-6">
-      <div className="text-center mb-4">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4 text-[#FF385C]">Airbnb House Rules Generator</h1>
-
-        <p className="text-xl md:text-2xl text-gray-700 mb-8">
-          Create clear, professional house rules for your Airbnb listing in seconds
-        </p>
-
-        <div className="bg-gray-50 border border-gray-200 rounded-lg p-6 text-left">
-          <h2 className="text-2xl font-semibold mb-4 text-gray-800">
-            Set Clear Expectations with AI-Generated House Rules
-          </h2>
-
-          <p className="text-gray-700 mb-4">
-            Our Airbnb House Rules Generator analyzes your property photos to create customized, professional guidelines
-            that protect your space while maintaining a welcoming tone for guests.
-          </p>
-
-          <p className="text-gray-700 mb-4">
-            Stop struggling with what to include in your Airbnb listing's house rules. Our AI tool identifies important
-            elements in your property and generates appropriate rules that help prevent misunderstandings and property
-            damage.
-          </p>
-
-          <div className="mt-6 space-y-3">
-            <div className="flex items-start">
-              <div className="flex-shrink-0 h-5 w-5 text-[#FF385C]">
-                <ClipboardCheck className="h-5 w-5" />
-              </div>
-              <p className="ml-2 text-gray-700">
-                <strong>Property-specific rules</strong> based on your unique space and amenities
-              </p>
+      <Toaster />
+      <ToolPageShell
+        titleBefore="Airbnb House Rules"
+        titleAccent="Generator"
+        subtitle="Create clear, professional house rules for your Airbnb listing in seconds"
+        intro={
+          <>
+            <h2 className="mb-3 text-lg font-semibold text-gray-900 sm:text-xl">
+              Set Clear Expectations with AI-Generated House Rules
+            </h2>
+            <p className="mt-2 text-gray-700">
+              Our Airbnb House Rules Generator analyzes your property photos to create customized, professional guidelines
+              that protect your space while maintaining a welcoming tone for guests.
+            </p>
+            <p className="mt-2 text-gray-700">
+              Stop struggling with what to include in your Airbnb listing&apos;s house rules. Our AI tool identifies important
+              elements in your property and generates appropriate rules that help prevent misunderstandings and property
+              damage.
+            </p>
+            <div className="mt-4 space-y-3">
+              {[
+                <>
+                  <strong>Property-specific rules</strong> based on your unique space and amenities
+                </>,
+                <>
+                  <strong>Professional, friendly tone</strong> that sets boundaries without sounding harsh
+                </>,
+                <>
+                  <strong>Comprehensive coverage</strong> of noise policies, pet rules, smoking, and more
+                </>,
+                <>
+                  <strong>Copy-and-paste ready</strong> for immediate use in your Airbnb listing
+                </>,
+              ].map((bullet, i) => (
+                <div key={i} className="flex items-start gap-2">
+                  <ClipboardCheck className="mt-0.5 h-5 w-5 shrink-0 text-[#FF385C]" aria-hidden />
+                  <p className="text-gray-700">{bullet}</p>
+                </div>
+              ))}
             </div>
-
-            <div className="flex items-start">
-              <div className="flex-shrink-0 h-5 w-5 text-[#FF385C]">
-                <ClipboardCheck className="h-5 w-5" />
-              </div>
-              <p className="ml-2 text-gray-700">
-                <strong>Professional, friendly tone</strong> that sets boundaries without sounding harsh
-              </p>
+          </>
+        }
+      >
+        <div className="w-full flex-1 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm lg:p-8">
+          <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+            <div>
+              <h2 className="text-lg font-semibold text-gray-900 sm:text-xl">House Rules - Upload Images</h2>
             </div>
-
-            <div className="flex items-start">
-              <div className="flex-shrink-0 h-5 w-5 text-[#FF385C]">
-                <ClipboardCheck className="h-5 w-5" />
-              </div>
-              <p className="ml-2 text-gray-700">
-                <strong>Comprehensive coverage</strong> of noise policies, pet rules, smoking, and more
-              </p>
-            </div>
-
-            <div className="flex items-start">
-              <div className="flex-shrink-0 h-5 w-5 text-[#FF385C]">
-                <ClipboardCheck className="h-5 w-5" />
-              </div>
-              <p className="ml-2 text-gray-700">
-                <strong>Copy-and-paste ready</strong> for immediate use in your Airbnb listing
-              </p>
-            </div>
+            <FreeRewritesLeft freeRewritesLeft={freeRewritesLeft} />
           </div>
 
-        </div>
-      </div>
-    </div> 
-          <div className="flex items-center justify-center text-md  " id="generator">
-        
-        <div className="flex flex-wrap justify-between w-full max-w-8xl p-4 lg:p-10  ">
-          {/* Left Side: Uploaded Images and Form */}
-          <div className="w-full md:w-1/2  shadow-lg p-8 text-black mb-8 rounded-lg md:mb-0 border-solid border-4 border-white-400 ">
-            <h2 className="text-xl text-[#FF385C] font-bold mb-4">House Rules - Upload Images</h2>
-          
-            <FreeRewritesLeft freeRewritesLeft={freeRewritesLeft} />
-            {images.length > 0 ? (
-               <div className="flex flex-wrap mb-4">
-               {images.map((image, index) => (
-                 <div key={index} className="w-1/4 p-2">
-                   <img
-                     src={`data:image/jpeg;base64,${image}`}
-                     className="w-full object-contain max-h-32 mb-2"
-                     alt={`Uploaded Image ${index}`}
-                   />
-                 </div>
-               ))}
-             </div>
-            ) : (
-              <div className="mb-4 p-8 text-center">
-                <p>Once you upload images, you will see them here.</p>
-                <p>You need to upload at least 2 images.</p>
-              </div>
-            )}
+          {images.length > 0 ? (
+            <div className="mb-4 grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3">
+              {images.map((image, index) => (
+                <div
+                  key={index}
+                  className="relative aspect-[4/3] overflow-hidden rounded-lg border border-gray-200 bg-gray-100"
+                >
+                  <img
+                    src={`data:image/jpeg;base64,${image}`}
+                    className="h-full w-full object-cover"
+                    alt={`Upload ${index + 1}`}
+                  />
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="mb-4 rounded-xl border border-gray-100 bg-white px-4 py-6 text-center text-sm text-gray-500">
+              <p>Once you upload images, you will see them here.</p>
+              <p className="mt-1">You need to upload at least 2 images.</p>
+            </div>
+          )}
 
-            <form onSubmit={(e) => handleSubmit(e)}>
-              <div className="flex flex-col mb-6">
+          <form onSubmit={(e) => handleSubmit(e)} className="space-y-6">
+            <div>
+              <label className="flex cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed border-gray-200 bg-gray-50 px-4 py-8 transition-colors hover:border-gray-300 hover:bg-gray-100/60">
+                <Camera className="mb-2 h-8 w-8 text-gray-400" aria-hidden />
+                <span className="text-sm font-medium text-gray-800">Click to upload photos</span>
+                <span className="mt-1 text-xs text-gray-500">JPG or PNG · multiple files OK</span>
                 <input
                   type="file"
-                  className="text-sm border rounded-lg cursor-pointer"
+                  accept="image/*"
+                  className="sr-only"
                   onChange={(e) => handleFileChange(e)}
                   multiple
                 />
-              </div>
+              </label>
+            </div>
 
-              <div className="flex justify-center">
-          {auth.user ? (
-            // User is logged in
-            freeRewritesLeft && freeRewritesLeft > 0 ? (
-              // User has free rewrites left
-              <>
-               <style jsx>{`
-               .loader {
-                border: 16px solid #f3f3f3; /* Light grey */
-                border-top: 16px solid black; /* Blue */
-                border-radius: 50%;
-                width: 45px;
-                height: 45px;
-                animation: spin 2s linear infinite;
-              }
-              
-              @keyframes spin {
-                0% { transform: rotate(0deg); }
-                100% { transform: rotate(360deg); }
-              }
-                 `}</style>
-           
-           {submitting ? (
-        <div className="loader"></div>
-      ) : (
-        <button
-          type="submit"
-          className="sm:inline-block text-white px-3 text-md font-medium border-solid border-4 border-white-400 rounded-lg bg-[#FF385C] p-1 text-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 overflow-hidden whitespace-nowrap truncate"
-          disabled={submitting} // Disable the button when submitting
-        >
-          Generate Listing
-        </button>
-      )}
-              </>
-            ) : (
-              // User doesn't have free rewrites left
+            <div className="flex flex-col items-stretch gap-3 sm:items-center">
+              {auth.user ? (
+                freeRewritesLeft && freeRewritesLeft > 0 ? (
+                  submitting ? (
+                    <div
+                      className="mx-auto h-10 w-10 animate-spin rounded-full border-2 border-gray-200 border-t-[#FF385C]"
+                      aria-label="Generating"
+                    />
+                  ) : (
+                    <button
+                      type="submit"
+                      disabled={submitting}
+                      className="w-full rounded-xl bg-[#FF385C] px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#E31C5F] focus:outline-none focus:ring-2 focus:ring-[#FF385C] focus:ring-offset-2 disabled:opacity-60 sm:w-auto sm:min-w-[220px]"
+                    >
+                      Generate Listing
+                    </button>
+                  )
+                ) : (
+                  <button
+                    type="button"
+                    onClick={handleCheckout}
+                    className="w-full rounded-xl bg-[#FF385C] px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#E31C5F] focus:outline-none focus:ring-2 focus:ring-[#FF385C] focus:ring-offset-2 sm:w-auto sm:min-w-[220px]"
+                  >
+                    Buy Credits
+                  </button>
+                )
+              ) : (
+                <button
+                  type="button"
+                  onClick={handleGenerateListingClick}
+                  className="w-full rounded-xl bg-[#FF385C] px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#E31C5F] focus:outline-none focus:ring-2 focus:ring-[#FF385C] focus:ring-offset-2 sm:w-auto sm:min-w-[220px]"
+                >
+                  Generate Listing
+                </button>
+              )}
+            </div>
+          </form>
+        </div>
+
+        <div className="w-full flex-1 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm lg:sticky lg:top-24 lg:max-h-[calc(100vh-6rem)] lg:overflow-y-auto lg:p-8">
+          <div className="flex flex-col gap-1 border-b border-gray-100 pb-4 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <h2 className="text-lg font-semibold text-gray-900">House rules</h2>
+              <p className="text-xs text-gray-500">Generated copy appears below</p>
+            </div>
+            {openAIResponse ? (
               <button
                 type="button"
-                onClick={handleCheckout}
-                className="sm:inline-block text-white px-3 text-md font-medium border-solid border-4 border-white-400 rounded-lg bg-[#FF385C] p-1 text-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 overflow-hidden whitespace-nowrap truncate"
+                onClick={copyAIResponseToClipboard}
+                className="text-sm font-semibold text-[#E31C5F] hover:text-[#FF385C] hover:underline"
               >
-                Buy Credits
+                Copy all
               </button>
-            )
-          ) : (
-            // User is not logged in
-            <button type="button" onClick={handleGenerateListingClick} className="sm:inline-block text-white px-3 text-md font-medium border-solid border-4 border-white-400 rounded-lg bg-[#FF385C] p-1 text-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 overflow-hidden whitespace-nowrap truncate">
-              Generate Listing</button>
-          )}
-        </div>
-             
-            </form>
-            
+            ) : null}
           </div>
-         
 
-          {/* Right Side: AI Response */}
-          {openAIResponse !== "" && (
-  <div className="w-full md:w-1/2 border-solid border-t-4 border-r-4 border-b-4 border-white-400 rounded-lg shadow-md p-8 text-black">
-    <div className="border-t border-gray-300 pt-4">
-      <h2 className="text-xl font-bold mb-2">House Rules:</h2>
-      {submitting ? "Generating..." : ""}
-      <div>
-        {openAIResponse.split('\n').map((line, index) => {
-          if (line.startsWith("###")) {
-            return (
-              <div key={index} className="mb-4">
-                <strong>{line.replace(/#/g, "").trim()}</strong>
+          <div className="pt-5">
+            {submitting && !openAIResponse ? (
+              <div className="flex flex-col items-center justify-center gap-3 py-16 text-sm text-gray-500">
+                <div className="h-10 w-10 animate-spin rounded-full border-2 border-gray-200 border-t-[#FF385C]" />
+                Writing your house rules…
               </div>
-            );
-          } else if (line.startsWith("**")) {
-            return (
-              <div key={index} className="mb-4">
-                <strong>{line.replace(/\*/g, "").trim()}</strong>
-              </div>
-            );
-          } else {
-            return (
-              <div key={index} className="mb-4">
-                {line}
-              </div>
-            );
-          }
-        })}
-      </div>
-      <div className="flex justify-center mt-4">
-        <button
-          className="sm:inline-block text-black px-3 text-md font-medium border-solid border-4 border-white-400 rounded-lg bg-[#FF385C] p-1 text-black hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 overflow-hidden whitespace-nowrap truncate"
-          onClick={copyAIResponseToClipboard}
-        >
-          Copy Listing
-        </button>
-      </div>
-    </div>
-  </div>
-)}
+            ) : openAIResponse ? (
+              <>
+                <div className="space-y-3">
+                  {openAIResponse.split("\n").map((line, index) => {
+                    const t = line.trimEnd();
+                    if (!t.trim()) {
+                      return <div key={index} className="h-1" />;
+                    }
+                    if (t.startsWith("###")) {
+                      return (
+                        <h3
+                          key={index}
+                          className="text-xl font-bold leading-snug tracking-tight text-gray-900 sm:text-2xl"
+                        >
+                          {t.replace(/^#+\s*/, "").trim()}
+                        </h3>
+                      );
+                    }
+                    if (t.startsWith("**")) {
+                      return (
+                        <p key={index} className="text-sm font-semibold text-gray-900">
+                          {t.replace(/\*/g, "").trim()}
+                        </p>
+                      );
+                    }
+                    return (
+                      <p key={index} className="text-base leading-relaxed text-gray-700">
+                        {t}
+                      </p>
+                    );
+                  })}
+                </div>
+                <button
+                  type="button"
+                  onClick={copyAIResponseToClipboard}
+                  className="mt-8 w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm font-semibold text-gray-800 shadow-sm transition hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#FF385C]/30 sm:hidden"
+                >
+                  Copy listing
+                </button>
+              </>
+            ) : (
+              <p className="py-14 text-center text-sm leading-relaxed text-gray-500">
+                Upload photos and click <span className="font-medium text-gray-700">Generate Listing</span>—your house
+                rules will appear here.
+              </p>
+            )}
+          </div>
         </div>
-      </div>
-        </>
-      
-
-
-
-
-
-
-
-
-
-
-
-      
-        </>
-
-
-     
-   
+      </ToolPageShell>
+    </>
   );
 }

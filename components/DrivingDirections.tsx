@@ -14,7 +14,8 @@ import { Carousel, Typography, Button } from "@material-tailwind/react";
 import Link from "next/link";
 import { Footer } from "@/components/Footer";
 import { Clock, CheckCircle } from "lucide-react"
-import { ArrowRight, Map } from "lucide-react"
+import { ArrowRight, Map } from "lucide-react";
+import { ToolPageShell } from "@/components/ToolPageShell";
 
 export default function DrivingDirections() {
 
@@ -168,7 +169,7 @@ export default function DrivingDirections() {
 
     try {
       // Make a POST request to the image analysis API
-      const response = await fetch("api/analyze-image", {
+      const response = await fetch("/api/analyze-image", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -236,7 +237,7 @@ export default function DrivingDirections() {
 
     try {
       // Make a POST request to the image analysis API
-      const response = await fetch("api/analyze-description", {
+      const response = await fetch("/api/analyze-description", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -408,180 +409,162 @@ export default function DrivingDirections() {
   };
 
 
+  const addressFieldClass =
+    "mt-1 block w-full rounded-lg border border-gray-200 bg-white px-3 py-2.5 text-sm text-gray-900 outline-none transition-shadow focus:border-[#FF385C]/40 focus:ring-2 focus:ring-[#FF385C]/20";
+
   return (
     <>
-    
-          {/* Content for Location Generator */}
-          <div className="max-w-4xl mx-auto p-6">
-      <div className="text-center mb-4">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4 text-[#FF385C]">Driving Directions Generator</h1>
-
-        <p className="text-xl md:text-2xl text-gray-700 mb-8">
-          Create clear, detailed driving directions for your guests
-        </p>
-
-        <div className="bg-gray-50 border border-gray-200 rounded-lg p-6 text-left">
-          <h2 className="text-2xl font-semibold mb-4 text-gray-800">
-            Help Guests Find Your Property with Perfect Directions
-          </h2>
-
-          <p className="text-gray-700 mb-4">
-            Our Driving Directions Generator creates detailed, easy-to-follow instructions that guide your guests
-            directly to your property. Simply enter your address, and our AI will generate comprehensive directions that
-            you can add to your Airbnb listing.
-          </p>
-
-          <p className="text-gray-700 mb-4">
-            Reduce check-in frustrations and late arrivals by providing guests with clear navigation instructions,
-            landmark references, and helpful tips for finding your property easily.
-          </p>
-
-          <div className="mt-6 space-y-3">
-            <div className="flex items-start">
-              <div className="flex-shrink-0 h-5 w-5 text-[#FF385C]">
-                <Map className="h-5 w-5" />
-              </div>
-              <p className="ml-2 text-gray-700">
-                <strong>Step-by-step directions</strong> from major highways and nearby landmarks
-              </p>
+      <Toaster />
+      <ToolPageShell
+        titleBefore="Driving Directions"
+        titleAccent="Generator"
+        subtitle="Create clear, detailed driving directions for your guests"
+        intro={
+          <>
+            <h2 className="mb-3 text-lg font-semibold text-gray-900 sm:text-xl">
+              Help Guests Find Your Property with Perfect Directions
+            </h2>
+            <p className="mt-2 text-gray-700">
+              Our Driving Directions Generator creates detailed, easy-to-follow instructions that guide your guests
+              directly to your property. Simply enter your address, and our AI will generate comprehensive directions that
+              you can add to your Airbnb listing.
+            </p>
+            <p className="mt-2 text-gray-700">
+              Reduce check-in frustrations and late arrivals by providing guests with clear navigation instructions,
+              landmark references, and helpful tips for finding your property easily.
+            </p>
+            <div className="mt-4 space-y-3">
+              {[
+                <>
+                  <strong>Step-by-step directions</strong> from major highways and nearby landmarks
+                </>,
+                <>
+                  <strong>Parking instructions</strong> with clear guidance on where and how to park
+                </>,
+                <>
+                  <strong>Local navigation tips</strong> including potential GPS issues and shortcuts
+                </>,
+                <>
+                  <strong>Multiple transportation options</strong> including driving, public transit, and rideshare
+                </>,
+              ].map((bullet, i) => (
+                <div key={i} className="flex items-start gap-2">
+                  <Map className="mt-0.5 h-5 w-5 shrink-0 text-[#FF385C]" aria-hidden />
+                  <p className="text-gray-700">{bullet}</p>
+                </div>
+              ))}
             </div>
-
-            <div className="flex items-start">
-              <div className="flex-shrink-0 h-5 w-5 text-[#FF385C]">
-                <Map className="h-5 w-5" />
-              </div>
-              <p className="ml-2 text-gray-700">
-                <strong>Parking instructions</strong> with clear guidance on where and how to park
-              </p>
+          </>
+        }
+      >
+        <div className="w-full flex-1 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm lg:p-8">
+          <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+            <div>
+              <h2 className="text-lg font-semibold text-gray-900 sm:text-xl">Enter property address:</h2>
             </div>
-
-            <div className="flex items-start">
-              <div className="flex-shrink-0 h-5 w-5 text-[#FF385C]">
-                <Map className="h-5 w-5" />
-              </div>
-              <p className="ml-2 text-gray-700">
-                <strong>Local navigation tips</strong> including potential GPS issues and shortcuts
-              </p>
-            </div>
-
-            <div className="flex items-start">
-              <div className="flex-shrink-0 h-5 w-5 text-[#FF385C]">
-                <Map className="h-5 w-5" />
-              </div>
-              <p className="ml-2 text-gray-700">
-                <strong>Multiple transportation options</strong> including driving, public transit, and rideshare
-              </p>
-            </div>
+            <FreeRewritesLeft freeRewritesLeft={freeRewritesLeft} />
           </div>
 
-        </div>
-      </div>
-    </div>
-          <div className="flex items-center justify-center text-md  " id="generator">
-  <div className="flex flex-wrap justify-between w-full max-w-8xl p-4 lg:p-10">
-    {/* Left Side: Uploaded Images and Form */}
-    <div className="w-full md:w-1/2  shadow-lg p-8 text-black mb-8 rounded-lg md:mb-0 border-solid border-4 border-white-400">
-      <h2 className="text-xl text-[#FF385C] font-bold mb-4">Enter property address:</h2>
-      <FreeRewritesLeft freeRewritesLeft={freeRewritesLeft} />
-        <div className="flex flex-col mb-6 mt-3 ">
-        <input
-        type="text"
-        placeholder="35 Adams St, Newark, NJ"
-        value={factType}
-        onChange={handleInputChange}
-        style={{ marginBottom: '10px' }}
-        className="text-black border-4 border-white-400 rounded-xl p-2"
-      />
-        </div>
-        <div className="flex justify-center">
-          {auth.user ? (
-            // User is logged in
-            freeRewritesLeft && freeRewritesLeft > 0 ? (
-              // User has free rewrites left
-              <>
-               <style jsx>{`
-               .loader {
-                border: 16px solid #f3f3f3; /* Light grey */
-                border-top: 16px solid black; /* Blue */
-                border-radius: 50%;
-                width: 45px;
-                height: 45px;
-                animation: spin 2s linear infinite;
-              }
-              @keyframes spin {
-                0% { transform: rotate(0deg); }
-                100% { transform: rotate(360deg); }
-              }
-                 `}</style>
-           
-           {submitting ? (
-        <div className="loader"></div>
-      ) : (
-      
-        <button
-        className="sm:inline-block text-white px-3 text-md font-medium border-solid border-4 border-white-400 rounded-lg bg-[#FF385C] p-1 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 overflow-hidden whitespace-nowrap truncate"
-        onClick={fetchRandomFact}
-        disabled={loading || submitting}
-      >
-        {loading ? 'Loading...' : 'Get Directions'}
-      </button>
-      )}
-              </>
+          <label htmlFor="driving-address" className="text-sm font-medium text-gray-800">
+            Address
+          </label>
+          <input
+            id="driving-address"
+            type="text"
+            placeholder="35 Adams St, Newark, NJ"
+            value={factType}
+            onChange={handleInputChange}
+            className={addressFieldClass}
+          />
+
+          <div className="mt-6 flex flex-col items-stretch gap-3 sm:items-center">
+            {auth.user ? (
+              freeRewritesLeft && freeRewritesLeft > 0 ? (
+                submitting || loading ? (
+                  <div
+                    className="mx-auto h-10 w-10 animate-spin rounded-full border-2 border-gray-200 border-t-[#FF385C]"
+                    aria-label="Loading"
+                  />
+                ) : (
+                  <button
+                    type="button"
+                    className="w-full rounded-xl bg-[#FF385C] px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#E31C5F] focus:outline-none focus:ring-2 focus:ring-[#FF385C] focus:ring-offset-2 sm:w-auto sm:min-w-[220px]"
+                    onClick={fetchRandomFact}
+                    disabled={loading || submitting}
+                  >
+                    Get Directions
+                  </button>
+                )
+              ) : (
+                <button
+                  type="button"
+                  onClick={handleCheckout}
+                  className="w-full rounded-xl bg-[#FF385C] px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#E31C5F] focus:outline-none focus:ring-2 focus:ring-[#FF385C] focus:ring-offset-2 sm:w-auto sm:min-w-[220px]"
+                >
+                  Buy Credits
+                </button>
+              )
             ) : (
-              // User doesn't have free rewrites left
               <button
                 type="button"
-                onClick={handleCheckout}
-                className="sm:inline-block text-white px-3 text-md font-medium border-solid border-4 border-white-400 rounded-lg bg-[#FF385C] p-1 text-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 overflow-hidden whitespace-nowrap truncate"
+                onClick={handleGenerateListingClick}
+                className="w-full rounded-xl bg-[#FF385C] px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#E31C5F] focus:outline-none focus:ring-2 focus:ring-[#FF385C] focus:ring-offset-2 sm:w-auto sm:min-w-[220px]"
               >
-                Buy Credits
+                Generate Listing
               </button>
-            )
-          ) : (
-            // User is not logged in
-            <button type="button" onClick={handleGenerateListingClick} className="sm:inline-block text-white px-3 text-md font-medium border-solid border-4 border-white-400 rounded-lg bg-[#FF385C] p-1 text-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 overflow-hidden whitespace-nowrap truncate">
-              Generate Listing</button>
-          )}
-        </div>
-             
-            
+            )}
           </div>
-         
+        </div>
 
-          
-          {openAIResponse === "" && (
-  <div className="w-full md:w-1/2 border-solid border-t-4 border-r-4 border-b-4 border-white-400 rounded-lg shadow-md p-8 text-black">
-    <h2 className="text-xl text-[#FF385C] font-bold mb-2">Directions Instructions:</h2>
-    {submitting ? "Generating..." : ""}
-    <div>
-      {fact && (
-        <div className="border-t border-gray-300 pt-4">
-          <div>
-            {/* Split the fact into multiple instructions and display each */}
-            {fact.split('\n').map((instruction, index) => (
-              <div key={index} className="mt-4">
-                <p className="text-black">{instruction}</p>
+        <div className="w-full flex-1 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm lg:sticky lg:top-24 lg:max-h-[calc(100vh-6rem)] lg:overflow-y-auto lg:p-8">
+          <div className="flex flex-col gap-1 border-b border-gray-100 pb-4 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <h2 className="text-lg font-semibold text-gray-900">Directions instructions</h2>
+              <p className="text-xs text-gray-500">Generated steps appear below</p>
+            </div>
+            {openAIResponse === "" && fact ? (
+              <button
+                type="button"
+                onClick={copyFactToClipboard}
+                className="text-sm font-semibold text-[#E31C5F] hover:text-[#FF385C] hover:underline"
+              >
+                Copy directions
+              </button>
+            ) : null}
+          </div>
+
+          <div className="pt-5">
+            {openAIResponse !== "" ? null : loading && !fact ? (
+              <div className="flex flex-col items-center justify-center gap-3 py-16 text-sm text-gray-500">
+                <div className="h-10 w-10 animate-spin rounded-full border-2 border-gray-200 border-t-[#FF385C]" />
+                Generating directions…
               </div>
-            ))}
+            ) : fact ? (
+              <>
+                <div className="space-y-4">
+                  {fact.split("\n").map((instruction, index) => (
+                    <p key={index} className="text-base leading-relaxed text-gray-700">
+                      {instruction}
+                    </p>
+                  ))}
+                </div>
+                <button
+                  type="button"
+                  onClick={copyFactToClipboard}
+                  className="mt-8 w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm font-semibold text-gray-800 shadow-sm transition hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#FF385C]/30 sm:hidden"
+                >
+                  Copy directions
+                </button>
+              </>
+            ) : (
+              <p className="py-14 text-center text-sm leading-relaxed text-gray-500">
+                Enter an address and click <span className="font-medium text-gray-700">Get Directions</span>—steps will
+                appear here.
+              </p>
+            )}
           </div>
         </div>
-      )}
-    </div>
-    <div className="flex justify-center mt-4">
-      <button
-        className="sm:inline-block text-white px-3 text-md font-medium border-solid border-4 border-white-400 rounded-lg bg-[#FF385C] p-1 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 overflow-hidden whitespace-nowrap truncate"
-        onClick={copyFactToClipboard}
-      >
-        Copy Directions
-      </button>
-    </div>
-  </div>
-)}
-        </div>
-      </div>
-      
-        </>
-
-
+      </ToolPageShell>
+    </>
   );
 }

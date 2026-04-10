@@ -1,22 +1,17 @@
 
 "use client";
-import Navbar from "@/components/Navbar";
 import { ChangeEvent, useState, useEffect, FormEvent } from "react";
 import { Toaster, toast } from "react-hot-toast";
 import { useAuth } from "../context/AuthContext";
-import { loadStripe } from '@stripe/stripe-js';
+import { loadStripe } from "@stripe/stripe-js";
 import FreeRewritesLeft from "../components/FreeRewritesLeft";
-import { updateDoc, getDoc, doc } from "firebase/firestore"; 
+import { ToolPageShell } from "@/components/ToolPageShell";
+import { updateDoc, getDoc, doc } from "firebase/firestore";
 import { db } from "../config/firebase";
-import axios from "axios"
-import Image from "next/image";
-import { Carousel, Typography, Button } from "@material-tailwind/react";
-import Link from "next/link";
-import { Footer } from "@/components/Footer";
-import imageCompression from "browser-image-compression"; // Import the compression library
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { storage } from "../config/firebase"; // assuming you've exported storage in firebase config
-import { ArrowRight } from "lucide-react"
+import imageCompression from "browser-image-compression";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { storage } from "../config/firebase";
+import { Camera } from "lucide-react";
 
 
 export default function InstantListing() {
@@ -135,7 +130,7 @@ export default function InstantListing() {
     setLoadingResponse(true); // Start loading
 
     try {
-      const response = await fetch("api/gpt4o", {
+      const response = await fetch("/api/gpt4o", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -245,393 +240,313 @@ export default function InstantListing() {
     } 
   };
 
+  const fieldClass =
+    "mt-1 block w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 outline-none transition-shadow focus:border-[#FF385C]/40 focus:ring-2 focus:ring-[#FF385C]/20";
+
   return (
     <>
       <Toaster />
-      <div className="max-w-4xl mx-auto p-6">
-      <div className="text-center mb-4">
-        <h1 className="text-4xl md:text-6xl font-bold mb-4 mt-4 text-[#FF385C]">Airbnb Listing Generator</h1>
-
-        <p className="text-xl md:text-2xl text-gray-700 mb-8">
-          Create professional, high-converting Airbnb listings in seconds with AI
-        </p>
-
-        <div className="bg-gray-50 border border-gray-200 rounded-lg p-6 text-left">
-          <h2 className="text-2xl font-semibold mb-4 text-gray-800">
-            Transform Your Property Photos Into Perfect Airbnb Listings
-          </h2>
-          <div className="mt-6 space-y-3">
-            <div className="flex items-start">
-              <div className="flex-shrink-0 h-5 w-5 text-[#FF385C]">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                  <path
-                    fillRule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </div>
-              <p className="ml-2 text-gray-700">
-                <strong>SEO-optimized titles</strong> that increase visibility in Airbnb search results
+      <ToolPageShell
+        titleBefore="Airbnb Listing"
+        titleAccent="Generator"
+        subtitle="Create professional, high-converting Airbnb listings in seconds with AI"
+        intro={
+          <>
+            <h2 className="mb-3 text-lg font-semibold text-gray-900 sm:text-xl">
+              Transform Your Property Photos Into Perfect Airbnb Listings
+            </h2>
+            <div className="mt-2 space-y-3">
+              {[
+                <>
+                  <strong>SEO-optimized titles</strong> that increase visibility in Airbnb search results
+                </>,
+                <>
+                  <strong>Compelling property descriptions</strong> that showcase your space&apos;s unique features
+                </>,
+                <>
+                  <strong>Professional house rules</strong> and guest information sections
+                </>,
+                <>
+                  <strong>Local area highlights</strong> to help guests discover nearby attractions
+                </>,
+                <>
+                  <strong>Room-by-room descriptions</strong> with accurate details from your photos
+                </>,
+              ].map((text, i) => (
+                <div key={i} className="flex items-start gap-2">
+                  <div className="mt-0.5 h-5 w-5 shrink-0 text-[#FF385C]" aria-hidden>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                  <p className="text-gray-700">{text}</p>
+                </div>
+              ))}
+            </div>
+          </>
+        }
+      >
+        <div className="w-full flex-1 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm lg:p-8">
+          <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+            <div>
+              <h2 className="text-lg font-semibold text-gray-900 sm:text-xl">Upload Images</h2>
+              <p className="mt-1 text-sm text-gray-500">
+                Please upload a minimum of 2 images and a maximum of 10 images for better results.
               </p>
             </div>
-
-            <div className="flex items-start">
-              <div className="flex-shrink-0 h-5 w-5 text-[#FF385C]">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                  <path
-                    fillRule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </div>
-              <p className="ml-2 text-gray-700">
-                <strong>Compelling property descriptions</strong> that showcase your space's unique features
-              </p>
-            </div>
-
-            <div className="flex items-start">
-              <div className="flex-shrink-0 h-5 w-5 text-[#FF385C]">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                  <path
-                    fillRule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </div>
-              <p className="ml-2 text-gray-700">
-                <strong>Professional house rules</strong> and guest information sections
-              </p>
-            </div>
-
-            <div className="flex items-start">
-              <div className="flex-shrink-0 h-5 w-5 text-[#FF385C]">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                  <path
-                    fillRule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </div>
-              <p className="ml-2 text-gray-700">
-                <strong>Local area highlights</strong> to help guests discover nearby attractions
-              </p>
-            </div>
-
-            <div className="flex items-start">
-              <div className="flex-shrink-0 h-5 w-5 text-[#FF385C]">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                  <path
-                    fillRule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </div>
-              <p className="ml-2 text-gray-700">
-              <strong>Room-by-room descriptions</strong> with accurate details from your photos
-              </p>
-            </div>
+            <FreeRewritesLeft freeRewritesLeft={freeRewritesLeft} />
           </div>
-        </div>
-      </div>
-    </div>
-      <div className="h-screen">
-        <div className="flex items-center justify-center text-md" id="generator">
-          <div className="flex flex-wrap justify-between w-full max-w-8xl p-4 lg:p-10">
-            {/* Left Side: Uploaded Images and Form */}
-            <div className="w-full md:w-1/2 shadow-lg p-8 text-black mb-8 rounded-lg md:mb-0 border border-gray-300 bg-white">
-              <h2 className="text-xl text-[#FF385C] font-bold mb-4">Upload Images</h2>
-              <p className="text-sm text-gray-600 mb-4">Please upload a minimum of 2 images and a maximum of 10 images for better results.</p>
 
-              <FreeRewritesLeft freeRewritesLeft={freeRewritesLeft} />
+          <div className="mb-4">
+            <label htmlFor="placeDescription" className="text-sm font-medium text-gray-800">
+              Which of these best describes your place?
+            </label>
+            <select
+              id="placeDescription"
+              value={placeDescription}
+              onChange={(e) => setPlaceDescription(e.target.value)}
+              className={fieldClass}
+            >
+              <option value="">Select a description</option>
+              <option value="House">House</option>
+              <option value="Apartment">Apartment</option>
+              <option value="Barn">Barn</option>
+              <option value="Cabin">Cabin</option>
+              <option value="Farm">Farm</option>
+              <option value="Hotel">Hotel</option>
+            </select>
+          </div>
 
-              {/* Dropdown for place description */}
-              <div className="mb-4 mt-4">
-                <label htmlFor="placeDescription" className="block text-md font-medium text-gray-700">Which of these best describes your place?</label>
+          <div className="mb-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
+            {(
+              [
+                ["numGuests", "Guests", numGuests, setNumGuests] as const,
+                ["numBedrooms", "Bedrooms", numBedrooms, setNumBedrooms] as const,
+                ["numBeds", "Beds", numBeds, setNumBeds] as const,
+                ["numBathrooms", "Bathrooms", numBathrooms, setNumBathrooms] as const,
+              ] as const
+            ).map(([id, label, value, setter]) => (
+              <div key={id}>
+                <label htmlFor={id} className="text-sm font-medium text-gray-800">
+                  {label}
+                </label>
                 <select
-                  id="placeDescription"
-                  value={placeDescription}
-                  onChange={(e) => setPlaceDescription(e.target.value)}
-                  className="mt-1 block w-full border border-gray-300 p-1 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-blue-500"
+                  id={id}
+                  value={value}
+                  onChange={(e) => setter(e.target.value)}
+                  className={fieldClass}
                 >
-                  <option value="">Select a description</option>
-                  <option value="House">House</option>
-                  <option value="Apartment">Apartment</option>
-                  <option value="Barn">Barn</option>
-                  <option value="Cabin">Cabin</option>
-                  <option value="Farm">Farm</option>
-                  <option value="Hotel">Hotel</option>
+                  {Array.from({ length: 6 }, (_, i) => (
+                    <option key={i + 1} value={i + 1}>
+                      {i + 1}
+                    </option>
+                  ))}
+                  <option value="6+">6+</option>
                 </select>
               </div>
+            ))}
+          </div>
 
-              {/* Inputs for number of guests, bedrooms, beds, and bathrooms */}
-              <div className="grid grid-cols-4 gap-4 mb-4">
-                <div>
-                  <label htmlFor="numGuests" className="block text-md font-medium text-gray-700">Guests</label>
-                  <select
-                    id="numGuests"
-                    value={numGuests}
-                    onChange={(e) => setNumGuests(e.target.value)}
-                    className="mt-1 block w-full border p-1 border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-blue-500"
-                  >
-                    {Array.from({ length: 6 }, (_, i) => (
-                      <option key={i + 1} value={i + 1}>{i + 1}</option>
-                    ))}
-                    <option value="6+">6+</option>
-                  </select>
-                </div>
-                <div>
-                  <label htmlFor="numBedrooms" className="block text-md font-medium text-gray-700">Bedrooms</label>
-                  <select
-                    id="numBedrooms"
-                    value={numBedrooms}
-                    onChange={(e) => setNumBedrooms(e.target.value)}
-                    className="mt-1 block w-full border p-1 border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-blue-500"
-                  >
-                    {Array.from({ length: 6 }, (_, i) => (
-                      <option key={i + 1} value={i + 1}>{i + 1}</option>
-                    ))}
-                    <option value="6+">6+</option>
-                  </select>
-                </div>
-                <div>
-                  <label htmlFor="numBeds" className="block text-md font-medium text-gray-700">Beds</label>
-                  <select
-                    id="numBeds"
-                    value={numBeds}
-                    onChange={(e) => setNumBeds(e.target.value)}
-                    className="mt-1 block w-full border p-1 border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-blue-500"
-                  >
-                    {Array.from({ length: 6 }, (_, i) => (
-                      <option key={i + 1} value={i + 1}>{i + 1}</option>
-                    ))}
-                    <option value="6+">6+</option>
-                  </select>
-                </div>
-                <div>
-                  <label htmlFor="numBathrooms" className="block text-md font-medium text-gray-700">Bathrooms</label>
-                  <select
-                    id="numBathrooms"
-                    value={numBathrooms}
-                    onChange={(e) => setNumBathrooms(e.target.value)}
-                    className="mt-1 block w-full border p-1 border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-blue-500"
-                  >
-                    {Array.from({ length: 6 }, (_, i) => (
-                      <option key={i + 1} value={i + 1}>{i + 1}</option>
-                    ))}
-                    <option value="6+">6+</option>
-                  </select>
-                </div>
-              </div>
+          <div className="mb-4">
+            <label htmlFor="contactInfo" className="text-sm font-medium text-gray-800">
+              Contact information
+            </label>
+            <input
+              type="text"
+              id="contactInfo"
+              value={contactInfo}
+              onChange={(e) => setContactInfo(e.target.value)}
+              placeholder="example@gmail.com, +1 973-757-4890, WhatsApp, Airbnb chat"
+              className={fieldClass}
+            />
+          </div>
 
-              {/* Input for contact information */}
-              <div className="mb-4">
-                <label htmlFor="contactInfo" className="block text-md font-medium text-gray-700">Contact Information</label>
+          <div className="mb-4">
+            <label htmlFor="optionalAddress" className="text-sm font-medium text-gray-800">
+              Address
+            </label>
+            <input
+              type="text"
+              id="optionalAddress"
+              value={optionalAddress}
+              onChange={(e) => setOptionalAddress(e.target.value)}
+              placeholder="573 Broadway Ave, New York"
+              className={fieldClass}
+            />
+          </div>
+
+          {loadingImages ? (
+            <div className="mb-4 flex items-center justify-center gap-3 py-4 text-sm text-gray-600">
+              <div
+                className="h-10 w-10 animate-spin rounded-full border-2 border-gray-200 border-t-[#FF385C]"
+                aria-hidden
+              />
+              Uploading images…
+            </div>
+          ) : null}
+
+          {images.length > 0 ? (
+            <div className="mb-4 grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3">
+              {images.map((image, index) => (
+                <div
+                  key={index}
+                  className="relative aspect-[4/3] overflow-hidden rounded-lg border border-gray-200 bg-gray-100"
+                >
+                  <img src={image} className="h-full w-full object-cover" alt={`Upload ${index + 1}`} />
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="mb-4 rounded-xl border border-gray-100 bg-white px-4 py-6 text-center text-sm text-gray-500">
+              <p>Once you upload images, you will see them here.</p>
+              <p className="mt-1">You need to upload at least 2 images.</p>
+            </div>
+          )}
+
+          <form onSubmit={(e) => handleSubmitDescription(e)} className="space-y-6">
+            <div>
+              <label className="flex cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed border-gray-200 bg-gray-50 px-4 py-8 transition-colors hover:border-gray-300 hover:bg-gray-100/60">
+                <Camera className="mb-2 h-8 w-8 text-gray-400" aria-hidden />
+                <span className="text-sm font-medium text-gray-800">Click to upload photos</span>
+                <span className="mt-1 text-xs text-gray-500">JPG or PNG · multiple files OK</span>
                 <input
-                  type="text"
-                  id="contactInfo"
-                  value={contactInfo}
-                  onChange={(e) => setContactInfo(e.target.value)}
-                  placeholder="example@gmail.com, +1 973-757-4890, WhatsApp, Airbnb chat"
-                  className="mt-1 block w-full border p-1 border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-blue-500"
+                  type="file"
+                  accept="image/*"
+                  className="sr-only"
+                  onChange={(e) => handleFileChange(e)}
+                  multiple
                 />
-              </div>
-
-              {/* Input for optional address */}
-              <div className="mb-4">
-                <label htmlFor="optionalAddress" className="block text-md font-medium text-gray-700">Address</label>
-                <input
-                  type="text"
-                  id="optionalAddress"
-                  value={optionalAddress}
-                  onChange={(e) => setOptionalAddress(e.target.value)}
-                  placeholder="573 Broadway Ave, New York"
-                  className="mt-1 block w-full border p-1 border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-blue-500"
-                />
-              </div>
-
-              {/* Show loading state for image uploads */}
-              
-              {/* Show loading state for image uploads */}
-              {loadingImages && (
-                <div className="flex justify-center items-center">
-                  <style jsx>{`
-                    .loader {
-                      border: 8px solid #f3f3f3; /* Light grey */
-                      border-top: 8px solid black; /* Black */
-                      border-radius: 50%;
-                      width: 45px;
-                      height: 45px;
-                      animation: spin 1s linear infinite;
-                    }
-                    @keyframes spin {
-                      0% { transform: rotate(0deg); }
-                      100% { transform: rotate(360deg); }
-                    }
-                  `}</style>
-                  <div className="loader mr-2"></div>
-                  <span>Uploading images...</span>
-                </div>
-              )}
-
-              {images.length > 0 ? (
-                <div className="flex flex-wrap mb-4">
-                  {images.map((image, index) => (
-                    <div key={index} className="w-1/4 p-2">
-                      <img
-                        src={image}
-                        className="w-full object-contain max-h-32 mb-2"
-                        alt={`Uploaded Image ${index}`}
-                      />
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <div className="mb-4 p-8 text-center">
-                  <p>Once you upload images, you will see them here.</p>
-                  <p>You need to upload at least 2 images.</p>
-                </div>
-              )}
-
-              <form onSubmit={(e) => handleSubmitDescription(e)}>
-                <div className="flex flex-col mb-6">
-                  <input
-                    type="file"
-                    className="text-sm border rounded-lg cursor-pointer"
-                    onChange={(e) => handleFileChange(e)}
-                    multiple
-                  />
-                </div>
-
-                <div className="flex justify-center">
-                  {auth.user ? (
-                    freeRewritesLeft && freeRewritesLeft > 0 ? (
-                      <>
-                        <style jsx>{`
-                          .loader {
-                            border: 16px solid #f3f3f3; /* Light grey */
-                            border-top: 16px solid black; /* Blue */
-                            border-radius: 50%;
-                            width: 45px;
-                            height: 45px;
-                            animation: spin 2s linear infinite;
-                          }
-                          @keyframes spin {
-                            0% { transform: rotate(0deg); }
-                            100% { transform: rotate(360deg); }
-                          }
-                        `}</style>
-
-                        {submitting ? (
-                          <div className="loader"></div>
-                        ) : (
-                          <button
-                            type="submit"
-                            className="sm:inline-block text-white px-3 text-md font-medium border-solid border-4 border-white-400 rounded-lg bg-[#FF385C] p-1 text-white hover:hover:bg-[#E04E5A] focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 overflow-hidden whitespace-nowrap truncate"
-                            disabled={submitting || loadingImages || images.length === 0} // Disable if submitting or loading images
-                          >
-                            Generate Listing
-                          </button>
-                        )}
-                      </>
-                    ) : (
-                      <button
-                        type="button"
-                        onClick={handleCheckout}
-                        className="sm:inline-block text-white px-3 text-md font-medium border-solid border-4 border-white-400 rounded-lg bg-[#FF385C] p-1 text-white hover:hover:bg-[#E04E5A] focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 overflow-hidden whitespace-nowrap truncate"
-                      >
-                        Buy Credits
-                      </button>
-                    )
-                  ) : (
-                    <button type="button" onClick={handleGenerateListingClick} className="sm:inline-block text-white px-3 text-md font-medium border-solid border-4 border-white-400 rounded-lg bg-[#FF385C] p-1 text-white hover:hover:bg-[#E04E5A] focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 overflow-hidden whitespace-nowrap truncate">
-                      Generate Listing
-                    </button>
-                  )}
-                </div>
-              </form>
+              </label>
             </div>
 
-            {/* Right Side: AI Response */}
-            {loadingResponse ? (
-              <div className="flex justify-center items-center">
-                <style jsx>{`
-                  .loader {
-                    border: 8px solid #f3f3f3; /* Light grey */
-                    border-top: 8px solid black; /* Black */
-                    border-radius: 50%;
-                    width: 45px;
-                    height: 45px;
-                    animation: spin 1s linear infinite;
-                  }
-                  @keyframes spin {
-                    0% { transform: rotate(0deg); }
-                    100% { transform: rotate(360deg); }
-                  }
-                `}</style>
-                <div className="loader mr-1"></div>
-                <span className="text-black font-semibold mr-40">Generating Listing...</span>
+            <div className="flex flex-col items-stretch gap-3 sm:items-center">
+              {auth.user ? (
+                freeRewritesLeft && freeRewritesLeft > 0 ? (
+                  submitting ? (
+                    <div
+                      className="mx-auto h-10 w-10 animate-spin rounded-full border-2 border-gray-200 border-t-[#FF385C]"
+                      aria-label="Generating"
+                    />
+                  ) : (
+                    <button
+                      type="submit"
+                      disabled={submitting || loadingImages || images.length === 0}
+                      className="w-full rounded-xl bg-[#FF385C] px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#E31C5F] focus:outline-none focus:ring-2 focus:ring-[#FF385C] focus:ring-offset-2 disabled:opacity-60 sm:w-auto sm:min-w-[220px]"
+                    >
+                      Generate Listing
+                    </button>
+                  )
+                ) : (
+                  <button
+                    type="button"
+                    onClick={handleCheckout}
+                    className="w-full rounded-xl bg-[#FF385C] px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#E31C5F] focus:outline-none focus:ring-2 focus:ring-[#FF385C] focus:ring-offset-2 sm:w-auto sm:min-w-[220px]"
+                  >
+                    Buy Credits
+                  </button>
+                )
+              ) : (
+                <button
+                  type="button"
+                  onClick={handleGenerateListingClick}
+                  className="w-full rounded-xl bg-[#FF385C] px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#E31C5F] focus:outline-none focus:ring-2 focus:ring-[#FF385C] focus:ring-offset-2 sm:w-auto sm:min-w-[220px]"
+                >
+                  Generate Listing
+                </button>
+              )}
+            </div>
+          </form>
+        </div>
+
+        <div className="w-full flex-1 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm lg:sticky lg:top-24 lg:max-h-[calc(100vh-6rem)] lg:overflow-y-auto lg:p-8">
+          <div className="flex flex-col gap-1 border-b border-gray-100 pb-4 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <h2 className="text-lg font-semibold text-gray-900">Property listing</h2>
+              <p className="text-xs text-gray-500">Tap a section to copy that block</p>
+            </div>
+            {openAIResponse ? (
+              <button
+                type="button"
+                onClick={copyAIResponseToClipboard}
+                className="text-sm font-semibold text-[#E31C5F] hover:text-[#FF385C] hover:underline"
+              >
+                Copy all
+              </button>
+            ) : null}
+          </div>
+
+          <div className="pt-5">
+            {loadingResponse && !openAIResponse ? (
+              <div className="flex flex-col items-center justify-center gap-3 py-16 text-sm text-gray-500">
+                <div className="h-10 w-10 animate-spin rounded-full border-2 border-gray-200 border-t-[#FF385C]" />
+                Generating listing…
               </div>
-            ) : (
-              openAIResponse !== "" && (
-                <div className="w-full md:w-1/2 border border-gray-300 rounded-lg shadow-md p-8 bg-[#F7F7F7]">
-                  <div className="border-t border-gray-300 pt-4">
-                    <h2 className="text-xl text-black font-bold mb-4">Property Listing:</h2>
-                    {submitting ? "Generating..." : ""}
-                    <div>
-                      {/* Split the response into sections */}
-                      {(() => {
-                        const sections = openAIResponse.split("\n\n");
-                        const filteredSections = sections.filter(
-                          (section) =>
-                            section.trim() !== "" && // Remove empty sections
-                            !section.trim().startsWith("---") // Remove rows with only "---"
-                        );
+            ) : openAIResponse ? (
+              <>
+                <div>
+                  {(() => {
+                    const sections = openAIResponse.split("\n\n");
+                    const filteredSections = sections.filter(
+                      (section) => section.trim() !== "" && !section.trim().startsWith("---")
+                    );
 
-                        return (
-                          <>
-                            {filteredSections.map((section, index) => {
-                              const titleMatch = section.match(/^(###|\*\*)?\s*(Title|Description|House Rules|Image Descriptions|Contact Information|How to Get There|Sample Cancellation Policy|Amenities|Nearby Activities|Property Description|Number of Guests|Number of Bedrooms|Number of Beds|Number of Bathrooms|Activities Nearby):?/i);
-                              const title = titleMatch ? titleMatch[0].replace(/#/g, "").replace(/\*/g, "").replace(/:/g, "").trim() : null; // Set to null if not found
-                              const content = titleMatch ? section.replace(titleMatch[0], "").replace(/\*/g, "").trim() : section.replace(/\*/g, "").trim();
+                    return (
+                      <>
+                        {filteredSections.map((section, index) => {
+                          const titleMatch = section.match(
+                            /^(###|\*\*)?\s*(Title|Description|House Rules|Image Descriptions|Contact Information|How to Get There|Sample Cancellation Policy|Amenities|Nearby Activities|Property Description|Number of Guests|Number of Bedrooms|Number of Beds|Number of Bathrooms|Activities Nearby):?/i
+                          );
+                          const title = titleMatch
+                            ? titleMatch[0].replace(/#/g, "").replace(/\*/g, "").replace(/:/g, "").trim()
+                            : null;
+                          const content = titleMatch
+                            ? section.replace(titleMatch[0], "").replace(/\*/g, "").trim()
+                            : section.replace(/\*/g, "").trim();
 
-                              if (title) {
-                                return (
-                                  <div key={index} className="mb-6">
-                                    <h3 className="text-lg font-semibold mb-2 text-[#484848]">
-                                      <strong>{title}</strong>
-                                    </h3>
-                                    <div
-                                      className="p-4 bg-white rounded-lg border border-[#FF5A5F] hover:bg-[#F7F7F7] hover:text-white transition-colors cursor-pointer"
-                                      onClick={() => {
-                                        navigator.clipboard.writeText(content); // Copy only the content
-                                        toast.success(`Copied ${title || "section"} content to clipboard!`, {
-                                          icon: "✂️",
-                                        });
-                                      }}
-                                    >
-                                      <pre className="whitespace-pre-wrap text-gray-700 font-sans">{content}</pre>
-                                    </div>
-                                  </div>
-                                );
-                              }
-                              return null; // Skip rendering if title is null
-                            })}
-                          </>
-                        );
-                      })()}
-                    </div>
-                  </div>
+                          if (title) {
+                            return (
+                              <div key={index} className="mb-5">
+                                <h3 className="mb-2 text-base font-semibold text-gray-900">{title}</h3>
+                                <button
+                                  type="button"
+                                  className="w-full rounded-xl border border-gray-200 bg-gray-50/80 p-4 text-left text-sm text-gray-700 transition hover:border-[#FF385C]/30 hover:bg-white focus:outline-none focus:ring-2 focus:ring-[#FF385C]/20"
+                                  onClick={() => {
+                                    navigator.clipboard.writeText(content);
+                                    toast.success(`Copied ${title} to clipboard!`, { icon: "✂️" });
+                                  }}
+                                >
+                                  <pre className="whitespace-pre-wrap font-sans">{content}</pre>
+                                </button>
+                              </div>
+                            );
+                          }
+                          return null;
+                        })}
+                      </>
+                    );
+                  })()}
                 </div>
-              )
+                <button
+                  type="button"
+                  onClick={copyAIResponseToClipboard}
+                  className="mt-6 w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm font-semibold text-gray-800 shadow-sm transition hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#FF385C]/30 sm:hidden"
+                >
+                  Copy listing
+                </button>
+              </>
+            ) : (
+              <p className="py-14 text-center text-sm leading-relaxed text-gray-500">
+                Upload photos, fill in the details, and click{" "}
+                <span className="font-medium text-gray-700">Generate Listing</span>—sections will appear here.
+              </p>
             )}
           </div>
         </div>
-      </div>
+      </ToolPageShell>
     </>
   );
 }

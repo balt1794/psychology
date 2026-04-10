@@ -16,10 +16,8 @@ const FreeRewritesLeft: React.FC<FreeRewritesLeftProps> = ({ freeRewritesLeft })
   };
 
   return (
-    <div className="flex items-center">
-      <div className={`px-2 py-1 bg-[#FF385C] rounded border border-white rounded text-sm font-bold text-white`}>
-        Credits: {renderCredits()}
-      </div>
+    <div className="inline-flex items-center rounded-md border border-[#FF385C]/25 bg-[#FF385C]/10 px-3 py-1 text-md font-semibold text-black">
+      Credits: {renderCredits()}
     </div>
   );
 };
