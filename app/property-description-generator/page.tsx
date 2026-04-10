@@ -1,4 +1,5 @@
 import PropertyDescription from '@/components/PropertyDescription';
+import { RelatedToolsCards } from '@/components/RelatedToolsCards';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -9,6 +10,9 @@ export const metadata: Metadata = {
 
 export default function PropertyDescriptionGenerator () {
   return (
-    <PropertyDescription/>
-);
+    <>
+      <PropertyDescription/>
+      <RelatedToolsCards currentTool="property-description-generator" />
+    </>
+  );
 }

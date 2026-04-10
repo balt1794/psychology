@@ -1,4 +1,5 @@
 import HouseRules from '@/components/HouseRules';
+import { RelatedToolsCards } from '@/components/RelatedToolsCards';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -9,6 +10,9 @@ export const metadata: Metadata = {
 
 export default function HouseRulesGenerator () {
   return (
-    <HouseRules/>
-);
+    <>
+      <HouseRules/>
+      <RelatedToolsCards currentTool="airbnb-house-rules-generator" />
+    </>
+  );
 }

@@ -1,4 +1,5 @@
 import DrivingDirections from '@/components/DrivingDirections';
+import { RelatedToolsCards } from '@/components/RelatedToolsCards';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -9,6 +10,9 @@ export const metadata: Metadata = {
 
 export default function DrivingDirectionsGenerator () {
   return (
-    <DrivingDirections/>
-);
+    <>
+      <DrivingDirections/>
+      <RelatedToolsCards currentTool="driving-directions-generator" />
+    </>
+  );
 }

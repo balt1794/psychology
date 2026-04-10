@@ -1,4 +1,5 @@
 import InstantListing from '@/components/InstantListing';
+import { RelatedToolsCards } from '@/components/RelatedToolsCards';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -9,6 +10,9 @@ export const metadata: Metadata = {
 
 export default function AirbnbListing () {
   return (
-    <InstantListing/>
-);
+    <>
+      <InstantListing/>
+      <RelatedToolsCards currentTool="airbnb-listing" />
+    </>
+  );
 }
