@@ -318,7 +318,13 @@ export default function Home() {
 
     <section className="w-full max-w-screen-3xl mx-auto px-5 py-10 sm:px-8 md:px-10 lg:px-14 xl:px-20 2xl:px-24 lg:py-14 mt-10 mb-14 lg:mt-12 lg:mb-8">
       <h2 className="text-center text-3xl font-bold text-gray-900 lg:text-4xl mb-8 lg:mb-10">
-        Explore the Best Real Estate Tools
+        Explore the Best{" "}
+        <Link
+          href="/tools"
+          className="inline-flex items-center gap-1 rounded-md px-1.5 py-0.5 font-semibold text-[#FF385C] transition-colors hover:bg-rose-50 hover:text-[#E31C5F] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF385C] focus-visible:ring-offset-2"
+        >
+          Real Estate Tools
+        </Link>
       </h2>
       <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2 sm:gap-x-7 sm:gap-y-8 lg:grid-cols-4 lg:gap-x-7 xl:gap-x-9">
         {[

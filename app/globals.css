@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Sticky navbar (~4rem): keep in-page anchors and focus from hiding under the bar */
+html {
+  scroll-padding-top: 5rem;
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;

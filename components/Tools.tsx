@@ -10,9 +10,10 @@ export default function ToolsPage() {
       titleAccent="Tools"
       subtitle="Everything you need to create captivating property listings in a fraction of the time"
       mainVariant="stack"
+      mainSectionId={null}
     >
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-        <div className="flex flex-col rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md sm:p-7">
+        <div className="group flex flex-col rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-[#FF385C]/30 hover:shadow-lg sm:p-7">
           <div className="mb-4 w-fit rounded-xl bg-[#FF385C]/10 p-3">
             <Edit3 className="h-6 w-6 text-[#FF385C]" aria-hidden />
           </div>
@@ -23,14 +24,15 @@ export default function ToolsPage() {
           <div className="mt-auto">
             <a
               href="/airbnb-listing"
-              className="inline-flex items-center text-sm font-semibold text-[#E31C5F] hover:text-[#FF385C] hover:underline"
+              className="inline-flex items-center text-sm font-semibold text-[#E31C5F] transition-colors hover:text-[#FF385C]"
             >
-              Try it now <ArrowRight className="ml-1 h-4 w-4" />
+              Try it now{" "}
+              <ArrowRight className="ml-1 h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
             </a>
           </div>
         </div>
 
-        <div className="flex flex-col rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md sm:p-7">
+        <div className="group flex flex-col rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-[#FF385C]/30 hover:shadow-lg sm:p-7">
           <div className="mb-4 w-fit rounded-xl bg-[#FF385C]/10 p-3">
             <Image className="h-6 w-6 text-[#FF385C]" aria-hidden />
           </div>
@@ -41,14 +43,15 @@ export default function ToolsPage() {
           <div className="mt-auto">
             <a
               href="/property-description-generator"
-              className="inline-flex items-center text-sm font-semibold text-[#E31C5F] hover:text-[#FF385C] hover:underline"
+              className="inline-flex items-center text-sm font-semibold text-[#E31C5F] transition-colors hover:text-[#FF385C]"
             >
-              Try it now <ArrowRight className="ml-1 h-4 w-4" />
+              Try it now{" "}
+              <ArrowRight className="ml-1 h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
             </a>
           </div>
         </div>
 
-        <div className="flex flex-col rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md sm:p-7">
+        <div className="group flex flex-col rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-[#FF385C]/30 hover:shadow-lg sm:p-7">
           <div className="mb-4 w-fit rounded-xl bg-[#FF385C]/10 p-3">
             <Map className="h-6 w-6 text-[#FF385C]" aria-hidden />
           </div>
@@ -59,14 +62,15 @@ export default function ToolsPage() {
           <div className="mt-auto">
             <a
               href="/driving-directions-generator"
-              className="inline-flex items-center text-sm font-semibold text-[#E31C5F] hover:text-[#FF385C] hover:underline"
+              className="inline-flex items-center text-sm font-semibold text-[#E31C5F] transition-colors hover:text-[#FF385C]"
             >
-              Try it now <ArrowRight className="ml-1 h-4 w-4" />
+              Try it now{" "}
+              <ArrowRight className="ml-1 h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
             </a>
           </div>
         </div>
 
-        <div className="flex flex-col rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md sm:p-7">
+        <div className="group flex flex-col rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-[#FF385C]/30 hover:shadow-lg sm:p-7">
           <div className="mb-4 w-fit rounded-xl bg-[#FF385C]/10 p-3">
             <FileText className="h-6 w-6 text-[#FF385C]" aria-hidden />
           </div>
@@ -77,9 +81,10 @@ export default function ToolsPage() {
           <div className="mt-auto">
             <a
               href="/airbnb-house-rules-generator"
-              className="inline-flex items-center text-sm font-semibold text-[#E31C5F] hover:text-[#FF385C] hover:underline"
+              className="inline-flex items-center text-sm font-semibold text-[#E31C5F] transition-colors hover:text-[#FF385C]"
             >
-              Try it now <ArrowRight className="ml-1 h-4 w-4" />
+              Try it now{" "}
+              <ArrowRight className="ml-1 h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
             </a>
           </div>
         </div>

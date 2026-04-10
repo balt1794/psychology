@@ -9,6 +9,8 @@ type ToolPageShellProps = {
   intro?: ReactNode;
   /** split: form + output row on large screens; stack: single column (e.g. tools index) */
   mainVariant?: "split" | "stack";
+  /** Id on the main content band; use null on index pages to avoid anchor scroll jumping past the hero */
+  mainSectionId?: string | null;
   children: ReactNode;
 };
 
@@ -18,6 +20,7 @@ export function ToolPageShell({
   subtitle,
   intro,
   mainVariant = "split",
+  mainSectionId = "generator",
   children,
 }: ToolPageShellProps) {
   const mainInner =
@@ -27,10 +30,12 @@ export function ToolPageShell({
 
   return (
     <>
-      <div className="mx-auto max-w-5xl px-4 pt-8 text-center sm:px-6 mt-6">
+      <div className="mx-auto max-w-5xl scroll-mt-20 px-4 pb-2 pt-20 text-center sm:px-6 sm:pt-12">
         <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl md:text-6xl">
           {titleBefore}{" "}
-          <span className="text-[#FF385C]">{titleAccent}</span>
+          <span className="text-[#FF385C] decoration-2 underline-offset-[0.2em] transition-colors hover:underline hover:decoration-[#FF385C]">
+            {titleAccent}
+          </span>
         </h1>
         <h2 className="mx-auto mt-4 max-w-5xl text-base text-black sm:text-lg mb-4">
           {subtitle}
@@ -45,7 +50,10 @@ export function ToolPageShell({
         </div>
       ) : null}
 
-      <div className="border-t border-gray-200/80 bg-[#f6f6f7] pb-16 pt-8" id="generator">
+      <div
+        className="border-t border-gray-200/80 bg-[#f6f6f7] pb-16 pt-8"
+        id={mainSectionId ?? undefined}
+      >
         <div className={mainInner}>{children}</div>
       </div>
     </>
