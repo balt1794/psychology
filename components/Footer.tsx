@@ -28,6 +28,9 @@ export const Footer = () => {
           <Link href="/terms-of-use" className="text-gray-700 hover:text-[#FF385C]">
             Terms of Use
           </Link>
+          <Link href="/faq" className="text-gray-700 hover:text-[#FF385C]">
+            FAQ
+          </Link>
           <Link href="/airbnb-listing" className="text-gray-700 hover:text-[#FF385C]">
             Airbnb Listing
           </Link>
