@@ -4,7 +4,8 @@ type ToolId =
   | "airbnb-listing"
   | "property-description-generator"
   | "airbnb-house-rules-generator"
-  | "driving-directions-generator";
+  | "driving-directions-generator"
+  | "social-media-post";
 
 type RelatedToolsCardsProps = {
   currentTool: ToolId;
@@ -53,6 +54,15 @@ const TOOL_CARDS: Array<{
     href: "/driving-directions-generator",
     imageSrc: "/tool4.webp",
     buttonLabel: "Get directions",
+  },
+  {
+    id: "social-media-post",
+    title: "Social Media Post Generator",
+    description:
+      "Generate social media posts for any social media platform. Upload photos, fill in the details, pick a template, and download a polished post for any social media platform.",
+    href: "/social-media-post-generator",
+    imageSrc: "/tool1.png",
+    buttonLabel: "Create post",
   },
 ];
 

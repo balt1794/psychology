@@ -287,6 +287,15 @@ export default function Home() {
             href: "/driving-directions-generator",
             primaryLabel: "Get directions",
           },
+          {
+            imageAlt: "Social media post generator preview",
+            imageSrc: "/tool5.png",
+            title: "Social Media Post Generator",
+            description:
+              "Generate social media posts for any social media platform. Upload photos, fill in the details, pick a template, and download a polished post for any social media platform.",
+            href: "/social-media-post-generator",
+            primaryLabel: "Create post",
+          },
         ].map((card) => (
           <div
             key={card.title}
@@ -353,6 +362,18 @@ export default function Home() {
                     <p className="mx-auto mt-1 max-w-[92%] text-center text-[10px] leading-relaxed text-white/90 sm:text-xs">
                       From downtown, take I-95 North to Exit 24, continue 2 miles, then turn right on Palm Avenue. The
                       property is on your left with a blue gate.
+                    </p>
+                  </div>
+                </div>
+              ) : null}
+              {card.title === "Social Media Post Generator" ? (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="mx-3 w-full max-w-[92%] rounded-lg bg-black/30 px-4 py-4 text-center backdrop-blur-[1px]">
+                    <p className="mx-auto max-w-[92%] text-center text-[11px] font-black leading-relaxed text-white/95 sm:text-sm">
+                      Social Media Post Generator
+                    </p>
+                    <p className="mx-auto mt-1 max-w-[92%] text-center text-[10px] leading-relaxed text-white/90 sm:text-xs">
+                      Social media templates ready to post on any social media platform.
                     </p>
                   </div>
                 </div>

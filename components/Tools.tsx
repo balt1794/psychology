@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { ArrowRight, Edit3, Image, FileText, Map } from "lucide-react";
+import { ArrowRight, Edit3, Image, FileText, Map, Wand2 } from "lucide-react";
 import { ToolPageShell } from "@/components/ToolPageShell";
 
 export default function ToolsPage() {
@@ -81,6 +81,25 @@ export default function ToolsPage() {
           <div className="mt-auto">
             <a
               href="/airbnb-house-rules-generator"
+              className="inline-flex items-center text-sm font-semibold text-[#E31C5F] transition-colors hover:text-[#FF385C]"
+            >
+              Try it now{" "}
+              <ArrowRight className="ml-1 h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+            </a>
+          </div>
+        </div>
+
+        <div className="group flex flex-col rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-[#FF385C]/30 hover:shadow-lg sm:p-7">
+          <div className="mb-4 w-fit rounded-xl bg-[#FF385C]/10 p-3">
+            <Wand2 className="h-6 w-6 text-[#FF385C]" aria-hidden />
+          </div>
+          <h3 className="mb-2 text-lg font-semibold text-gray-900">Social Media Post Generator</h3>
+          <p className="mb-4 flex-1 text-sm leading-relaxed text-gray-600">
+            Generate social media posts for any social media platform. Upload photos, fill in the details, pick a template, and download a polished post for any social media platform.
+          </p>
+          <div className="mt-auto">
+            <a
+              href="/social-media-post-generator"
               className="inline-flex items-center text-sm font-semibold text-[#E31C5F] transition-colors hover:text-[#FF385C]"
             >
               Try it now{" "}

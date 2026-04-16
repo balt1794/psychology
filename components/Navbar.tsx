@@ -19,6 +19,7 @@ const tools = [
   { name: "Property Description Generator", href: "/property-description-generator" },
   { name: "Driving Directions Generator", href: "/driving-directions-generator" },
   { name: "House Rules Generator", href: "/airbnb-house-rules-generator" },
+  { name: "Social Media Post Generator", href: "/social-media-post-generator" },
 ];
 
 function classNames(...classes: string[]) {

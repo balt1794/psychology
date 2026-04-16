@@ -33,6 +33,7 @@
     "react-dom": "^18",
     "react-dropzone": "^14.3.8",
     "react-hot-toast": "^2.4.1",
+    "replicate": "^1.4.0",
     "stripe": "^14.11.0"
   },
   "devDependencies": {
