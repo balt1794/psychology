@@ -552,7 +552,7 @@ export default function InstantListing() {
             ) : (
               <p className="py-14 text-center text-sm leading-relaxed text-gray-500">
                 Upload photos, fill in the details, and click{" "}
-                <span className="font-medium text-gray-700">Generate Listing</span>—sections will appear here.
+                <span className="font-medium text-gray-700">Generate Listing</span>—sections will appear here
               </p>
             )}
           </div>
