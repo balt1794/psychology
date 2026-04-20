@@ -3,6 +3,8 @@ import { NextResponse } from "next/server";
 import { randomUUID } from "crypto";
 import { adminStorage } from "@/lib/firebaseAdmin";
 
+const MAX_UPLOAD_BYTES = 3.5 * 1024 * 1024;
+
 export async function POST(request: NextRequest) {
   try {
     const formData = (await request.formData()) as any;
@@ -13,6 +15,12 @@ export async function POST(request: NextRequest) {
     }
     if (!file.type.startsWith("image/")) {
       return NextResponse.json({ error: "File must be an image" }, { status: 400 });
+    }
+    if (file.size > MAX_UPLOAD_BYTES) {
+      return NextResponse.json(
+        { error: "Image is too large. Please upload an image under 3.5MB." },
+        { status: 413 },
+      );
     }
 
     const mimeToExt: Record<string, string> = {

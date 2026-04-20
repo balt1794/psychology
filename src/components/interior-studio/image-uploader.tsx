@@ -7,6 +7,77 @@ interface ImageUploaderProps {
   onImageUpload: (imageUrl: string) => void;
 }
 
+const MAX_UPLOAD_BYTES = 3.5 * 1024 * 1024; // Stay comfortably under common 4MB-ish limits.
+const MAX_DIMENSION = 2048;
+const JPEG_QUALITY = 0.82;
+
+const readImage = (file: File): Promise<HTMLImageElement> =>
+  new Promise((resolve, reject) => {
+    const objectUrl = URL.createObjectURL(file);
+    const image = new Image();
+    image.onload = () => {
+      URL.revokeObjectURL(objectUrl);
+      resolve(image);
+    };
+    image.onerror = () => {
+      URL.revokeObjectURL(objectUrl);
+      reject(new Error("Unable to read image file"));
+    };
+    image.src = objectUrl;
+  });
+
+const blobToFile = (blob: Blob, originalFileName: string): File => {
+  const normalizedName = originalFileName.replace(/\.[^/.]+$/, "");
+  return new File([blob], `${normalizedName}.jpg`, {
+    type: "image/jpeg",
+    lastModified: Date.now(),
+  });
+};
+
+const resizeAndCompressImage = async (file: File): Promise<File> => {
+  if (!file.type.startsWith("image/")) {
+    throw new Error("Please upload a valid image file");
+  }
+
+  if (file.size <= MAX_UPLOAD_BYTES) return file;
+
+  const image = await readImage(file);
+  const scale = Math.min(1, MAX_DIMENSION / Math.max(image.width, image.height));
+  const width = Math.max(1, Math.round(image.width * scale));
+  const height = Math.max(1, Math.round(image.height * scale));
+
+  const canvas = document.createElement("canvas");
+  canvas.width = width;
+  canvas.height = height;
+
+  const context = canvas.getContext("2d");
+  if (!context) {
+    throw new Error("Unable to process image for upload");
+  }
+
+  context.drawImage(image, 0, 0, width, height);
+
+  let quality = JPEG_QUALITY;
+  let compressedBlob: Blob | null = null;
+
+  while (quality >= 0.55) {
+    compressedBlob = await new Promise<Blob | null>((resolve) => {
+      canvas.toBlob(resolve, "image/jpeg", quality);
+    });
+
+    if (compressedBlob && compressedBlob.size <= MAX_UPLOAD_BYTES) {
+      break;
+    }
+    quality -= 0.1;
+  }
+
+  if (!compressedBlob) {
+    throw new Error("Unable to compress image for upload");
+  }
+
+  return blobToFile(compressedBlob, file.name);
+};
+
 export default function ImageUploader({ onImageUpload }: ImageUploaderProps) {
   const [isDragOver, setIsDragOver] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
@@ -20,8 +91,9 @@ export default function ImageUploader({ onImageUpload }: ImageUploaderProps) {
       setUploadError(null);
 
       try {
+        const processedFile = await resizeAndCompressImage(file);
         const formData = new FormData();
-        formData.append("file", file);
+        formData.append("file", processedFile);
 
         const response = await fetch("/api/ai-interior-upload", {
           method: "POST",
@@ -29,8 +101,21 @@ export default function ImageUploader({ onImageUpload }: ImageUploaderProps) {
         });
 
         if (!response.ok) {
-          const error = await response.json();
-          throw new Error(error.error || "Failed to upload");
+          const responseText = await response.text();
+          let message = "Failed to upload image";
+
+          try {
+            const parsed = JSON.parse(responseText) as { error?: string };
+            if (parsed.error) message = parsed.error;
+          } catch {
+            if (response.status === 413) {
+              message = "Image is too large. We compressed it, but please try a smaller image.";
+            } else if (responseText.trim()) {
+              message = responseText.trim();
+            }
+          }
+
+          throw new Error(message);
         }
 
         const data = await response.json();
@@ -173,7 +258,7 @@ export default function ImageUploader({ onImageUpload }: ImageUploaderProps) {
             </h3>
             <p className="text-gray-600 text-center mb-6">
               {isUploading
-                ? "Please wait while we process your image"
+                ? "Please wait while we optimize and upload your image"
                 : "or click to browse from your device"}
             </p>
 
