@@ -281,7 +281,7 @@ export default function BeforeAfterSlider({
                 referrerPolicy="no-referrer"
               />
               {/* Before Label */}
-              <div className="absolute top-4 left-4 px-3 py-1.5 rounded-full bg-black/50 backdrop-blur-sm text-black text-sm font-medium">
+              <div className="absolute top-4 left-4 px-3 py-1.5 rounded-full mt-2 bg-black backdrop-blur-sm text-white text-sm font-medium">
                 Before
               </div>
             </div>
@@ -302,7 +302,7 @@ export default function BeforeAfterSlider({
                 referrerPolicy="no-referrer"
               />
               {/* After Label */}
-              <div className="absolute right-4 top-4 flex items-center gap-1.5 rounded-full border border-stone-200/80 bg-[#FAF9F6]/95 px-3 py-1.5 text-sm font-semibold text-neutral-800 shadow-sm backdrop-blur-sm">
+              <div className="absolute right-4 top-4 flex items-center gap-1.5 rounded-full bg-black backdrop-blur-sm mt-2 text-white px-3 py-1.5 text-sm font-semibold text-neutral-800 shadow-sm backdrop-blur-sm">
                 <Sparkles className="h-3.5 w-3.5 text-[#5E7361]" />
                 After
               </div>
@@ -336,7 +336,7 @@ export default function BeforeAfterSlider({
               <div
                 className={`
                   absolute -bottom-10 left-1/2 -translate-x-1/2
-                  px-3 py-1 rounded-full bg-gray-900 text-black text-xs font-medium
+                  px-3 py-1 rounded-full bg-black text-white text-xs mt-2 font-medium
                   transition-opacity duration-200
                   ${isDragging ? "opacity-100" : "opacity-0"}
                 `}

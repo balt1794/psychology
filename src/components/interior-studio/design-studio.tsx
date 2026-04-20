@@ -174,6 +174,8 @@ export default function DesignStudio() {
 
   const isImprovementComplete = improvementStep?.data?.status === "completed";
   const improvedImageUrl = improvementStep?.data?.url || uploadedImage || "";
+  const hasCredits = (freeRewritesLeft ?? 0) > 0;
+  const canUpload = Boolean(auth.user) && hasCredits;
   const handleDownload = useCallback(async () => {
     if (!improvedImageUrl) return;
     if (!auth.user) {
@@ -230,12 +232,42 @@ export default function DesignStudio() {
         <ToolPageShell
           titleBefore="AI Interior Design"
           titleAccent="Generator"
-          titleAccentClassName="text-[#5E7361] decoration-2 underline-offset-[0.2em] transition-colors hover:underline hover:decoration-[#5E7361]"
-          subtitle="Transform your space with AI. Upload a room photo and watch the magic happen."
+          subtitle="Create professional, high-converting interior redesigns in seconds with AI."
         >
-          <div className="mx-auto flex w-full max-w-8xl flex-col gap-6 lg:flex-row lg:items-start">
+          <div className="mx-auto flex w-full max-w-8xl flex-col gap-6 py-4 md:py-8 lg:flex-row lg:items-start">
             <div className="min-w-0 flex-1">
-              <ImageUploader onImageUpload={handleImageUpload} />
+              {canUpload ? (
+                <ImageUploader onImageUpload={handleImageUpload} />
+              ) : (
+                <div className="mx-auto my-4 w-full max-w-2xl rounded-2xl border border-stone-200 bg-white px-8 py-12 text-center shadow-sm">
+                  <h3 className="text-xl font-semibold text-black mt-6">
+                    {auth.user ? "Credits required to upload" : "Sign in to upload"}
+                  </h3>
+                  <p className="mt-4 mb-6 text-sm text-gray-700">
+                    {auth.user
+                      ? freeRewritesLeft === null
+                        ? "Checking your available credits..."
+                        : "You need at least 1 credit before uploading a room photo."
+                      : "Please sign in and add credits to start uploading interior photos."}
+                  </p>
+
+                  {auth.user && (
+                    <div className="mt-8 flex items-center justify-center gap-2 mb-6">
+                      <div className="rounded-lg border border-stone-300 bg-stone-50 px-4 py-2 text-sm font-medium text-black">
+                        Credits: {freeRewritesLeft === null ? "-" : freeRewritesLeft}
+                      </div>
+                      <button
+                        type="button"
+                        onClick={handleCheckout}
+                        disabled={checkoutLoading || freeRewritesLeft === null}
+                        className="rounded-lg bg-[#FF385C] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#e03150] disabled:cursor-not-allowed disabled:opacity-60"
+                      >
+                        {checkoutLoading ? "Loading..." : "Buy Credits"}
+                      </button>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </ToolPageShell>
@@ -255,7 +287,7 @@ export default function DesignStudio() {
       {currentStep === "suggestions" && uploadedImage && (
         <div className="min-h-screen bg-[#FAF9F6] text-neutral-800">
           <main className="max-w-7xl mx-auto p-4 md:p-6">
-            <div className="mb-4 rounded-2xl border border-stone-200/80 bg-white px-4 py-3 shadow-sm">
+            <div className="mb-4 rounded-2xl  px-4 py-1">
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <h1 className="text-2xl font-semibold text-black md:text-3xl">
                   AI Interior Design Generator
