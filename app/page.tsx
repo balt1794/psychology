@@ -298,7 +298,7 @@ export default function Home() {
           },
           {
             imageAlt: "AI interior design generator preview",
-            imageSrc: "/tool5.png",
+            imageSrc: "/tool6.png",
             title: "AI Interior Design Generator",
             description:
               "Upload a room photo, review AI suggestions, and generate an improved interior design image in minutes.",
@@ -383,6 +383,18 @@ export default function Home() {
                     </p>
                     <p className="mx-auto mt-1 max-w-[92%] text-center text-[10px] leading-relaxed text-white/90 sm:text-xs">
                       Social media templates ready to post on any social media platform.
+                    </p>
+                  </div>
+                </div>
+              ) : null}
+              {card.title === "AI Interior Design Generator" ? (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="mx-3 w-full max-w-[92%] rounded-lg bg-black/30 px-4 py-4 text-center backdrop-blur-[1px]">
+                    <p className="mx-auto max-w-[92%] text-center text-[11px] font-black leading-relaxed text-white/95 sm:text-sm">
+                      AI Interior Design Generator
+                    </p>
+                    <p className="mx-auto mt-1 max-w-[92%] text-center text-[10px] leading-relaxed text-white/90 sm:text-xs">
+                      Upload a room photo, pick your favorite upgrades, and get a redesigned space in minutes.
                     </p>
                   </div>
                 </div>
