@@ -107,6 +107,25 @@ export default function ToolsPage() {
             </a>
           </div>
         </div>
+
+        <div className="group flex flex-col rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-[#FF385C]/30 hover:shadow-lg sm:p-7">
+          <div className="mb-4 w-fit rounded-xl bg-[#FF385C]/10 p-3">
+            <Wand2 className="h-6 w-6 text-[#FF385C]" aria-hidden />
+          </div>
+          <h3 className="mb-2 text-lg font-semibold text-gray-900">AI Interior Design Generator</h3>
+          <p className="mb-4 flex-1 text-sm leading-relaxed text-gray-600">
+            Upload a room photo, review AI suggestions, and generate an improved interior design image in minutes.
+          </p>
+          <div className="mt-auto">
+            <a
+              href="/ai-interior-design-generator"
+              className="inline-flex items-center text-sm font-semibold text-[#E31C5F] transition-colors hover:text-[#FF385C]"
+            >
+              Try it now{" "}
+              <ArrowRight className="ml-1 h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+            </a>
+          </div>
+        </div>
       </div>
     </ToolPageShell>
   );

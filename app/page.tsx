@@ -296,6 +296,15 @@ export default function Home() {
             href: "/social-media-post-generator",
             primaryLabel: "Create post",
           },
+          {
+            imageAlt: "AI interior design generator preview",
+            imageSrc: "/tool5.png",
+            title: "AI Interior Design Generator",
+            description:
+              "Upload a room photo, review AI suggestions, and generate an improved interior design image in minutes.",
+            href: "/ai-interior-design-generator",
+            primaryLabel: "Design room",
+          },
         ].map((card) => (
           <div
             key={card.title}

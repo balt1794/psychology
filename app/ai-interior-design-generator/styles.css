@@ -1,0 +1,160 @@
+:root {
+  --bg-primary: #f8f5f0;
+  --bg-secondary: #ede8e0;
+  --bg-card: #fffdf9;
+  --bg-elevated: #ffffff;
+  --accent-terracotta: #c45636;
+  --accent-terracotta-light: #d86b4a;
+  --accent-sage: #6b705c;
+  --accent-brass: #b8965c;
+  --text-primary: #2c2825;
+  --text-secondary: #6b6560;
+  --text-muted: #9a948e;
+  --text-inverse: #f8f5f0;
+  --border-light: rgba(44, 40, 37, 0.08);
+  --border-medium: rgba(44, 40, 37, 0.15);
+  --success: #4a6741;
+  --success-bg: #e8f0e6;
+  --error: #b54545;
+}
+
+.font-display {
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.paper-texture {
+  position: relative;
+  background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+}
+
+.paper-texture::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Keep page content above the fixed texture layer */
+.paper-texture > * {
+  position: relative;
+  z-index: 1;
+}
+
+.glass {
+  background: rgba(255, 253, 249, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.input {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 0.9375rem;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-medium);
+  border-radius: 12px;
+  color: var(--text-primary);
+  outline: none;
+}
+
+.input:focus {
+  border-color: var(--accent-terracotta);
+  box-shadow: 0 0 0 3px rgba(196, 86, 54, 0.1);
+}
+
+.dropzone {
+  position: relative;
+  border: 2px dashed var(--border-medium);
+  border-radius: 28px;
+  background: var(--bg-card);
+  transition: all 250ms ease;
+  overflow: hidden;
+}
+
+.dropzone:hover,
+.dropzone.dragover {
+  border-color: var(--accent-terracotta);
+  background: var(--bg-elevated);
+}
+
+.dropzone.dragover {
+  transform: scale(1.01);
+}
+
+.progress-bar {
+  height: 6px;
+  background: var(--bg-secondary);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-terracotta) 0%, var(--accent-brass) 100%);
+  border-radius: 3px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes pulse {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes glow {
+  0%,100% { box-shadow: 0 0 20px rgba(196, 86, 54, 0.2); }
+  50% { box-shadow: 0 0 35px rgba(196, 86, 54, 0.35); }
+}
+
+@keyframes borderGlow {
+  0%,100% { border-color: rgba(196, 86, 54, 0.3); }
+  50% { border-color: rgba(196, 86, 54, 0.6); }
+}
+
+@keyframes confetti {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(-200px) rotate(720deg); opacity: 0; }
+}
+
+.animate-fade-in { animation: fadeIn 250ms ease-out forwards; }
+.animate-fade-in-up { animation: fadeInUp 400ms ease-out forwards; }
+.animate-fade-in-down { animation: fadeInDown 400ms ease-out forwards; }
+.animate-slide-in-right { animation: slideInRight 400ms ease-out forwards; }
+.animate-scale-in { animation: scaleIn 250ms ease-out forwards; }
+.animate-pulse-subtle { animation: pulse 2s ease-in-out infinite; }
+.animate-float { animation: float 3s ease-in-out infinite; }
+.animate-glow { animation: glow 2s ease-in-out infinite; }
+.animate-border-glow { animation: borderGlow 2s ease-in-out infinite; }

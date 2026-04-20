@@ -5,7 +5,8 @@ type ToolId =
   | "property-description-generator"
   | "airbnb-house-rules-generator"
   | "driving-directions-generator"
-  | "social-media-post";
+  | "social-media-post"
+  | "ai-interior-design-generator";
 
 type RelatedToolsCardsProps = {
   currentTool: ToolId;
@@ -63,6 +64,15 @@ const TOOL_CARDS: Array<{
     href: "/social-media-post-generator",
     imageSrc: "/tool1.png",
     buttonLabel: "Create post",
+  },
+  {
+    id: "ai-interior-design-generator",
+    title: "AI Interior Design Generator",
+    description:
+      "Upload a room photo, review AI suggestions, and generate an improved interior design image in minutes.",
+    href: "/ai-interior-design-generator",
+    imageSrc: "/tool5.png",
+    buttonLabel: "Design room",
   },
 ];
 

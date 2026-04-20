@@ -5,6 +5,8 @@ import type { ReactNode } from "react";
 type ToolPageShellProps = {
   titleBefore: string;
   titleAccent: string;
+  /** Optional override for the accent span styling (defaults to brand pink) */
+  titleAccentClassName?: string;
   subtitle: ReactNode;
   intro?: ReactNode;
   /** split: form + output row on large screens; stack: single column (e.g. tools index) */
@@ -17,6 +19,7 @@ type ToolPageShellProps = {
 export function ToolPageShell({
   titleBefore,
   titleAccent,
+  titleAccentClassName,
   subtitle,
   intro,
   mainVariant = "split",
@@ -33,7 +36,12 @@ export function ToolPageShell({
       <div className="mx-auto max-w-5xl scroll-mt-20 px-4 pb-2 pt-20 text-center sm:px-6 sm:pt-12">
         <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl md:text-6xl">
           {titleBefore}{" "}
-          <span className="text-[#FF385C] decoration-2 underline-offset-[0.2em] transition-colors hover:underline hover:decoration-[#FF385C]">
+          <span
+            className={
+              titleAccentClassName ??
+              "text-[#FF385C] decoration-2 underline-offset-[0.2em] transition-colors hover:underline hover:decoration-[#FF385C]"
+            }
+          >
             {titleAccent}
           </span>
         </h1>
