@@ -305,6 +305,33 @@ export default function Home() {
             href: "/ai-interior-design-generator",
             primaryLabel: "Design room",
           },
+          {
+            imageAlt: "Mortgage calculator preview",
+            imageSrc: "/hero2.jpg",
+            title: "Mortgage Calculator",
+            description:
+              "Estimate monthly mortgage payments with principal, interest, PMI, taxes, insurance, HOA, and amortization schedule.",
+            href: "/mortgage-calculator",
+            primaryLabel: "Calculate now",
+          },
+          {
+            imageAlt: "FHA mortgage calculator preview",
+            imageSrc: "/hero2.jpg",
+            title: "FHA Mortgage Loan Calculator",
+            description:
+              "Estimate FHA monthly payments with taxes, insurance, HOA, and FHA mortgage insurance premium (MIP).",
+            href: "/fha-mortgage-calculator",
+            primaryLabel: "Estimate FHA loan",
+          },
+          {
+            imageAlt: "VA mortgage calculator preview",
+            imageSrc: "/hero2.jpg",
+            title: "VA Mortgage Calculator",
+            description:
+              "Estimate VA monthly payments with taxes, insurance, HOA, and VA funding fee scenarios.",
+            href: "/va-mortgage-calculator",
+            primaryLabel: "Estimate VA loan",
+          },
         ].map((card) => (
           <div
             key={card.title}
@@ -395,6 +422,42 @@ export default function Home() {
                     </p>
                     <p className="mx-auto mt-1 max-w-[92%] text-center text-[10px] leading-relaxed text-white/90 sm:text-xs">
                       Upload a room photo, pick your favorite upgrades, and get a redesigned space in minutes.
+                    </p>
+                  </div>
+                </div>
+              ) : null}
+              {card.title === "Mortgage Calculator" ? (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="mx-3 w-full max-w-[92%] rounded-lg bg-black/30 px-4 py-4 text-center backdrop-blur-[1px]">
+                    <p className="mx-auto max-w-[92%] text-center text-[11px] font-black leading-relaxed text-white/95 sm:text-sm">
+                      Mortgage Calculator
+                    </p>
+                    <p className="mx-auto mt-1 max-w-[92%] text-center text-[10px] leading-relaxed text-white/90 sm:text-xs">
+                      Quickly estimate principal, interest, taxes, insurance, PMI, HOA, and your monthly payment.
+                    </p>
+                  </div>
+                </div>
+              ) : null}
+              {card.title === "FHA Mortgage Loan Calculator" ? (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="mx-3 w-full max-w-[92%] rounded-lg bg-black/30 px-4 py-4 text-center backdrop-blur-[1px]">
+                    <p className="mx-auto max-w-[92%] text-center text-[11px] font-black leading-relaxed text-white/95 sm:text-sm">
+                      FHA Mortgage Calculator
+                    </p>
+                    <p className="mx-auto mt-1 max-w-[92%] text-center text-[10px] leading-relaxed text-white/90 sm:text-xs">
+                      Estimate FHA payment with principal, interest, taxes, insurance, HOA, and FHA MIP.
+                    </p>
+                  </div>
+                </div>
+              ) : null}
+              {card.title === "VA Mortgage Calculator" ? (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="mx-3 w-full max-w-[92%] rounded-lg bg-black/30 px-4 py-4 text-center backdrop-blur-[1px]">
+                    <p className="mx-auto max-w-[92%] text-center text-[11px] font-black leading-relaxed text-white/95 sm:text-sm">
+                      VA Mortgage Calculator
+                    </p>
+                    <p className="mx-auto mt-1 max-w-[92%] text-center text-[10px] leading-relaxed text-white/90 sm:text-xs">
+                      Estimate VA payment with principal, interest, taxes, insurance, HOA, and funding fee scenarios.
                     </p>
                   </div>
                 </div>

@@ -6,7 +6,10 @@ type ToolId =
   | "airbnb-house-rules-generator"
   | "driving-directions-generator"
   | "social-media-post"
-  | "ai-interior-design-generator";
+  | "ai-interior-design-generator"
+  | "mortgage-calculator"
+  | "fha-mortgage-calculator"
+  | "va-mortgage-calculator";
 
 type RelatedToolsCardsProps = {
   currentTool: ToolId;
@@ -73,6 +76,33 @@ const TOOL_CARDS: Array<{
     href: "/ai-interior-design-generator",
     imageSrc: "/tool5.png",
     buttonLabel: "Design room",
+  },
+  {
+    id: "mortgage-calculator",
+    title: "Mortgage Calculator",
+    description:
+      "Estimate monthly payment with principal, interest, taxes, insurance, PMI, and HOA in one place.",
+    href: "/mortgage-calculator",
+    imageSrc: "/hero2.jpg",
+    buttonLabel: "Calculate now",
+  },
+  {
+    id: "fha-mortgage-calculator",
+    title: "FHA Mortgage Loan Calculator",
+    description:
+      "Estimate FHA monthly payments with principal, interest, taxes, insurance, HOA, and FHA MIP.",
+    href: "/fha-mortgage-calculator",
+    imageSrc: "/hero2.jpg",
+    buttonLabel: "Estimate FHA loan",
+  },
+  {
+    id: "va-mortgage-calculator",
+    title: "VA Mortgage Calculator",
+    description:
+      "Estimate VA monthly payments with taxes, insurance, HOA, and VA funding fee scenarios.",
+    href: "/va-mortgage-calculator",
+    imageSrc: "/hero2.jpg",
+    buttonLabel: "Estimate VA loan",
   },
 ];
 
