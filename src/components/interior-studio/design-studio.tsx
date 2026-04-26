@@ -91,7 +91,7 @@ export default function DesignStudio() {
         }),
       });
       const { sessionId } = await response.json();
-      const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || "");
+      const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY || "");
       if (!stripe) return;
       const { error } = await stripe.redirectToCheckout({ sessionId });
       if (error) {
