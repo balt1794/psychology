@@ -77,12 +77,12 @@ export default function Navbar() {
                 <div className="flex min-w-0 max-w-full items-center justify-center sm:max-w-none sm:justify-start">
                   <Link
                     href="/"
-                    className="flex min-w-0 max-w-full items-center gap-1 text-sm font-bold leading-tight text-black sm:max-w-none sm:text-sm lg:gap-1 lg:text-xl"
+                    className="flex min-w-0 max-w-full items-center gap-1 text-md font-bold leading-tight text-black sm:max-w-none sm:text-sm lg:gap-1 lg:text-xl"
                     aria-label="PropertyListingsAI home"
                   >
                     <span className="truncate sm:whitespace-normal">PropertyListingsAI</span>
                     <svg
-                      className="h-7 w-7 shrink-0 translate-y-[1px] sm:h-8 sm:w-8 sm:translate-y-0 sm:mb-1 lg:h-10 lg:w-10 lg:mb-1"
+                      className="h-7 w-7 shrink-0 -translate-y-[1px] sm:h-8 sm:w-8 sm:translate-y-0 sm:mb-1 lg:h-10 lg:w-10 lg:mb-1"
                       fill="#FF385C"
                       viewBox="-1 0 19 19"
                       xmlns="http://www.w3.org/2000/svg"
