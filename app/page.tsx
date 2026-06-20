@@ -7,16 +7,37 @@ import { Metadata } from "next";
 import { ArrowRight, Camera, Sparkles } from "lucide-react";
 import { FaqSection } from "@/components/FaqSection";
 import { faqJsonLd } from "@/lib/faq";
+import { PatientInfoForm } from "./PatientInfoForm";
 
 export const metadata: Metadata = {
-  title: 'PropertyListingsAI - Real Estate Listing Description Generator',
-  description:'Generate captivating real estate descriptions for your property listings instantly with AI to boost visibility, bookings and sales.'
+  title: 'App in Progress - Clinical Records Tracker',
+  description:'A psychology app in progress for organizing patient profiles, clinical reports, and treatment history.'
 };
 
 
 export default function Home() {
   return (
     <>
+      <main className="min-h-[70vh] bg-slate-50 px-6 py-16 text-slate-950 sm:px-8 lg:px-16">
+        <section className="mx-auto flex max-w-5xl flex-col items-center text-center">
+          <p className="mb-4 rounded-full border border-indigo-100 bg-white px-4 py-2 text-sm font-semibold text-indigo-700 shadow-sm">
+            Psychology app in progress
+          </p>
+          <h1 className="max-w-3xl text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+            App in Progress
+          </h1>
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600 sm:text-xl">
+            A simple workspace for clinicians to keep track of patient profiles, clinical reports,
+            session notes, and treatment history in one organized place.
+          </p>
+
+          <PatientInfoForm />
+        </section>
+      </main>
+
+      {/* Previous homepage hidden while the psychology app homepage is in progress. */}
+      {false && (
+        <>
 <section className="relative z-10 mx-auto max-w-9xl px-4 py-10 sm:px-6 sm:py-12 lg:px-16 lg:py-20">
   <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-14">
     <div>
@@ -655,6 +676,8 @@ export default function Home() {
 
       <Toaster />
 
+        </>
+      )}
     </>
   );
 }

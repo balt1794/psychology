@@ -10,12 +10,12 @@ import { getStorage } from "firebase/storage";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyB8tCPeZi3sP_447J2boym6p7V-qHfKY3M",
-  authDomain: "plai-c72e4.firebaseapp.com",
-  projectId: "plai-c72e4",
-  storageBucket: "plai-c72e4.firebasestorage.app",
-  messagingSenderId: "127784059643",
-  appId: "1:127784059643:web:8541f6c9b771d6b76b665e"
+  apiKey: "AIzaSyCnhgJwHZL3w6S2Q99wCuhtA9mxB6Sl0Dg",
+  authDomain: "psychology-8d9af.firebaseapp.com",
+  projectId: "psychology-8d9af",
+  storageBucket: "psychology-8d9af.firebasestorage.app",
+  messagingSenderId: "119598674679",
+  appId: "1:119598674679:web:fab77a4f231b9afd9619f2"
 };
 
 // Initialize Firebase
