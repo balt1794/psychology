@@ -8,5 +8,4 @@ const firebaseAdminApp =
     //credential: cert(serviceAccount as any),
     storageBucket: "plai-c72e4.firebasestorage.app",
   });
-
 export const adminStorage = getStorage(firebaseAdminApp);
