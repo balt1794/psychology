@@ -94,7 +94,8 @@ export default function RootLayout({
       <AuthContextProvider>
         <Navbar/>
         {children}
-        <Footer />
+        {/* Footer hidden while the psychology app is in progress. */}
+        {/* <Footer /> */}
         </AuthContextProvider>
       </body>
       <Script strategy="afterInteractive" src="https://www.googletagmanager.com/gtag/js?id=G-FQHMWF7HC9"/>
